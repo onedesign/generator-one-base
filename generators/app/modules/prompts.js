@@ -42,5 +42,37 @@ module.exports = [
     message: 'What is your github username?',
     default: 'onedesign',
     store: true
+  },
+
+  //
+  //   Optional Library Installs
+  //
+  //////////////////////////////////////////////////////////////////////
+  {
+    type: 'checkbox',
+    name: 'optionalDeps',
+    message: 'Which optional dependencies do you want installed?',
+    choices: [
+      {
+        name: 'lodash',
+        value: 'lodash',
+        checked: true
+      },
+      {
+        name: 'jquery',
+        value: 'jquery',
+        checked: true
+      },
+      {
+        name: 'sass-mq',
+        value: 'sass-mq',
+        checked: true
+      },
+      {
+        name: 'susy',
+        value: 'susy',
+        checked: true
+      }
+    ]
   }
 ]

@@ -106,11 +106,7 @@ module.exports = yeoman.Base.extend({
     ];
 
     var dependencies = [
-      'one-router',
-      'lodash',
-      'jquery',
-      'sass-mq',
-      'susy'
+      'one-router'
     ];
 
     var self = this;
@@ -122,6 +118,11 @@ module.exports = yeoman.Base.extend({
 
     // Install dependencies
     dependencies.forEach(function(item) {
+      self.npmInstall([item], { 'save': true });
+    });
+
+    // Install optional dependencies
+    this.props.optionalDeps.forEach(function(item) {
       self.npmInstall([item], { 'save': true });
     });
 
