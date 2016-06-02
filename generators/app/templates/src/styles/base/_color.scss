@@ -1,0 +1,13 @@
+//---------------------------------------------------------------
+// Color Helpers
+//---------------------------------------------------------------
+/*
+   Automatically generates a list of color helper classes 
+   from the $colors map in the `base/_variables.scss` file. 
+
+   The following classes are generated for each key: 
+   .h-color-bg-keyname
+   .h-color-text-keyname
+*/
+@include generate-color-helpers();
+

@@ -1,0 +1,20 @@
+{
+  "name": "<%= projectName %>",
+  "title": "<%= projectTitle %>",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= githubName %>/<%= projectName %>"
+  },
+  "author": {
+    "name": "<%= name %>",
+    "email": "<%= email %>",
+    "url": "<%= website %>"
+  },
+  "devDependencies": {
+    
+  },
+  "dependencies": {
+    
+  }
+}

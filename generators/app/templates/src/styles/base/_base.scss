@@ -1,0 +1,30 @@
+html,
+body {
+  overflow-x: hidden;
+  background-color: color(white);
+}
+
+html { 
+  font-size: 62.5%; 
+}
+
+body { 
+  @include type-style(a);
+  color: color(black);
+}
+
+*, *:before, *:after { 
+  box-sizing: border-box; 
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

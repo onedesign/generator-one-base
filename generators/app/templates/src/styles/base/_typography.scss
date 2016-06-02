@@ -1,0 +1,60 @@
+//===============================================================
+// Typography
+//===============================================================
+
+/*
+  Includes some baseline typestyles, notes on mixin generated 
+  typographic helper classes, and instructions for how to use the 
+  `type-style` mixin to apply type styles elsewhere in the codebase.  
+*/
+
+
+//---------------------------------------------------------------
+// Type Styles Mixin
+//---------------------------------------------------------------
+/*
+  The project contains the `type-style` mixin and `$type-styles`
+  map to organize our type styles, centralize how and where we define 
+  them, and assist with keeping things consistent and dry throughout 
+  the code base. 
+
+  The mixin is located in the `_utils/_type-styles.scss` file. 
+  The sass map is located in the `base/_variables.scss` file.
+
+  To apply styles to a class simply call the mixin and pass in 
+  the appropriate key from the `$type-styles` map. Example:
+  
+  .foo { 
+     @include type-style(ag-reg-14);
+  }
+
+  See typograhpic styleguide for reference:  
+  /styleguide/typography
+*/
+
+
+//---------------------------------------------------------------
+// Typographic Helpers
+//---------------------------------------------------------------
+/*
+  Automatically generates a list of typographic helper classes 
+  from the $type-styles map in the `base/_variables.scss` file. 
+
+  The following class is generated for each primary key: 
+  .h-type-keyname-12
+*/
+@include generate-type-helpers();
+
+
+//---------------------------------------------------------------
+// Text Selection
+//---------------------------------------------------------------
+::-moz-selection       { background: cyan; color: #fff; text-shadow: none; }
+::selection            { background: cyan; color: #fff; text-shadow: none; }
+
+
+//---------------------------------------------------------------
+// Super + Subscripts
+//---------------------------------------------------------------
+sup, sub              { vertical-align: baseline; position: relative; top: -0.2em; }
+sub                   { top: 0.2em; }
