@@ -74,59 +74,66 @@ module.exports = yeoman.Base.extend({
     );
   },
 
-  install: function () {
-    var devDependencies = [
-      'webpack',
-      'babel-core',
-      'babel-eslint',
-      'babel-loader',
-      'babel-preset-es2015',
-      'babel-preset-react',
-      'babel-preset-stage-2',
-      'browser-sync',
-      'del',
-      'eslint',
-      'eslint-config-odc',
-      'eslint-plugin-react',
-      'gulp',
-      'gulp-autoprefixer',
-      'gulp-css-globbing',
-      'gulp-cssimport',
-      'gulp-eslint',
-      'gulp-imagemin',
-      'gulp-pixrem',
-      'gulp-sass',
-      'gulp-shell',
-      'gulp-uglify',
-      'gulp-util',
-      'node-libs-browser',
-      'require-dir',
-      'run-sequence',
-      'script-loader'
-    ];
+  install: {
+    installDependencies: function() {
+      var devDependencies = [
+        'webpack',
+        'babel-core',
+        'babel-eslint',
+        'babel-loader',
+        'babel-preset-es2015',
+        'babel-preset-react',
+        'babel-preset-stage-2',
+        'browser-sync',
+        'del',
+        'eslint',
+        'eslint-config-odc',
+        'eslint-plugin-react',
+        'gulp',
+        'gulp-autoprefixer',
+        'gulp-css-globbing',
+        'gulp-cssimport',
+        'gulp-eslint',
+        'gulp-imagemin',
+        'gulp-pixrem',
+        'gulp-sass',
+        'gulp-shell',
+        'gulp-uglify',
+        'gulp-util',
+        'node-libs-browser',
+        'require-dir',
+        'run-sequence',
+        'script-loader'
+      ];
 
-    var dependencies = [
-      'one-router'
-    ];
+      var dependencies = [
+        'one-router'
+      ];
 
-    var self = this;
+      var self = this;
 
-    // Install dev dependencies
-    devDependencies.forEach(function(item) {
-      self.npmInstall([item], { 'saveDev': true });
-    });
+      // Install dev dependencies
+      devDependencies.forEach(function(item) {
+        self.npmInstall([item], { 'saveDev': true });
+      });
 
-    // Install dependencies
-    dependencies.forEach(function(item) {
-      self.npmInstall([item], { 'save': true });
-    });
+      // Install dependencies
+      dependencies.forEach(function(item) {
+        self.npmInstall([item], { 'save': true });
+      });
 
-    // Install optional dependencies
-    this.props.optionalDeps.forEach(function(item) {
-      self.npmInstall([item], { 'save': true });
-    });
+      // Install optional dependencies
+      this.props.optionalDeps.forEach(function(item) {
+        self.npmInstall([item], { 'save': true });
+      });
 
-    this.installDependencies();
+      this.installDependencies();
+    },
+
+    craftSetup: function() {
+      if (!this.props.isCraft) return;
+      // Do Craft-related stuff here in the future…
+    }
   },
 
   end: function() {

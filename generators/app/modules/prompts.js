@@ -74,5 +74,17 @@ module.exports = [
         checked: true
       }
     ]
+  },
+
+  //
+  //   Craft
+  //
+  //////////////////////////////////////////////////////////////////////
+  {
+    type: 'confirm',
+    name: 'isCraft',
+    message: 'Will this project use Craft CMS?',
+    default: true,
+    store: true
   }
 ]
