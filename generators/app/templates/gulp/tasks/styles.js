@@ -34,6 +34,7 @@ module.exports = gulp.task('styles', function() {
   }))
   .pipe(sass({
     outputStyle: 'compressed',
+    includePaths: ['node_modules']
   }).on('error', sass.logError))
   .pipe(pixrem({ rootValue: '10px' }))
   .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
