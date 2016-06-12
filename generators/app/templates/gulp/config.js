@@ -16,7 +16,17 @@ var paths = {
   templateDist: '',
 
   imageSrc: 'src/images/',
-  imageDist: 'dist/images/'
+  imageDist: 'dist/images/',
+
+  craftPath: 'craft/',
+
+  styleCopyPaths: [
+  
+  ],
+
+  scriptCopyPaths: [
+    'vendor'
+  ]
 };
 
 module.exports = {

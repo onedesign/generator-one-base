@@ -4,8 +4,9 @@ var browserSync  = require('browser-sync');
 var cssGlobbing  = require('gulp-css-globbing');
 var sass         = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var cssimport    = require('gulp-cssimport');
 var pixrem       = require('gulp-pixrem');
+var postcss      = require('gulp-postcss');
+var importCss    = require('postcss-import');
 
 //
 //   Styles
@@ -23,19 +24,21 @@ autoprefixer: Automatically adds vendor prefixes to experimental properties
 */
 
 module.exports = gulp.task('styles', function() {
+  var postCssProcessors = [
+    importCss()
+  ];
+
   return gulp.src([
     config.paths.styleSrc + 'main.scss',
   ])
-  .pipe(cssimport({
-    matchPattern: '*.css'
-  }))
   .pipe(cssGlobbing({
     extensions: ['.scss']
   }))
   .pipe(sass({
     outputStyle: 'compressed',
-    includePaths: ['node_modules']
+    includePaths: ['./node_modules']
   }).on('error', sass.logError))
+  .pipe(postcss(postCssProcessors, {}))
   .pipe(pixrem({ rootValue: '10px' }))
   .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
   .pipe(gulp.dest(config.paths.styleDist))

@@ -7,11 +7,10 @@
 @import "vendor/reset";
 
 // Utilities
-@import "util/color";
-@import "util/map-deep-get";
-@import "util/strip-units";
-@import "util/pseudo-absolute";
 @import "util/*";
+@import "one-sass-toolkit/color";
+@import "one-sass-toolkit/spacing";
+@import "one-sass-toolkit/type-styles";
 
 // Base
 @import "base/_variables";

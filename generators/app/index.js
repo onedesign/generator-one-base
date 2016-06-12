@@ -92,22 +92,25 @@ module.exports = yeoman.Base.extend({
         'gulp',
         'gulp-autoprefixer',
         'gulp-css-globbing',
-        'gulp-cssimport',
         'gulp-eslint',
+        'gulp-postcss',
         'gulp-imagemin',
         'gulp-pixrem',
+        'gulp-rev',
         'gulp-sass',
         'gulp-shell',
         'gulp-uglify',
         'gulp-util',
         'node-libs-browser',
+        'postcss-import',
         'require-dir',
         'run-sequence',
         'script-loader'
       ];
 
       var dependencies = [
-        'one-router'
+        'one-router',
+        'one-sass-toolkit'
       ];
 
       var self = this;
@@ -116,6 +119,9 @@ module.exports = yeoman.Base.extend({
       devDependencies.forEach(function(item) {
         self.npmInstall([item], { 'saveDev': true });
       });
+
+      // Explain that this is going to take awhile
+      this.log(chalk.yellow('\nInstalling dependencies via npm: ') + ' You may want to go grab a cup of coffee. This could take awhile.\n');
 
       // Install dependencies
       dependencies.forEach(function(item) {
@@ -126,8 +132,6 @@ module.exports = yeoman.Base.extend({
       this.props.optionalDeps.forEach(function(item) {
         self.npmInstall([item], { 'save': true });
       });
-
-      this.installDependencies();
     },
 
     craftSetup: function() {
@@ -137,6 +141,6 @@ module.exports = yeoman.Base.extend({
   },
 
   end: function() {
-    this.log('All done! Run ' + chalk.yellow('gulp') + ' to start your development server.');
+    this.log('\nAll done! Run ' + chalk.yellow('gulp') + ' to start your development server.');
   }
 });

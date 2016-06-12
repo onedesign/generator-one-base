@@ -14,13 +14,18 @@ module.exports = gulp.task('build', function(callback) {
   runSequence(
     'clean',
     [
-      'styles',
+      'templates',
       'scripts:lint',
       'scripts:bundle',
       'scripts:uglify',
-      'templates',
-      'images'
+      'styles',
+      'styles:copy',
+      'scripts:copy',
+      'images',
+      'svg'
     ],
+    'rev:clear',
+    'rev',
     callback
   );
 });
