@@ -12,11 +12,26 @@ A foundation for One Design Company projects on the web.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and `generator-one-base` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
+```
+
+### via npm install…
+
+```bash
 npm install -g generator-one-base
+```
+
+### via npm link…
+
+If you want to be able to make updates to the generator frequently, you can instead clone the repo and use `npm link` to use the cloned repo as your global version of `generator-one-base`
+
+```bash
+git clone git@github.com:onedesign/generator-one-base.git
+cd generator-one-base
+npm link
 ```
 
 ## Use
