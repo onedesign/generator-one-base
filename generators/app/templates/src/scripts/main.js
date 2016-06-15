@@ -21,7 +21,7 @@ APP.init = function() {
   // Each route should be defined in a routename_route.js file in /scripts/modules/routes
 
   var routes = {
-    '/$': APP.indexRoute
+    '^/$': APP.indexRoute
   };
 
   APP.router = new OneRouter(routes);
