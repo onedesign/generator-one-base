@@ -118,22 +118,16 @@ module.exports = yeoman.Base.extend({
       var self = this;
 
       // Install dev dependencies
-      devDependencies.forEach(function(item) {
-        self.npmInstall([item], { 'saveDev': true });
-      });
+      self.npmInstall(devDependencies, { 'saveDev': true });
 
       // Explain that this is going to take awhile
       this.log(chalk.yellow('\nInstalling dependencies via npm: ') + ' You may want to go grab a cup of coffee. This could take awhile.\n');
 
       // Install dependencies
-      dependencies.forEach(function(item) {
-        self.npmInstall([item], { 'save': true });
-      });
+      self.npmInstall(dependencies, { 'save': true });
 
       // Install optional dependencies
-      this.props.optionalDeps.forEach(function(item) {
-        self.npmInstall([item], { 'save': true });
-      });
+      self.npmInstall(this.props.optionalDeps, { 'save': true });
     },
 
     craftSetup: function() {
