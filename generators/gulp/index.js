@@ -27,6 +27,52 @@ module.exports = yeoman.Base.extend({
     );
   },
 
+  install: {
+    installDependencies: function() {
+      var devDependencies = [
+        'webpack',
+        'babel-core',
+        'babel-eslint',
+        'babel-loader',
+        'babel-preset-es2015',
+        'babel-preset-react',
+        'babel-preset-stage-2',
+        'browser-sync',
+        'del',
+        'eslint',
+        'eslint-config-odc',
+        'eslint-plugin-react',
+        'gulp',
+        'gulp-autoprefixer',
+        'gulp-css-globbing',
+        'gulp-eslint',
+        'gulp-postcss',
+        'gulp-imagemin',
+        'gulp-pixrem',
+        'gulp-replace',
+        'gulp-rev',
+        'gulp-sass',
+        'gulp-shell',
+        'gulp-svg-sprite',
+        'gulp-uglify',
+        'gulp-util',
+        'node-libs-browser',
+        'postcss-import',
+        'require-dir',
+        'run-sequence',
+        'script-loader'
+      ];
+
+      var self = this;
+
+      // Display a message
+      this.log(chalk.yellow('\nInstalling gulp-related dependencies via npm: '));
+
+      // Install dev dependencies
+      self.npmInstall(devDependencies, { 'saveDev': true });
+    }
+  },
+
   end: function() {
     this.log('All done! Enjoy your gulp setup!');
   }
