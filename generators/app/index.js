@@ -68,40 +68,6 @@ module.exports = yeoman.Base.extend({
 
   install: {
     installDependencies: function() {
-      var devDependencies = [
-        'webpack',
-        'babel-core',
-        'babel-eslint',
-        'babel-loader',
-        'babel-preset-es2015',
-        'babel-preset-react',
-        'babel-preset-stage-2',
-        'browser-sync',
-        'del',
-        'eslint',
-        'eslint-config-odc',
-        'eslint-plugin-react',
-        'gulp',
-        'gulp-autoprefixer',
-        'gulp-css-globbing',
-        'gulp-eslint',
-        'gulp-postcss',
-        'gulp-imagemin',
-        'gulp-pixrem',
-        'gulp-replace',
-        'gulp-rev',
-        'gulp-sass',
-        'gulp-shell',
-        'gulp-svg-sprite',
-        'gulp-uglify',
-        'gulp-util',
-        'node-libs-browser',
-        'postcss-import',
-        'require-dir',
-        'run-sequence',
-        'script-loader'
-      ];
-
       var dependencies = [
         'one-router',
         'one-sass-toolkit'
@@ -109,17 +75,11 @@ module.exports = yeoman.Base.extend({
 
       var self = this;
 
-      // Install dev dependencies
-      self.npmInstall(devDependencies, { 'saveDev': true });
-
-      // Explain that this is going to take awhile
-      this.log(chalk.yellow('\nInstalling dependencies via npm: ') + ' You may want to go grab a cup of coffee. This could take awhile.\n');
+      // Display a message
+      this.log(chalk.yellow('\nInstalling dependencies via npm: '));
 
       // Install dependencies
-      self.npmInstall(dependencies, { 'save': true });
-
-      // Install optional dependencies
-      self.npmInstall(this.props.optionalDeps, { 'save': true });
+      self.npmInstall(dependencies.concat(this.props.optionalDeps), { 'save': true });
     },
 
     craftSetup: function() {
