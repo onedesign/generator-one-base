@@ -20,7 +20,7 @@ npm install -g yo
 
 ### via npm link…
 
-If you want to be able to make updates to the generator frequently, you can instead clone the repo and use `npm link` to use the cloned repo as your global version of `generator-one-base`
+You can clone this repo and use `npm link` to use the cloned repo as your global version of `generator-one-base`
 
 ```bash
 git clone git@github.com:onedesign/generator-one-base.git
