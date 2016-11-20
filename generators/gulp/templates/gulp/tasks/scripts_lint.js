@@ -14,6 +14,7 @@ Reviews files for errors and coding consistency
 module.exports = gulp.task('scripts:lint', function() {
   return gulp.src([
     config.paths.scriptSrc + '**/*.js',
+    '!' + config.paths.scriptSrc + 'vendor/**/*.js'
   ])
   .pipe(eslint({
     configFile: './node_modules/eslint-config-odc/eslintrc.json',
