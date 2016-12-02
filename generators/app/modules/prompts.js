@@ -1,3 +1,10 @@
+function notBlank(input) {
+  if (input.length) {
+    return true;
+  }
+  return "Please enter a description.";
+}
+
 module.exports = [
   //
   //   package.json Details
@@ -19,7 +26,8 @@ module.exports = [
     type: 'input',
     name: 'description',
     message: 'What is a brief description of this project?',
-    default: ''
+    default: '',
+    validate: notBlank
   },
   {
     type: 'input',
