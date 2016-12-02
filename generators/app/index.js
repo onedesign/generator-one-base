@@ -66,6 +66,7 @@ module.exports = yeoman.Base.extend({
       }
     );
 
+    // Readme.md
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath('README.md'),
@@ -73,7 +74,7 @@ module.exports = yeoman.Base.extend({
         projectTitle: this.props.projectTitle,
         description: this.props.description
       }
-    )
+    );
   },
 
   install: {
