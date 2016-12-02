@@ -106,14 +106,19 @@ module.exports = yeoman.Base.extend({
 
       // otherwise ...
       this.log(chalk.yellow('\nInitializing git repo ...'));
-      this.spawnCommandSync('git', ['init', '--quiet']);
-      this.log(chalk.green('\nGit repository initialized'));
+      this.spawnCommandSync('git', ['init']);
 
       // This won't work on windows, but since no one's on windows that's
       // probably okay for now.
       this.log(chalk.yellow('\nHooking up hooks ...'));
-      this.spawnCommandSync('ln', ['-s', './hooks/pre-commit', './.git/hooks/pre-commit']);
-      this.spawnCommandSync('chmod', ['+x', '.git/hooks/pre-commit']);
+      this.spawnCommandSync('cp', [
+        this.templatePath('hooks/pre-commit'),
+        this.destinationPath('.git/hooks/pre-commit')
+      ]);
+      this.spawnCommandSync('chmod', [
+        '+x',
+        this.destinationPath('.git/hooks/pre-commit')
+      ]);
       this.log(chalk.green('\nHooks all hooked up.'));
     }
   },
