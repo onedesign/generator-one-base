@@ -7,25 +7,15 @@ var runSequence  = require('run-sequence');
 //////////////////////////////////////////////////////////////////////
 
 /*
-Runs all tasks needed to produce a deployable project
+Base tasks + tasks that should be run on production
 */
 
 module.exports = gulp.task('build', function(callback) {
   runSequence(
-    'clean',
+    'base',
     [
-      'templates',
-      'scripts:lint',
-      'scripts:bundle',
-      'scripts:uglify',
-      'styles',
-      'styles:copy',
-      'scripts:copy',
-      'images',
-      'svg'
+      'scripts:uglify'
     ],
-    'rev:clear',
-    'rev',
     callback
   );
 });
