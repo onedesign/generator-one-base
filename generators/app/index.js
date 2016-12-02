@@ -90,12 +90,29 @@ module.exports = yeoman.Base.extend({
       this.log(chalk.yellow('\nInstalling dependencies via npm: '));
 
       // Install dependencies
-      self.npmInstall(dependencies.concat(this.props.optionalDeps), { 'save': true });
+      // self.npmInstall(dependencies.concat(this.props.optionalDeps), { 'save': true });
     },
 
     craftSetup: function() {
       if (!this.props.isCraft) return;
       // Do Craft-related stuff here in the future…
+    },
+
+    gitInit: function() {
+      // if we don't want to do this, get out of here
+      if (!this.props.gitInit) return;
+
+      // otherwise ...
+      this.log(chalk.yellow('\nInitializing git repo ...'));
+      this.spawnCommandSync('git', ['init', '--quiet']);
+      this.log(chalk.green('\nGit repository initialized'));
+
+      // This won't work on windows, but since no one's on windows that's
+      // probably okay for now.
+      this.log(chalk.yellow('\nHooking up hooks ...'));
+      this.spawnCommandSync('ln', ['-s', './hooks/pre-commit', './.git/hooks/pre-commit']);
+      this.spawnCommandSync('chmod', ['+x', '.git/hooks/pre-commit']);
+      this.log(chalk.green('\nHooks all hooked up.'));
     }
   },
 
