@@ -25,10 +25,12 @@ module.exports = yeoman.Base.extend({
     this.destinationRoot(this.props.projectName);
 
     // General
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
-    );
+    if (this.props.gitInit) {
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    }
 
     // Styles
     this.fs.copy(
