@@ -17,6 +17,12 @@ module.exports = [
   },
   {
     type: 'input',
+    name: 'description',
+    message: 'What is a brief description of this project?',
+    default: ''
+  },
+  {
+    type: 'input',
     name: 'name',
     message: 'What is your name?',
     default: '',
