@@ -1,6 +1,7 @@
 {
   "name": "<%= projectName %>",
   "title": "<%= projectTitle %>",
+  "description": "<%= description %>",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -12,9 +13,9 @@
     "url": "<%= website %>"
   },
   "devDependencies": {
-    
+
   },
   "dependencies": {
-    
+
   }
 }
