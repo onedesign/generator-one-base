@@ -92,7 +92,7 @@ module.exports = yeoman.Base.extend({
       this.log(chalk.yellow('\nInstalling dependencies via npm: '));
 
       // Install dependencies
-      // self.npmInstall(dependencies.concat(this.props.optionalDeps), { 'save': true });
+      self.npmInstall(dependencies.concat(this.props.optionalDeps), { 'save': true });
     },
 
     craftSetup: function() {
