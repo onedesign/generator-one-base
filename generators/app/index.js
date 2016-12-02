@@ -64,6 +64,15 @@ module.exports = yeoman.Base.extend({
         projectTitle: this.props.projectTitle
       }
     );
+
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'),
+      {
+        projectTitle: this.props.projectTitle,
+        description: this.props.description
+      }
+    )
   },
 
   install: {
