@@ -25,7 +25,7 @@ module.exports = [
   {
     type: 'input',
     name: 'description',
-    message: 'What is a brief description for this project?',
+    message: 'What is a brief description of this project?',
     default: '',
     validate: notBlank
   },
