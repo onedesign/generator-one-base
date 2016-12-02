@@ -49,6 +49,7 @@ module.exports = yeoman.Base.extend({
       {
         projectName: this.props.projectName,
         projectTitle: this.props.projectTitle,
+        description: this.props.description,
         githubName: this.props.githubName,
         name: this.props.name,
         email: this.props.email,
