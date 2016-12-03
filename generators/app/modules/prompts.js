@@ -5,6 +5,16 @@ function notBlank(input) {
   return "Please enter a description.";
 }
 
+// https://gist.github.com/mathewbyrne/1280286
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
+
 module.exports = [
   //
   //   package.json Details
@@ -20,7 +30,9 @@ module.exports = [
     type: 'input',
     name: 'projectName',
     message: 'What is your project’s name?',
-    default: 'my-project'
+    default: function(answers) {
+      return slugify(answers.projectTitle);
+    }
   },
   {
     type: 'input',
