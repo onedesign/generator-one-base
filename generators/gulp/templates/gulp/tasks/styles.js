@@ -3,7 +3,7 @@ var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var cssGlobbing  = require('gulp-css-globbing');
 var sass         = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('autoprefixer');
 var pixrem       = require('gulp-pixrem');
 var postcss      = require('gulp-postcss');
 var importCss    = require('postcss-import');
@@ -25,7 +25,8 @@ autoprefixer: Automatically adds vendor prefixes to experimental properties
 
 module.exports = gulp.task('styles', function() {
   var postCssProcessors = [
-    importCss()
+    importCss(),
+    autoprefixer({ browsers: ['last 2 versions'] })
   ];
 
   return gulp.src([
@@ -40,7 +41,6 @@ module.exports = gulp.task('styles', function() {
   }).on('error', sass.logError))
   .pipe(postcss(postCssProcessors, {}))
   .pipe(pixrem({ rootValue: '10px' }))
-  .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
   .pipe(gulp.dest(config.paths.styleDist))
   .pipe(browserSync.reload({ stream: true }));
 });
