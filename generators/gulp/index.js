@@ -43,7 +43,7 @@ module.exports = yeoman.Base.extend({
         'eslint-config-odc',
         'eslint-plugin-react',
         'gulp',
-        'gulp-autoprefixer',
+        'autoprefixer',
         'gulp-css-globbing',
         'gulp-eslint',
         'gulp-postcss',
