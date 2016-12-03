@@ -101,16 +101,14 @@ module.exports = yeoman.Base.extend({
     },
 
     gitInit: function() {
-      // if we don't want to do this, get out of here
+      // If we don't want to use Git, bail out
       if (!this.props.gitInit) return;
 
-      // otherwise ...
-      this.log(chalk.yellow('\nInitializing git repo ...'));
+      this.log(chalk.yellow('\nInitializing git repo…'));
       this.spawnCommandSync('git', ['init']);
 
-      // This won't work on windows, but since no one's on windows that's
-      // probably okay for now.
-      this.log(chalk.yellow('\nHooking up hooks ...'));
+      // This won't work on windows
+      this.log(chalk.yellow('\nHooking up hooks…'));
       this.spawnCommandSync('cp', [
         this.templatePath('hooks/pre-commit'),
         this.destinationPath('.git/hooks/pre-commit')
