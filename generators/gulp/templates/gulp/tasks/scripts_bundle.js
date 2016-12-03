@@ -51,16 +51,16 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
 
     plugins: [
       new CommonsChunkPlugin('common.bundle.js'),
-      
+
       // Allows us to require bower components
       // e.g. var someBowerInstalledLib = require('bower-installed-lib-name');
       new webpack.ResolverPlugin(
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
       ),
-      
+
       // Remove duplicate code
       new webpack.optimize.DedupePlugin(),
-      
+
       // Give all modules access to jQuery
       new webpack.ProvidePlugin({
         $: 'jquery',
@@ -72,7 +72,12 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
 
   webpack(webpackConfig, function(err, stats) {
     if (err) throw new util.PluginError('webpack', err);
-    util.log('[webpack]', stats.toString({}));
+    util.log('[webpack]', stats.toString({
+      chunks: false,
+      colors: true,
+      version: false,
+      hash: false
+    }));
     browserSync.reload({ once: true });
     callback();
   });
