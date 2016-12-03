@@ -30,6 +30,12 @@ module.exports = yeoman.Base.extend({
       this.destinationPath('.gitignore')
     );
 
+    // Editorconfig
+    this.fs.copy(
+      this.templatePath('.editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+
     // Styles
     this.fs.copy(
       this.templatePath('src/styles'),
