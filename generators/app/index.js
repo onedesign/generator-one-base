@@ -68,7 +68,7 @@ module.exports = yeoman.Base.extend({
       }
     );
 
-    // Readme.md
+    // README.md
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath('README.md'),
