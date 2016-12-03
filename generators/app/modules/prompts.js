@@ -1,9 +1,6 @@
-function notBlank(input) {
-  if (input.length) {
-    return true;
-  }
-  return "Please enter a description.";
-}
+var notBlank = require('./notBlank');
+var slugify = require('./slugify');
+
 
 module.exports = [
   //
@@ -20,7 +17,9 @@ module.exports = [
     type: 'input',
     name: 'projectName',
     message: 'What is your project’s name?',
-    default: 'my-project'
+    default: function(answers) {
+      return slugify(answers.projectTitle);
+    }
   },
   {
     type: 'input',
