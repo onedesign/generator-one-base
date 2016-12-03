@@ -104,11 +104,11 @@ module.exports = yeoman.Base.extend({
       // If we don't want to use Git, bail out
       if (!this.props.gitInit) return;
 
-      this.log(chalk.yellow('\nInitializing git repo…'));
+      this.log(chalk.yellow('\nInitializing Git repo…'));
       this.spawnCommandSync('git', ['init']);
 
       // This won't work on windows
-      this.log(chalk.yellow('\nHooking up hooks…'));
+      this.log(chalk.yellow('\nConfiguring Git hooks…'));
       this.spawnCommandSync('cp', [
         this.templatePath('hooks/pre-commit'),
         this.destinationPath('.git/hooks/pre-commit')
@@ -117,7 +117,7 @@ module.exports = yeoman.Base.extend({
         '+x',
         this.destinationPath('.git/hooks/pre-commit')
       ]);
-      this.log(chalk.green('\nHooks all hooked up.'));
+      this.log(chalk.green('\nGit hooks configured.'));
     }
   },
 
