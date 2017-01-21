@@ -25,9 +25,11 @@ module.exports = Generator.extend({
     this.destinationRoot(this.options.projectName);
 
     // General
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
+      this.destinationPath('.gitignore'), {
+        platform: this.options.platform
+      }
     );
 
     // Editorconfig
