@@ -30,7 +30,9 @@ Thumbs.db
 # ---------------------------
 /public/*
 !/public/index.php
-!/public/robots.txt
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
 
 # Package Managers
 # ---------------------------
