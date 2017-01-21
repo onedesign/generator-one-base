@@ -99,6 +99,18 @@ module.exports = [
   },
 
   //
+  //   Git
+  //
+  //////////////////////////////////////////////////////////////////////
+  {
+    type: 'confirm',
+    name: 'gitInit',
+    message: 'Initialize a git repo for this project?',
+    default: true,
+    store: true
+  },
+
+  //
   //   Platform
   //
   //////////////////////////////////////////////////////////////////////

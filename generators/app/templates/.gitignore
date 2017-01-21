@@ -24,33 +24,26 @@ Thumbs.db
 # ---------------------------
 /craft/plugins/*
 /craft/rev-manifest.json
-/craft/storage/
+/craft/storage/*
 
 # Craft Public
 # ---------------------------
-/public/.htaccess
-/public/assets/
-/public/assets/**/_*
-/public/images/
-/public/scripts/
-/public/styles/
-/public/uploads/
-/public/web.config<% } %>
+/public/*
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico<% } %>
 
 # Package Managers
 # ---------------------------
-/.bundle
 /vendor/
-bower_components
-node_modules
-npm-debug.log
+/node_modules/
 
 # Temp
 # ---------------------------
 .cache
-.sass-cache
-/log/*.log
-/logs/*
+*.log
+/logs/
 /tmp
 
 # VM
