@@ -1,14 +1,11 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.Base.extend({
+module.exports = Generator.extend({
   prompting: function () {
-    // Greet the user
-    this.log(yosay(
-      'Welcome to the impressive ' + chalk.red('generator-one-base') + ' generator!'
-    ));
+    
   },
 
   writing: function () {
@@ -22,8 +19,15 @@ module.exports = yeoman.Base.extend({
     );
 
     this.fs.copy(
-      this.templatePath('gulp'),
-      this.destinationPath('gulp')
+      this.templatePath('gulp/tasks'),
+      this.destinationPath('gulp/tasks')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulp/config.js'),
+      this.destinationPath('gulp/config.js'), {
+        platform: this.options.platform
+      }
     );
   },
 
@@ -43,7 +47,7 @@ module.exports = yeoman.Base.extend({
         'eslint-config-odc',
         'eslint-plugin-react',
         'gulp',
-        'gulp-autoprefixer',
+        'autoprefixer',
         'gulp-css-globbing',
         'gulp-eslint',
         'gulp-postcss',
@@ -66,10 +70,10 @@ module.exports = yeoman.Base.extend({
       var self = this;
 
       // Display a message
-      this.log(chalk.yellow('\nInstalling gulp-related dependencies via npm: '));
+      this.log(chalk.yellow('\nInstalling gulp-related dependencies via yarn: '));
 
       // Install dev dependencies
-      self.npmInstall(devDependencies, { 'saveDev': true });
+      self.yarnInstall(devDependencies, { 'dev': true });
     }
   },
 

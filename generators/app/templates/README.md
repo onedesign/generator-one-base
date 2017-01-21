@@ -6,9 +6,9 @@
 
 ### Front End Dependencies
 
-First, make sure you have [NodeJS](http://nodejs.org) and [Gulp](http://gulpjs.com) installed. Then:
+First, make sure you have [NodeJS](http://nodejs.org), [Yarn](https://yarnpkg.com), and [Gulp](http://gulpjs.com) installed. Then:
 
-* `npm install`
+* `yarn`
 * `gulp`
 
 ### Development Server

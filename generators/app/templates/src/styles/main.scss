@@ -1,8 +1,8 @@
-// Vendor
-@import "susy/sass/susy";
-@import "sass-mq/mq";
+// Vendor<% if (deps.indexOf('susy') > -1) { %>
+@import "susy/sass/susy";<% } %><% if (deps.indexOf('sass-mq') > -1) { %>
+@import "sass-mq/mq";<% } %>
 
-// Vendor
+// Resets
 @import "vendor/normalize";
 @import "vendor/reset";
 
@@ -10,12 +10,12 @@
 @import "util/*";
 
 // Variables
-@import "base/_variables";
+@import "base/_variables";<% if (deps.indexOf('one-sass-toolkit') > -1) { %>
 
 // Toolkit
 @import "one-sass-toolkit/color";
 @import "one-sass-toolkit/spacing";
-@import "one-sass-toolkit/type-styles";
+@import "one-sass-toolkit/type-styles";<% } %>
 
 // Helpers
 @import "helpers/*";
