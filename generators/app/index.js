@@ -123,7 +123,7 @@ module.exports = Generator.extend({
 
     gitInit: function() {
       // If we don't want to use Git, bail out
-      if (!this.props.gitInit) return;
+      if (!this.options.gitInit) return;
 
       this.log(chalk.yellow('\nInitializing Git repo…'));
       this.spawnCommandSync('git', ['init']);
