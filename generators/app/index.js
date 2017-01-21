@@ -24,7 +24,7 @@ module.exports = Generator.extend({
   writing: function () {
     this.destinationRoot(this.options.projectName);
 
-    // General
+    // Git
     if (this.options.gitInit) {
       this.fs.copyTpl(
         this.templatePath('.gitignore'),
