@@ -1,9 +1,9 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.Base.extend({
+module.exports = Generator.extend({
   prompting: function () {
     // Greet the user
     this.log(yosay(
@@ -66,10 +66,10 @@ module.exports = yeoman.Base.extend({
       var self = this;
 
       // Display a message
-      this.log(chalk.yellow('\nInstalling gulp-related dependencies via npm: '));
+      this.log(chalk.yellow('\nInstalling gulp-related dependencies via yarn: '));
 
       // Install dev dependencies
-      self.npmInstall(devDependencies, { 'saveDev': true });
+      self.yarnInstall(devDependencies, { 'dev': true });
     }
   },
 

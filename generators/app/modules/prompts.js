@@ -1,7 +1,6 @@
 var notBlank = require('./notBlank');
 var slugify = require('./slugify');
 
-
 module.exports = [
   //
   //   package.json Details
