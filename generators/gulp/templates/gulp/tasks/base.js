@@ -13,6 +13,7 @@ The baseline tasks to get things going.
 module.exports = gulp.task('base', function(callback) {
   runSequence(
     'clean',
+    'rev:clear',
     [
       'templates',
       'scripts:lint',
@@ -23,8 +24,6 @@ module.exports = gulp.task('base', function(callback) {
       'images',
       'svg'
     ],
-    'rev:clear',
-    'rev',
     callback
   );
 });
