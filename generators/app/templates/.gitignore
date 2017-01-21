@@ -24,7 +24,7 @@ Thumbs.db
 # ---------------------------
 /craft/plugins/*
 /craft/rev-manifest.json
-/craft/storage/*<% } %>
+/craft/storage/*
 
 # Craft Public
 # ---------------------------
@@ -32,7 +32,7 @@ Thumbs.db
 !/public/index.php
 !/public/*.txt
 !/public/*.png
-!/public/*.ico
+!/public/*.ico<% } %>
 
 # Package Managers
 # ---------------------------
