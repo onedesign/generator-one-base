@@ -1,35 +1,49 @@
-################################################
-# macOS
-#################################################
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-################################################
-# Custom
-################################################
-node_modules
-dist
+# System
+# ---------------------------
 .DS_Store
+Thumbs.db
+
+# Config
+# ---------------------------
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.tmproject
+.env
+.env.php
+.idea
+.project
+.settings
+
+# Compiled Files
+# ---------------------------
+/dist/
+
+# Craft
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+/craft/storage/*
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/index.php
+!/public/robots.txt
+
+# Package Managers
+# ---------------------------
+/vendor/
+/node_modules/
+
+# Temp
+# ---------------------------
+.cache
+*.log
+/logs/
+/tmp
+
+# VM
+# ---------------------------
+.vagrant/*
