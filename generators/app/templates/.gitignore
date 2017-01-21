@@ -1,3 +1,58 @@
-node_modules
-dist
+# System
+# ---------------------------
 .DS_Store
+Thumbs.db
+
+# Config
+# ---------------------------
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.tmproject
+.env
+.env.php
+.idea
+.project
+.settings
+
+# Compiled Files
+# ---------------------------
+/dist/<% if (platform == 'craft') { %>
+
+# Craft
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+/craft/storage/
+
+# Craft Public
+# ---------------------------
+/public/.htaccess
+/public/assets/
+/public/assets/**/_*
+/public/images/
+/public/scripts/
+/public/styles/
+/public/uploads/
+/public/web.config<% } %>
+
+# Package Managers
+# ---------------------------
+/.bundle
+/vendor/
+bower_components
+node_modules
+npm-debug.log
+
+# Temp
+# ---------------------------
+.cache
+.sass-cache
+/log/*.log
+/logs/*
+/tmp
+
+# VM
+# ---------------------------
+.vagrant/*
