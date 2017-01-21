@@ -18,13 +18,13 @@ Thumbs.db
 
 # Compiled Files
 # ---------------------------
-/dist/
+/dist/<% if (platform == 'craft') { %>
 
 # Craft
 # ---------------------------
 /craft/plugins/*
 /craft/rev-manifest.json
-/craft/storage/*
+/craft/storage/*<% } %>
 
 # Craft Public
 # ---------------------------
