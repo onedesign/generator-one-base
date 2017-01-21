@@ -25,7 +25,7 @@ module.exports = Generator.extend({
     this.destinationRoot(this.options.projectName);
 
     // General
-    if (this.options.gitInit) {
+    if (!this.options.gitInit) {
       this.fs.copyTpl(
         this.templatePath('.gitignore'),
         this.destinationPath('.gitignore'), {
