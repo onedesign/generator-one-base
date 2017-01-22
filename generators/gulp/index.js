@@ -5,10 +5,7 @@ var yosay = require('yosay');
 
 module.exports = Generator.extend({
   prompting: function () {
-    // Greet the user
-    this.log(yosay(
-      'Welcome to the impressive ' + chalk.red('generator-one-base') + ' generator!'
-    ));
+    
   },
 
   writing: function () {
@@ -22,8 +19,15 @@ module.exports = Generator.extend({
     );
 
     this.fs.copy(
-      this.templatePath('gulp'),
-      this.destinationPath('gulp')
+      this.templatePath('gulp/tasks'),
+      this.destinationPath('gulp/tasks')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulp/config.js'),
+      this.destinationPath('gulp/config.js'), {
+        platform: this.options.platform
+      }
     );
   },
 

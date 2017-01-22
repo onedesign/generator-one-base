@@ -76,6 +76,11 @@ module.exports = [
         checked: true
       },
       {
+        name: 'one-router',
+        value: 'one-router',
+        checked: true
+      },
+      {
         name: 'sass-mq',
         value: 'sass-mq',
         checked: true
@@ -84,19 +89,44 @@ module.exports = [
         name: 'susy',
         value: 'susy',
         checked: true
+      },
+      {
+        name: 'one-sass-toolkit',
+        value: 'one-sass-toolkit',
+        checked: true
       }
     ]
   },
 
   //
-  //   Craft
+  //   Git
   //
   //////////////////////////////////////////////////////////////////////
   {
     type: 'confirm',
-    name: 'isCraft',
-    message: 'Will this project use Craft CMS?',
+    name: 'gitInit',
+    message: 'Initialize a git repo for this project?',
     default: true,
     store: true
+  },
+
+  //
+  //   Platform
+  //
+  //////////////////////////////////////////////////////////////////////
+  {
+    type: 'list',
+    name: 'platform',
+    message: 'What platform should the project use?',
+    choices: [
+      {
+        name: 'Static',
+        value: 'static'
+      },
+      {
+        name: 'Craft',
+        value: 'craft'
+      }
+    ]
   }
 ]

@@ -24,11 +24,15 @@ module.exports = Generator.extend({
   writing: function () {
     this.destinationRoot(this.options.projectName);
 
-    // General
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
-    );
+    // Git
+    if (this.options.gitInit) {
+      this.fs.copyTpl(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore'), {
+          platform: this.options.platform
+        }
+      );
+    }
 
     // Editorconfig
     this.fs.copy(
@@ -41,12 +45,26 @@ module.exports = Generator.extend({
       this.templatePath('src/styles'),
       this.destinationPath('src/styles')
     );
+    this.fs.copyTpl(
+      this.templatePath('src/styles/main.scss'),
+      this.destinationPath('src/styles/main.scss'), {
+        deps: this.options.optionalDeps
+      }
+    );
 
     // Scripts
-    this.fs.copy(
-      this.templatePath('src/scripts'),
-      this.destinationPath('src/scripts')
+    this.fs.copyTpl(
+      this.templatePath('src/scripts/main.js'),
+      this.destinationPath('src/scripts/main.js'), {
+        deps: this.options.optionalDeps
+      }
     );
+    if (this.options.optionalDeps.indexOf('one-router') > -1) {
+      this.fs.copy(
+        this.templatePath('src/scripts/modules/routes'),
+        this.destinationPath('src/scripts/modules/routes')
+      );
+    }
 
     // Package.js
     this.fs.copyTpl(
@@ -72,6 +90,7 @@ module.exports = Generator.extend({
       }
     );
 
+    // README.md
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath('README.md'),
@@ -79,14 +98,13 @@ module.exports = Generator.extend({
         projectTitle: this.options.projectTitle,
         description: this.options.description
       }
-    )
+    );
   },
 
   install: {
     installDependencies: function() {
       var dependencies = [
-        'one-router',
-        'one-sass-toolkit'
+
       ];
 
       var self = this;
@@ -99,8 +117,28 @@ module.exports = Generator.extend({
     },
 
     craftSetup: function() {
-      if (!this.options.isCraft) return;
+      if (!this.options.platform == 'craft') return;
       // Do Craft-related stuff here in the future…
+    },
+
+    gitInit: function() {
+      // If we don't want to use Git, bail out
+      if (!this.options.gitInit) return;
+
+      this.log(chalk.yellow('\nInitializing Git repo…'));
+      this.spawnCommandSync('git', ['init']);
+
+      // This won't work on windows
+      this.log(chalk.yellow('\nConfiguring Git hooks…'));
+      this.spawnCommandSync('cp', [
+        this.templatePath('hooks/pre-commit'),
+        this.destinationPath('.git/hooks/pre-commit')
+      ]);
+      this.spawnCommandSync('chmod', [
+        '+x',
+        this.destinationPath('.git/hooks/pre-commit')
+      ]);
+      this.log(chalk.green('\nGit hooks configured.'));
     }
   },
 
