@@ -1,5 +1,5 @@
 <% isCraft = platform == 'craft' -%>
-<% var rootSrcPath = isCraft ? 'public' : 'dist' -%>
+<% var rootSrcPath = isCraft ? 'public/dist' : 'dist' -%>
 //
 //   Config
 //
