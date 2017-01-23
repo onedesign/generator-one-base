@@ -6,7 +6,7 @@ var prompts = require('./modules/prompts');
 
 module.exports = Generator.extend({
   initializing: function () {
-    this.composeWith('one-base:gulp');
+    
   },
 
   prompting: function () {
@@ -18,6 +18,11 @@ module.exports = Generator.extend({
     return this.prompt(prompts).then(function (options) {
       // To access options later use this.options.someAnswer;
       this.options = options;
+
+      // Compose
+      this.composeWith(require.resolve('../gulp'), {
+        options: this.options
+      });
     }.bind(this));
   },
 

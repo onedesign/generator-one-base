@@ -22,9 +22,9 @@ gulp.task('rev', ['rev:clear'], function() {
     .pipe(gulp.dest('.'))
     .pipe(rev.manifest())
     .pipe(replace('public', ''))
-    .pipe(gulp.dest(config.paths.craftPath));
+    .pipe(gulp.dest(config.paths.dist));
 });
 
 gulp.task('rev:clear', function() {
-  return del([config.paths.craftPath + 'rev-manifest.json']);
+  return del([config.paths.dist + 'rev-manifest.json']);
 });

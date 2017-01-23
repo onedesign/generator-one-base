@@ -4,6 +4,10 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = Generator.extend({
+  initializing: function () {
+    this.options = this.options.options;
+  },
+
   prompting: function () {
     
   },
@@ -26,6 +30,7 @@ module.exports = Generator.extend({
     this.fs.copyTpl(
       this.templatePath('gulp/config.js'),
       this.destinationPath('gulp/config.js'), {
+        projectName: this.options.projectName,
         platform: this.options.platform
       }
     );

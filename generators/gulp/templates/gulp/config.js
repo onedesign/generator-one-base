@@ -1,22 +1,24 @@
+<% isCraft = platform == 'craft' -%>
+<% var rootSrcPath = isCraft ? 'public/dist' : 'dist' -%>
 //
 //   Config
 //
 //////////////////////////////////////////////////////////////////////
 
 var paths = {
-  dist: 'dist/',
+  dist: '<%= rootSrcPath %>/',
 
   styleSrc: 'src/styles/',
-  styleDist: 'dist/styles/',
+  styleDist: '<%= rootSrcPath %>/styles/',
 
   scriptSrc: 'src/scripts/',
-  scriptDist: 'dist/scripts/',
+  scriptDist: '<%= rootSrcPath %>/scripts/',
 
   templateSrc: '',
   templateDist: '',
 
   imageSrc: 'src/images/',
-  imageDist: 'dist/images/',<% if (platform == 'craft') { %>
+  imageDist: '<%= rootSrcPath %>/images/',<% if (isCraft) { %>
 
   craftPath: 'craft/',<% } %>
 
@@ -36,7 +38,7 @@ module.exports = {
   // If you want BrowserSync to proxy an existing URL,
   // change `useProxy` to true and enter your URL as `proxyUrl`
   useProxy: false,
-  proxyUrl: 'http://app.dev',
+  proxyUrl: 'http://<%= projectName %>.dev',
 
   scripts: {
     // entry files: 
