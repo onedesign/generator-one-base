@@ -5,7 +5,7 @@ var yosay = require('yosay');
 
 module.exports = Generator.extend({
   initializing: function () {
-    this.options = this.options.options;
+
   },
 
   prompting: function () {

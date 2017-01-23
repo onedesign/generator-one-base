@@ -21,7 +21,8 @@ module.exports = Generator.extend({
 
       // Compose
       this.composeWith(require.resolve('../gulp'), {
-        options: this.options
+        projectName: this.options.projectName,
+        platform: this.options.platform
       });
     }.bind(this));
   },
