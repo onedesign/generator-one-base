@@ -20,7 +20,7 @@ module.exports = Generator.extend({
       this.options = options;
 
       // Compose
-      this.composeWith('one-base:gulp', {
+      this.composeWith(require.resolve('../gulp'), {
         options: this.options
       });
     }.bind(this));
