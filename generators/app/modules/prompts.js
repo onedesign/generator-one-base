@@ -1,9 +1,5 @@
-function notBlank(input) {
-  if (input.length) {
-    return true;
-  }
-  return "Please enter a description.";
-}
+var notBlank = require('./notBlank');
+var slugify = require('./slugify');
 
 module.exports = [
   //
@@ -20,7 +16,9 @@ module.exports = [
     type: 'input',
     name: 'projectName',
     message: 'What is your project’s name?',
-    default: 'my-project'
+    default: function(answers) {
+      return slugify(answers.projectTitle);
+    }
   },
   {
     type: 'input',
@@ -78,6 +76,11 @@ module.exports = [
         checked: true
       },
       {
+        name: 'one-router',
+        value: 'one-router',
+        checked: true
+      },
+      {
         name: 'sass-mq',
         value: 'sass-mq',
         checked: true
@@ -85,6 +88,11 @@ module.exports = [
       {
         name: 'susy',
         value: 'susy',
+        checked: true
+      },
+      {
+        name: 'one-sass-toolkit',
+        value: 'one-sass-toolkit',
         checked: true
       }
     ]
@@ -103,14 +111,22 @@ module.exports = [
   },
 
   //
-  //   Craft
+  //   Platform
   //
   //////////////////////////////////////////////////////////////////////
   {
-    type: 'confirm',
-    name: 'isCraft',
-    message: 'Will this project use Craft CMS?',
-    default: true,
-    store: true
+    type: 'list',
+    name: 'platform',
+    message: 'What platform should the project use?',
+    choices: [
+      {
+        name: 'Static',
+        value: 'static'
+      },
+      {
+        name: 'Craft',
+        value: 'craft'
+      }
+    ]
   }
 ]

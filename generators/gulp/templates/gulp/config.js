@@ -16,9 +16,9 @@ var paths = {
   templateDist: '',
 
   imageSrc: 'src/images/',
-  imageDist: 'dist/images/',
+  imageDist: 'dist/images/',<% if (platform == 'craft') { %>
 
-  craftPath: 'craft/',
+  craftPath: 'craft/',<% } %>
 
   styleCopyPaths: [
   

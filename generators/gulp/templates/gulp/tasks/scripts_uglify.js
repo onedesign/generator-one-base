@@ -11,7 +11,7 @@ var uglify       = require('gulp-uglify');
 Minimizes the size of the javascript bundle file
 */
 
-module.exports = gulp.task('scripts:uglify', ['scripts:bundle'], function() {
+module.exports = gulp.task('scripts:uglify', function() {
   return gulp.src([
     config.paths.scriptDist + '**/*.js'
   ])

@@ -20,11 +20,11 @@ $colors: (
 //---------------------------------------------------------------
 // Easing
 //---------------------------------------------------------------
-$easeLinear: cubic-bezier(0.250, 0.250, 0.750, 0.750);
-$easeOutCubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-$easeOutQuart: cubic-bezier(0.165, 0.840, 0.440, 1.000);
-$easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
-$easeInOutExpo: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+$ease-linear: cubic-bezier(0.250, 0.250, 0.750, 0.750);
+$ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$ease-out-quart: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+$ease-out-expo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+$ease-in-out-expo: cubic-bezier(1.000, 0.000, 0.000, 1.000);
 
 
 //---------------------------------------------------------------
