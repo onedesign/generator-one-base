@@ -9,6 +9,7 @@ A foundation for One Design Company projects on the web.
 - Modular Javascript setup powered by [Webpack](https://webpack.github.io) and support for next-generation syntax via [Babel](https://babeljs.io)
 - Installs latest versions of all development tools and optional frontend libraries via [npm](https://www.npmjs.com)
 - Development server with live reload, powered by [BrowserSync](https://www.browsersync.io) that can optionally proxy an existing URL.
+- Pull Request template for consistent pull requests
 - Pre-commit hook that checks for commonly used logging functions and doesn't allow you to commit when they are present.
 
 ## Installation

@@ -38,6 +38,11 @@ module.exports = Generator.extend({
           platform: this.options.platform
         }
       );
+
+      this.fs.copy(
+        this.templatePath('.github'),
+        this.destinationPath('.github')
+      );
     }
 
     // Editorconfig
