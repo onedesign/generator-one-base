@@ -48,7 +48,10 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
     },
 
     plugins: [
-      new CommonsChunkPlugin('common.bundle.js'),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'common',
+        filename: 'common.bundle.js',
+      }),
 
       // Give all modules access to jQuery
       new webpack.ProvidePlugin({
