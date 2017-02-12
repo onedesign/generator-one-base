@@ -29,37 +29,26 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
     },
 
     resolve: {
-      root: [
-        path.resolve('./bower_components'),
+      modules: [
+        path.resolve('./node_modules'),
         path.resolve('./' + config.paths.scriptSrc + 'vendor')
       ],
       alias: config.scripts.aliases
     },
 
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-          query: {
-            presets: ['es2015', 'stage-2', 'react']
-          }
+          loader: 'babel-loader',
+          options: { presets: ['es2015', 'stage-2', 'react'] },
+          exclude: [/node_modules/]
         }
       ]
     },
 
     plugins: [
       new CommonsChunkPlugin('common.bundle.js'),
-
-      // Allows us to require bower components
-      // e.g. var someBowerInstalledLib = require('bower-installed-lib-name');
-      new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
-      ),
-
-      // Remove duplicate code
-      new webpack.optimize.DedupePlugin(),
 
       // Give all modules access to jQuery
       new webpack.ProvidePlugin({
