@@ -19,6 +19,9 @@ module.exports = Generator.extend({
       // To access options later use this.options.someAnswer;
       this.options = options;
 
+      // Use gulp
+      this.options.isUsingGulp = true;
+
       // Compose
       this.composeWith(require.resolve('../gulp'), {
         projectName: this.options.projectName,
@@ -94,7 +97,8 @@ module.exports = Generator.extend({
           githubName: this.options.githubName,
           name: this.options.name,
           email: this.options.email,
-          website: this.options.website
+          website: this.options.website,
+          isUsingGulp: this.options.isUsingGulp
         }
       );
     },
