@@ -17,5 +17,9 @@
   },
   "dependencies": {
 
+  },
+  "scripts": {<% if (isUsingGulp) { %>
+    "start": "gulp",
+    "build": "gulp build"<% } %>
   }
 }
