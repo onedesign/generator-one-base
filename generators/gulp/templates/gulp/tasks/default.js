@@ -1,5 +1,6 @@
 var gulp         = require('gulp');
 var runSequence  = require('run-sequence');
+global.browserSync = require('browser-sync').create();
 
 //
 //   Default

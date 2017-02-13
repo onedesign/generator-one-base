@@ -1,6 +1,5 @@
 var config             = require('../config');
 var gulp               = require('gulp');
-var browserSync        = require('browser-sync');
 var _                  = require('lodash');
 var util               = require('gulp-util');
 var path               = require('path');
@@ -63,14 +62,24 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
   }
 
   webpack(webpackConfig, function(err, stats) {
+    var log = function(stats) {
+      util.log('[webpack]', stats.toString({
+        chunks: false,
+        colors: true,
+        version: false,
+        hash: false
+      }));
+    }
+
     if (err) throw new util.PluginError('webpack', err);
-    util.log('[webpack]', stats.toString({
-      chunks: false,
-      colors: true,
-      version: false,
-      hash: false
-    }));
-    browserSync.reload({ once: true });
+    if (stats.hasErrors()) {
+      var info = stats.toJson('errors-only');
+      var body = info.errors.join('/n');
+      global.browserSync.notify(body, 30000);
+    } else {
+      global.browserSync.reload({ once: true });
+    }
+    log(stats);
     callback();
   });
 });

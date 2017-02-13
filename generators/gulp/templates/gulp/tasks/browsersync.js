@@ -1,6 +1,5 @@
 var config      = require('../config');
 var gulp        = require('gulp');
-var browserSync = require('browser-sync');
 
 //
 //   BrowserSync
@@ -27,5 +26,5 @@ module.exports = gulp.task('browserSync', function() {
     }
   }
 
-  browserSync.init(null, options);
+  global.browserSync.init(null, options);
 });
