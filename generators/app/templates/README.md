@@ -9,7 +9,7 @@
 First, make sure you have [NodeJS](http://nodejs.org), [Yarn](https://yarnpkg.com), and [Gulp](http://gulpjs.com) installed. Then:
 
 * `yarn`
-* `npm start`
+* `yarn start`
 
 ### Development Server
 
