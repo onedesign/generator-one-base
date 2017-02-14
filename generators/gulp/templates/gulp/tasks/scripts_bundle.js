@@ -72,6 +72,7 @@ gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
     }
 
     if (err) throw new util.PluginError('webpack', err);
+
     if (stats.hasErrors()) {
       var info = stats.toJson('errors-only');
       var body = info.errors.join('/n');
