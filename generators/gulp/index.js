@@ -69,7 +69,8 @@ module.exports = Generator.extend({
         'postcss-import',
         'require-dir',
         'run-sequence',
-        'script-loader'
+        'script-loader',
+        'strip-ansi'
       ];
 
       var self = this;
