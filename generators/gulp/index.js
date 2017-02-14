@@ -4,36 +4,38 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = Generator.extend({
-  initializing: function () {
-
-  },
-
-  prompting: function () {
+  initializing: function() {
     
   },
 
-  writing: function () {
-    // Maybe not the best, but works for now
-    this.destinationRoot('./');
+  prompting: function() {
+    
+  },
 
-    // Gulp
-    this.fs.copy(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js')
-    );
+  writing: {
+    setRoot: function() {
+      this.destinationRoot('./');
+    },
 
-    this.fs.copy(
-      this.templatePath('gulp/tasks'),
-      this.destinationPath('gulp/tasks')
-    );
+    gulp: function() {
+      this.fs.copy(
+        this.templatePath('gulpfile.js'),
+        this.destinationPath('gulpfile.js')
+      );
 
-    this.fs.copyTpl(
-      this.templatePath('gulp/config.js'),
-      this.destinationPath('gulp/config.js'), {
-        projectName: this.options.projectName,
-        platform: this.options.platform
-      }
-    );
+      this.fs.copy(
+        this.templatePath('gulp/tasks'),
+        this.destinationPath('gulp/tasks')
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('gulp/config.js'),
+        this.destinationPath('gulp/config.js'), {
+          projectName: this.options.projectName,
+          platform: this.options.platform
+        }
+      );
+    }
   },
 
   install: {

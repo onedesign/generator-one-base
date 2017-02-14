@@ -5,19 +5,22 @@ var yosay = require('yosay');
 var prompts = require('./modules/prompts');
 
 module.exports = Generator.extend({
-  initializing: function () {
+  initializing: function() {
     
   },
 
-  prompting: function () {
+  prompting: function() {
     // Greet the user
     this.log(yosay(
       'Welcome to the impressive ' + chalk.red('generator-one-base') + ' generator!'
     ));
 
-    return this.prompt(prompts).then(function (options) {
+    return this.prompt(prompts).then(function(options) {
       // To access options later use this.options.someAnswer;
       this.options = options;
+
+      // Use gulp
+      this.options.isUsingGulp = true;
 
       // Compose
       this.composeWith(require.resolve('../gulp'), {
@@ -27,89 +30,99 @@ module.exports = Generator.extend({
     }.bind(this));
   },
 
-  writing: function () {
-    this.destinationRoot(this.options.projectName);
+  writing: {
+    setRoot: function() {
+      this.destinationRoot(this.options.projectName);
+    },
 
-    // Git
-    if (this.options.gitInit) {
+    git: function() {
+      if (this.options.gitInit) {
+        this.fs.copyTpl(
+          this.templatePath('.gitignore'),
+          this.destinationPath('.gitignore'), {
+            platform: this.options.platform
+          }
+        );
+
+        this.fs.copy(
+          this.templatePath('.github'),
+          this.destinationPath('.github')
+        );
+      }
+    },
+
+    editorConfig: function() {
+      this.fs.copy(
+        this.templatePath('.editorconfig'),
+        this.destinationPath('.editorconfig')
+      );
+    },
+
+    styles: function() {
+      this.fs.copy(
+        this.templatePath('src/styles'),
+        this.destinationPath('src/styles')
+      );
       this.fs.copyTpl(
-        this.templatePath('.gitignore'),
-        this.destinationPath('.gitignore'), {
-          platform: this.options.platform
+        this.templatePath('src/styles/main.scss'),
+        this.destinationPath('src/styles/main.scss'), {
+          deps: this.options.optionalDeps
         }
       );
+    },
 
-      this.fs.copy(
-        this.templatePath('.github'),
-        this.destinationPath('.github')
+    scripts: function() {
+      this.fs.copyTpl(
+        this.templatePath('src/scripts/main.js'),
+        this.destinationPath('src/scripts/main.js'), {
+          deps: this.options.optionalDeps
+        }
+      );
+      if (this.options.optionalDeps.indexOf('one-router') > -1) {
+        this.fs.copy(
+          this.templatePath('src/scripts/modules/routes'),
+          this.destinationPath('src/scripts/modules/routes')
+        );
+      }
+    },
+
+    packageJson: function() {
+      this.fs.copyTpl(
+        this.templatePath('package.json'),
+        this.destinationPath('package.json'),
+        {
+          projectName: this.options.projectName,
+          projectTitle: this.options.projectTitle,
+          description: this.options.description,
+          githubName: this.options.githubName,
+          name: this.options.name,
+          email: this.options.email,
+          website: this.options.website,
+          isUsingGulp: this.options.isUsingGulp
+        }
+      );
+    },
+
+    indexHtml: function() {
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('index.html'),
+        {
+          projectTitle: this.options.projectTitle
+        }
+      );
+    },
+
+    readme: function() {
+      this.fs.copyTpl(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md'),
+        {
+          projectTitle: this.options.projectTitle,
+          description: this.options.description
+        }
       );
     }
-
-    // Editorconfig
-    this.fs.copy(
-      this.templatePath('.editorconfig'),
-      this.destinationPath('.editorconfig')
-    );
-
-    // Styles
-    this.fs.copy(
-      this.templatePath('src/styles'),
-      this.destinationPath('src/styles')
-    );
-    this.fs.copyTpl(
-      this.templatePath('src/styles/main.scss'),
-      this.destinationPath('src/styles/main.scss'), {
-        deps: this.options.optionalDeps
-      }
-    );
-
-    // Scripts
-    this.fs.copyTpl(
-      this.templatePath('src/scripts/main.js'),
-      this.destinationPath('src/scripts/main.js'), {
-        deps: this.options.optionalDeps
-      }
-    );
-    if (this.options.optionalDeps.indexOf('one-router') > -1) {
-      this.fs.copy(
-        this.templatePath('src/scripts/modules/routes'),
-        this.destinationPath('src/scripts/modules/routes')
-      );
-    }
-
-    // Package.js
-    this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      {
-        projectName: this.options.projectName,
-        projectTitle: this.options.projectTitle,
-        description: this.options.description,
-        githubName: this.options.githubName,
-        name: this.options.name,
-        email: this.options.email,
-        website: this.options.website
-      }
-    );
-
-    // index.html
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('index.html'),
-      {
-        projectTitle: this.options.projectTitle
-      }
-    );
-
-    // README.md
-    this.fs.copyTpl(
-      this.templatePath('README.md'),
-      this.destinationPath('README.md'),
-      {
-        projectTitle: this.options.projectTitle,
-        description: this.options.description
-      }
-    );
   },
 
   install: {
