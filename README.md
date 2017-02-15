@@ -14,11 +14,11 @@ A foundation for One Design Company projects on the web.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+### Prerequisites
 
-```bash
-npm install -g yo
-```
+- [node.js](https://nodejs.org/)
+- [yarn](https://yarnpkg.com/en/docs/install)
+- [yo](https://www.npmjs.com/package/yo)
 
 ### via npm link…
 
