@@ -15,17 +15,24 @@ module.exports = gulp.task('images', function() {
   return gulp.src([
     config.paths.imageSrc + '**/*'
   ])
-  .pipe(imagemin({
-    progressive: true,
-    svgoPlugins: [{
-      cleanupIDs: false,
-      collapseGroups: false,
-      mergePaths: false,
-      moveElemsAttrsToGroup: false,
-      moveGroupAttrsToElems: false,
-      removeUselessStrokeAndFill: false,
-      removeViewBox: false
-    }]
-  }))
+  .pipe(imagemin([
+      imagemin.jpegtran({
+        progressive: true
+      }),
+      imagemin.svgo({
+        plugins: [
+          { cleanupIDs: false },
+          { collapseGroups: false },
+          { mergePaths: false },
+          { moveElemsAttrsToGroup: false },
+          { moveGroupAttrsToElems: false },
+          { removeUselessStrokeAndFill: false },
+          { removeViewBox: false }
+        ]
+      }),
+      imagemin.gifsicle(),
+      imagemin.optipng()
+    ]
+  ))
   .pipe(gulp.dest(config.paths.imageDist));
 });
