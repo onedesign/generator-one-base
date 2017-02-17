@@ -27,5 +27,6 @@ module.exports = gulp.task('images', function() {
       removeViewBox: false
     }]
   }))
-  .pipe(gulp.dest(config.paths.imageDist));
+  .pipe(gulp.dest(config.paths.imageDist))
+  .pipe(global.browserSync.reload({ stream: true, once: true }));
 });

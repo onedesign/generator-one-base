@@ -1,6 +1,5 @@
 var config       = require('../config');
 var gulp         = require('gulp');
-var browserSync  = require('browser-sync');
 var cssGlobbing  = require('gulp-css-globbing');
 var sass         = require('gulp-sass');
 var autoprefixer = require('autoprefixer');
@@ -38,9 +37,12 @@ module.exports = gulp.task('styles', function() {
   .pipe(sass({
     outputStyle: 'compressed',
     includePaths: ['./node_modules']
-  }).on('error', sass.logError))
+  }).on('error', function(error) {
+    global.browserSync.notify(error.message, 30000);
+    sass.logError.call(this, error);
+  }))
   .pipe(postcss(postCssProcessors, {}))
   .pipe(pixrem({ rootValue: '10px' }))
   .pipe(gulp.dest(config.paths.styleDist))
-  .pipe(browserSync.reload({ stream: true }));
+  .pipe(global.browserSync.reload({ stream: true }));
 });

@@ -1,6 +1,5 @@
 var config       = require('../config');
 var gulp         = require('gulp');
-var browserSync  = require('browser-sync');
 
 //
 //   Templates
@@ -16,5 +15,5 @@ module.exports = gulp.task('templates', function() {
     config.paths.templateSrc + '**/*.html',
     config.paths.templateSrc + '**/*.php'
   ])
-  .pipe(browserSync.reload({ stream: true, once: true }));
+  .pipe(global.browserSync.reload({ stream: true, once: true }));
 });
