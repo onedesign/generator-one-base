@@ -111,6 +111,8 @@ module.exports = Generator.extend({
     },
 
     indexHtml: function() {
+      if (this.options.platform != 'static') return;
+      
       this.fs.copyTpl(
         this.templatePath('index.html'),
         this.destinationPath('index.html'),

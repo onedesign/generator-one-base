@@ -3,7 +3,7 @@ var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var download = require('download');
-var fs = require('fs');
+var del = require('del');
 var PleasantProgress = require('pleasant-progress');
 var progress = new PleasantProgress();
 var child_process = require('child_process');
@@ -33,6 +33,14 @@ module.exports = Generator.extend({
       }).then(function() {
         progress.stop();
       });
+    },
+
+    clean: function() {
+      del.sync([
+        this.destinationPath('craft/templates'),
+        this.destinationPath('craft/config/general.php'),
+        this.destinationPath('craft/config/db.php')
+      ]);
     },
 
     composer: function() {
@@ -85,6 +93,13 @@ module.exports = Generator.extend({
       }
     },
 
+    templates: function() {
+      this.fs.copy(
+        this.templatePath('craft/templates'),
+        this.destinationPath('craft/templates')
+      );
+    },
+
     permissions: function() {
       // console.log(chalk.green('> Setting global permissions to 755 / 644'));
       // child_process.execSync('chmod -R 755 *');
@@ -105,7 +120,7 @@ module.exports = Generator.extend({
     
   },
 
-  end: function() {
+  end: {
     
   }
 });
