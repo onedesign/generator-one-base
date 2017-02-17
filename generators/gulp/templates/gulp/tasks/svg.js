@@ -27,5 +27,6 @@ module.exports = gulp.task('svg', function() {
     config.paths.imageSrc + 'svg/*.svg'
   ])
   .pipe(svgSprite(svgSpriteConfig))
-  .pipe(gulp.dest(config.paths.imageDist + 'svg'));
+  .pipe(gulp.dest(config.paths.imageDist + 'svg'))
+  .pipe(global.browserSync.reload({ stream: true, once: true }));
 });
