@@ -37,9 +37,12 @@ module.exports = Generator.extend({
 
     clean: function() {
       del.sync([
-        this.destinationPath('craft/templates'),
         this.destinationPath('craft/config/general.php'),
-        this.destinationPath('craft/config/db.php')
+        this.destinationPath('craft/config/db.php'),
+        this.destinationPath('craft/templates/news'),
+        this.destinationPath('craft/templates/_layout.html'),
+        this.destinationPath('craft/templates/index.html'),
+        this.destinationPath('craft/templates/404.html'),
       ]);
     },
 
@@ -95,24 +98,36 @@ module.exports = Generator.extend({
 
     templates: function() {
       this.fs.copy(
-        this.templatePath('craft/templates'),
-        this.destinationPath('craft/templates')
+        this.templatePath('craft/templates/_layout.html'),
+        this.destinationPath('craft/templates/_layout.html')
+      );
+      this.fs.copy(
+        this.templatePath('craft/templates/index.html'),
+        this.destinationPath('craft/templates/index.html')
+      );
+      this.fs.copy(
+        this.templatePath('craft/templates/404.html'),
+        this.destinationPath('craft/templates/404.html')
+      );
+      this.fs.copy(
+        this.templatePath('craft/templates/_partials'),
+        this.destinationPath('craft/templates/_partials')
       );
     },
 
     permissions: function() {
-      // console.log(chalk.green('> Setting global permissions to 755 / 644'));
-      // child_process.execSync('chmod -R 755 *');
-      // child_process.execSync('find . -type f -exec chmod 644 {} \\;');
-      // console.log(chalk.green('> Setting permissions on craft/app to 775 / 644'));
-      // child_process.execSync('chmod -R 775 craft/app');
-      // child_process.execSync('find craft/app/ -type f -exec chmod 664 {} \\;');
-      // console.log(chalk.green('> Setting permissions on craft/config to 775 / 644'));
-      // child_process.execSync('chmod -R 775 craft/config');
-      // child_process.execSync('find craft/config/ -type f -exec chmod 664 {} \\;');
-      // console.log(chalk.green('> Setting permissions on craft/storage to 775 / 644'));
-      // child_process.execSync('chmod -R 775 craft/storage');
-      // child_process.execSync('find craft/storage/ -type f -exec chmod 664 {} \\;');
+      console.log(chalk.green('> Setting global permissions to 755 / 644'));
+      child_process.execSync('chmod -R 755 *');
+      child_process.execSync('find . -type f -exec chmod 644 {} \\;');
+      console.log(chalk.green('> Setting permissions on craft/app to 775 / 644'));
+      child_process.execSync('chmod -R 775 craft/app');
+      child_process.execSync('find craft/app/ -type f -exec chmod 664 {} \\;');
+      console.log(chalk.green('> Setting permissions on craft/config to 775 / 644'));
+      child_process.execSync('chmod -R 775 craft/config');
+      child_process.execSync('find craft/config/ -type f -exec chmod 664 {} \\;');
+      console.log(chalk.green('> Setting permissions on craft/storage to 775 / 644'));
+      child_process.execSync('chmod -R 775 craft/storage');
+      child_process.execSync('find craft/storage/ -type f -exec chmod 664 {} \\;');
     }
   },
 
