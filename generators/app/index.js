@@ -22,11 +22,18 @@ module.exports = Generator.extend({
       // Use gulp
       this.options.isUsingGulp = true;
 
-      // Compose
+      // Compose with Gulp generator
       this.composeWith(require.resolve('../gulp'), {
         projectName: this.options.projectName,
         platform: this.options.platform
       });
+
+      // Compose with Craft generator
+      if (this.options.platform == 'craft') {
+        this.composeWith(require.resolve('../craft'), {
+          projectName: this.options.projectName
+        });
+      }
     }.bind(this));
   },
 
@@ -118,8 +125,10 @@ module.exports = Generator.extend({
         this.templatePath('README.md'),
         this.destinationPath('README.md'),
         {
+          projectName: this.options.projectName,
           projectTitle: this.options.projectTitle,
-          description: this.options.description
+          description: this.options.description,
+          platform: this.options.platform
         }
       );
     }
