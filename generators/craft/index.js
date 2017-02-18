@@ -39,6 +39,7 @@ module.exports = Generator.extend({
 
     clean: function() {
       del.sync([
+        this.destinationPath('readme.txt'),
         this.destinationPath('public/index.php'),
         this.destinationPath('craft/config/general.php'),
         this.destinationPath('craft/config/db.php'),
