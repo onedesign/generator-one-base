@@ -178,6 +178,6 @@ module.exports = Generator.extend({
   },
 
   end: function() {
-    this.log('\nAll done! Run ' + chalk.yellow('npm start') + ' to start your development server.');
+    this.log('\nAll done! Run ' + chalk.yellow('yarn start') + ' to start your development server.');
   }
 });
