@@ -1,13 +1,9 @@
 {
     "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:onedesign/oneimgix.git"
-        }
+      
     ],
 
     "require": {
-       "onedesign/oneimgix": "1.1.0",
        "nystudio107/retour": "1.0.17",
        "nystudio107/seomatic": "1.1.39"
     },
