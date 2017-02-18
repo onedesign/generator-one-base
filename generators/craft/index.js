@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var download = require('download');
 var del = require('del');
+var fs = require('fs');
 var PleasantProgress = require('pleasant-progress');
 var progress = new PleasantProgress();
 var child_process = require('child_process');
@@ -60,6 +61,12 @@ module.exports = Generator.extend({
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('env.sample'), {
+          projectName: this.options.projectName
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('env.sample'),
+        this.destinationPath('.env'), {
           projectName: this.options.projectName
         }
       );
@@ -134,8 +141,16 @@ module.exports = Generator.extend({
       });
     },
 
-    copyPlugins: function() {
-
+    movePlugins: function() {
+      var self = this;
+      this.options.craftPlugins.forEach(function(option) {
+        var plugin = plugins[option];
+        if (plugin.src.indexOf('http') == -1) return;
+        var pluginDirPath = self.destinationPath('craft/plugins/downloads/' + plugin.githubName + '-master/' + option);
+        if (!fs.existsSync(pluginDirPath)) return;
+        fs.renameSync(pluginDirPath, self.destinationPath('craft/plugins/' + option));
+      });
+      del.sync([self.destinationPath('craft/plugins/downloads/')]);
     },
 
     permissions: function() {
@@ -157,7 +172,7 @@ module.exports = Generator.extend({
   install: {
     composer: function() {
       this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-      child_process.execSync('composer install \\;');
+      child_process.execSync('composer install');
     }
   },
 

@@ -17,22 +17,10 @@ module.exports = {
     src: 'https://github.com/fruitstudios/LinkIt/archive/master.zip',
     checked: true
   },
-  minify: {
-    name: 'Minify',
-    githubName: '',
-    src: 'nystudio107/minify',
-    checked: true
-  },
   mntwigperversion: {
     name: 'Twig Perversion',
     githubName: 'craft-twig_perversion',
     src: 'https://github.com/marionnewlevant/craft-twig_perversion/archive/master.zip',
-    checked: true
-  },
-  seomatic: {
-    name: 'SEOmatic',
-    githubName: '',
-    src: 'nystudio107/seomatic',
     checked: true
   },
   supertable: {
@@ -45,6 +33,24 @@ module.exports = {
     name: 'Pimp My Matrix',
     githubName: 'Pimp-My-Matrix',
     src: 'https://github.com/supercool/Pimp-My-Matrix/archive/master.zip',
+    checked: true
+  },
+  seomatic: {
+    name: 'SEOmatic',
+    githubName: '',
+    src: 'nystudio107/seomatic',
+    checked: true
+  },
+  minify: {
+    name: 'Minify',
+    githubName: '',
+    src: 'nystudio107/minify',
+    checked: true
+  },
+  retour: {
+    name: 'Retour',
+    githubName: '',
+    src: 'nystudio107/retour',
     checked: true
   }
 }
