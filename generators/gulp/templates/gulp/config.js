@@ -1,5 +1,6 @@
 <% isCraft = platform == 'craft' -%>
 <% var rootSrcPath = isCraft ? 'public/dist' : 'dist' -%>
+<% var templatePath = isCraft ? 'craft/templates/' : '' -%>
 //
 //   Config
 //
@@ -14,8 +15,8 @@ var paths = {
   scriptSrc: 'src/scripts/',
   scriptDist: '<%= rootSrcPath %>/scripts/',
 
-  templateSrc: '',
-  templateDist: '',
+  templateSrc: '<%= templatePath %>',
+  templateDist: '<%= templatePath %>',
 
   imageSrc: 'src/images/',
   imageDist: '<%= rootSrcPath %>/images/',<% if (isCraft) { %>
