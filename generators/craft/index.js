@@ -57,15 +57,6 @@ module.exports = Generator.extend({
       );
     },
 
-    composer: function() {
-      this.fs.copyTpl(
-        this.templatePath('composer.json'),
-        this.destinationPath('composer.json'), {
-          craftPlugins: this.options.craftPlugins
-        }
-      );
-    },
-
     env: function() {
       this.fs.copyTpl(
         this.templatePath('env.sample'),
@@ -135,15 +126,27 @@ module.exports = Generator.extend({
     downloadPlugins: function() {
       progress.start('Installing Craft Plugins');
       var installationPromises = [];
+      var composerPlugins = [];
       var self = this;
       this.options.craftPlugins.forEach(function(option) {
         var plugin = plugins[option];
-        if (plugin.src.indexOf('http') == -1) return;
+        if (plugin.src.indexOf('http') == -1) {
+          composerPlugins.push(plugin);
+          return;
+        };
         var downloadPromise = download(plugin.src, self.destinationPath('craft/plugins/downloads'), {
           extract: true
         })
         installationPromises.push(downloadPromise);
       });
+
+      // Render composer.json
+      this.fs.copyTpl(
+        this.templatePath('composer.json'),
+        this.destinationPath('composer.json'), {
+          plugins: composerPlugins
+        }
+      );
 
       return Promise.all(installationPromises).then(function() {
         progress.stop();

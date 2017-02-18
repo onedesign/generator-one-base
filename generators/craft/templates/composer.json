@@ -3,10 +3,8 @@
       
     ],
 
-    "require": {<% if (craftPlugins.indexOf('minify') != -1) { %>
-       "nystudio107/minify": "1.1.1",<% } %><% if (craftPlugins.indexOf('seomatic') != -1) { %>
-       "nystudio107/seomatic": "1.1.39",<% } %><% if (craftPlugins.indexOf('retour') != -1) { %>
-       "nystudio107/retour": "1.0.19",<% } %>
+    "require": {<% plugins.forEach(function(plugin) { %>
+       "<%= plugin.src %>": "^1.0",<% }) %>
        "vlucas/phpdotenv": "2.2"
     },
 
