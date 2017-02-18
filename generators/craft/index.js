@@ -39,6 +39,7 @@ module.exports = Generator.extend({
 
     clean: function() {
       del.sync([
+        this.destinationPath('public/index.php'),
         this.destinationPath('craft/config/general.php'),
         this.destinationPath('craft/config/db.php'),
         this.destinationPath('craft/templates/news'),
@@ -46,6 +47,13 @@ module.exports = Generator.extend({
         this.destinationPath('craft/templates/index.html'),
         this.destinationPath('craft/templates/404.html'),
       ]);
+    },
+
+    index: function() {
+      this.fs.copy(
+        this.templatePath('public/index.php'),
+        this.destinationPath('public/index.php')
+      );
     },
 
     composer: function() {
