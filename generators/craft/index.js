@@ -96,8 +96,8 @@ module.exports = Generator.extend({
       // Asset Rev
       if (this.options.craftPlugins.indexOf('assetrev') > -1) {
         this.fs.copy(
-          this.templatePath('craft/config/asset-rev.php'),
-          this.destinationPath('craft/config/asset-rev.php')
+          this.templatePath('craft/config/assetrev.php'),
+          this.destinationPath('craft/config/assetrev.php')
         );
       }
 
