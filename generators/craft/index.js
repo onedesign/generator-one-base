@@ -176,7 +176,7 @@ module.exports = Generator.extend({
     }
   },
 
-  end: {
-    
+  end: function() {
+    this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
   }
 });
