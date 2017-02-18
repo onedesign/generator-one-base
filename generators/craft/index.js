@@ -8,6 +8,7 @@ var PleasantProgress = require('pleasant-progress');
 var progress = new PleasantProgress();
 var child_process = require('child_process');
 var prompts = require('./modules/prompts');
+var plugins = require('./modules/craft_plugins');
 
 module.exports = Generator.extend({
   initializing: function() {
@@ -78,7 +79,7 @@ module.exports = Generator.extend({
       );
 
       // Asset Rev
-      if (this.options.craftPlugins.indexOf('https://github.com/clubstudioltd/craft-asset-rev') > -1) {
+      if (this.options.craftPlugins.indexOf('assetRev') > -1) {
         this.fs.copy(
           this.templatePath('craft/config/asset-rev.php'),
           this.destinationPath('craft/config/asset-rev.php')
@@ -86,7 +87,7 @@ module.exports = Generator.extend({
       }
 
       // Imager
-      if (this.options.craftPlugins.indexOf('https://github.com/aelvan/Imager-Craft') > -1) {
+      if (this.options.craftPlugins.indexOf('imager') > -1) {
         this.fs.copyTpl(
           this.templatePath('craft/config/imager.php'),
           this.destinationPath('craft/config/imager.php'), {
@@ -115,6 +116,28 @@ module.exports = Generator.extend({
       );
     },
 
+    downloadPlugins: function() {
+      progress.start('Installing Craft Plugins');
+      var installationPromises = [];
+      var self = this;
+      this.options.craftPlugins.forEach(function(option) {
+        var plugin = plugins[option];
+        if (plugin.src.indexOf('http') == -1) return;
+        var downloadPromise = download(plugin.src, self.destinationPath('craft/plugins/downloads'), {
+          extract: true
+        })
+        installationPromises.push(downloadPromise);
+      });
+
+      return Promise.all(installationPromises).then(function() {
+        progress.stop();
+      });
+    },
+
+    copyPlugins: function() {
+
+    },
+
     permissions: function() {
       console.log(chalk.green('> Setting global permissions to 755 / 644'));
       child_process.execSync('chmod -R 755 *');
@@ -132,7 +155,10 @@ module.exports = Generator.extend({
   },
 
   install: {
-    
+    composer: function() {
+      this.log(chalk.yellow('\nInstalling dependencies via composer: '));
+      child_process.execSync('composer install \\;');
+    }
   },
 
   end: {
