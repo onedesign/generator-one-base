@@ -21,7 +21,7 @@ gulp.task('rev', ['rev:clear'], function() {
     .pipe(rev())
     .pipe(gulp.dest('.'))
     .pipe(rev.manifest())
-    .pipe(replace('public', ''))
+    .pipe(replace('public/', ''))
     .pipe(gulp.dest(config.paths.dist));
 });
 

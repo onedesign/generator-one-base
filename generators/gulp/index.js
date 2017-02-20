@@ -86,6 +86,6 @@ module.exports = Generator.extend({
   },
 
   end: function() {
-    this.log('All done! Enjoy your gulp setup!');
+    
   }
 });

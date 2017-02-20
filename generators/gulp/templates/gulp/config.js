@@ -1,5 +1,6 @@
 <% isCraft = platform == 'craft' -%>
 <% var rootSrcPath = isCraft ? 'public/dist' : 'dist' -%>
+<% var templatePath = isCraft ? 'craft/templates/' : '' -%>
 //
 //   Config
 //
@@ -14,8 +15,8 @@ var paths = {
   scriptSrc: 'src/scripts/',
   scriptDist: '<%= rootSrcPath %>/scripts/',
 
-  templateSrc: '',
-  templateDist: '',
+  templateSrc: '<%= templatePath %>',
+  templateDist: '<%= templatePath %>',
 
   imageSrc: 'src/images/',
   imageDist: '<%= rootSrcPath %>/images/',<% if (isCraft) { %>
@@ -37,7 +38,7 @@ module.exports = {
   // By default, Browsersync will create a dev server for you.
   // If you want BrowserSync to proxy an existing URL,
   // change `useProxy` to true and enter your URL as `proxyUrl`
-  useProxy: false,
+  useProxy: <% if (isCraft) { %>true<% } else { %>false<% } %>,
   proxyUrl: 'http://<%= projectName %>.dev',
 
   scripts: {

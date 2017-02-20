@@ -1,6 +1,6 @@
 {
   "name": "generator-one-base",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A foundation for One Design Company projects on the web.",
   "homepage": "",
   "author": {
@@ -16,8 +16,11 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^1.0.1",
     "chalk": "^1.0.0",
+    "del": "^2.2.2",
+    "download": "^5.0.3",
+    "pleasant-progress": "^1.1.0",
+    "yeoman-generator": "^1.0.1",
     "yosay": "^1.0.0"
   },
   "devDependencies": {
