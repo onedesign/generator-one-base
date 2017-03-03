@@ -29,6 +29,7 @@ Thumbs.db
 # Craft Public
 # ---------------------------
 /public/*
+!/public/.htaccess
 !/public/index.php
 !/public/*.txt
 !/public/*.png

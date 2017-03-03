@@ -50,10 +50,14 @@ module.exports = Generator.extend({
       ]);
     },
 
-    index: function() {
+    public: function() {
       this.fs.copy(
         this.templatePath('public/index.php'),
         this.destinationPath('public/index.php')
+      );
+      this.fs.copy(
+        this.destinationPath('public/htaccess'),
+        this.destinationPath('public/.htaccess')
       );
     },
 
