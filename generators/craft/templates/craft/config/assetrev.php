@@ -2,6 +2,7 @@
 return array(
     '*' => array(
         'manifestPath' => '../public/dist/rev-manifest.json',
-        'assetsBasePath' => ''
+        'assetsBasePath' => '../public/dist/',
+        'assetUrlPrefix' => '{siteUrl}/dist/',
     )
 );
