@@ -19,12 +19,12 @@ Bundles javascript files.
 gulp.task('scripts:bundle', ['scripts:lint'], function(callback) {
   var webpackConfig = {
     entry: _.reduce(config.scripts.entryFiles, function(result, name) {
-      result[name] = './' + config.paths.scriptSrc + name;
+      result[name] = path.resolve('./' + config.paths.scriptSrc + name);
       return result;
     }, {}),
 
     output: {
-      path: './' + config.paths.scriptDist,
+      path: path.resolve('./' + config.paths.scriptDist),
       filename: '[name].bundle.js'
     },
 
