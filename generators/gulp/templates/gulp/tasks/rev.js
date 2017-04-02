@@ -13,7 +13,7 @@ var replace      = require('gulp-replace');
 Adds revision hash to assets and stores hashes in a manifest file
 */
 
-gulp.task('rev', ['rev:clear'], function() {
+gulp.task('rev', function() {
   return gulp.src([
     config.paths.styleDist + '**/*.css',
     config.paths.scriptDist + '**/*.js'
