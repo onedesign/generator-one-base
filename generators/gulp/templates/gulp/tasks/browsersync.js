@@ -22,7 +22,7 @@ module.exports = gulp.task('browserSync', function() {
         'position: fixed;',
         'text-align: left;',
         'font-family: monospace;',
-        'font-size: 0.7em;',
+        'font-size: 14px;',
         'line-height: 1.5;',
         'white-space: pre;',
         'z-index: 9999;',

@@ -10,7 +10,7 @@ var gulp         = require('gulp');
 Copies script files from src to dist
 */
 
-module.exports = gulp.task('scripts:copy', ['scripts:bundle'], function() {
+module.exports = gulp.task('scripts:copy', function() {
   var scriptSrc = [];
 
   config.paths.scriptCopyPaths.forEach(function(path) {
