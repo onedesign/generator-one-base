@@ -41,8 +41,8 @@
 //                  ...
 //**
 @mixin relative($pos: 0) {
-  @include _set-position($pos);
   position: relative;
+  @include _set-position($pos);
 }
 
 //**
@@ -55,8 +55,8 @@
 //                  ...
 //**
 @mixin absolute($pos: 0 0 0 0) {
-  @include _set-position($pos);
   position: absolute;
+  @include _set-position($pos);
 }
 
 //**
@@ -69,8 +69,8 @@
 //                  ...
 //**
 @mixin fixed($pos: 0 0 0 0) {
-  @include _set-position($pos);
   position: fixed;
+  @include _set-position($pos);
 }
 
 //**
