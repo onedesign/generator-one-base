@@ -1,8 +1,5 @@
 // ============================================================
-// Positioning Mixins
-//
-// Adapted from:
-// https://coderwall.com/p/enp59q/sass-positioning-mixin
+//          Positioning Mixins
 // ------------------------------------------------------------
 
 //**
@@ -10,40 +7,28 @@
 // Set the Position for the Position Mixins
 //
 // @mixin       _set-position
-// @param       $position {list} One Value = top, Two Values = top left, Four Values = top right bottom left (t = zero position) can be in px or %
-// @usage:      @include _set-position($position)
+// @param       $position {list} One Value = top, Two Value = top left, Four Values = top right bottom left (t = zero position) can be in px or %
+// @usage:      +_set-position($position)
 //                  ...
 //**
 @mixin _set-position($position) {
-  $targets: null !default;
-  $count: null !default;
+    $targets: top right bottom left;
 
-  $count: length($position);
-
-  @if $count == 1 {
-    $targets: top
-  }
-
-  @if $count == 2 {
-    $targets: top left
-  }
-  @if $count == 4 {
-    $targets: top right bottom left
-  }
-
-  @for $i from 1 through $count {
-    @if nth($position, $i) == 0 {
-      #{nth($targets, ($i))}: 0
-    } @else {
-      @if nth($position, $i) > 0 or nth($position, $i) < 0 {
-        @if unitless(nth($position, $i)) {
-          #{nth($targets,($i))}: nth($position, $i) + 0px
-        } @else {
-          #{nth($targets,($i))}: nth($position, $i)
-        }
-      }
+    @if length($position) == 0 {
+      $position: 0 0 0 0;
     }
-  }
+
+    @if length($position) == 2 {
+      $position: nth($position, 1) nth($position, 2) nth($position, 1) nth($position, 2);
+    }
+
+    @if length($position) == 3 {
+      $position: nth($position, 1) nth($position, 2) nth($position, 3) nth($position, 2);
+    }
+
+    @for $i from 1 through length($targets) {
+      #{nth($targets, $i)}: nth($position, $i);
+    }
 }
 
 //**
