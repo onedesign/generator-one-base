@@ -54,7 +54,7 @@ module.exports = Generator.extend({
         del.sync([
           this.destinationPath('public/robots.txt')
         ]);
-        this.closingStatements.push(chalk.yellow('We removed the default robots.txt because you’re using SEOmatic. Be sure to add your custom robots.txt to the SEOmatic settings in Craft.'));
+        this.closingStatements.push('robots.txt: ' + chalk.yellow('We removed the default robots.txt because you’re using SEOmatic. Be sure to add your custom robots.txt to the SEOmatic settings in Craft.'));
       }
     },
 
