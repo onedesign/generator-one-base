@@ -13,7 +13,7 @@ var plugins = require('./modules/craft_plugins');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+    this.closingStatements = [];
   },
 
   prompting: function() {
@@ -48,6 +48,14 @@ module.exports = Generator.extend({
         this.destinationPath('craft/templates/index.html'),
         this.destinationPath('craft/templates/404.html'),
       ]);
+
+      // If using SEOmatic, remove default robots.txt
+      if (this.options.craftPlugins.indexOf('seomatic') > -1) {
+        del.sync([
+          this.destinationPath('public/robots.txt')
+        ]);
+        this.closingStatements.push(chalk.yellow('We removed the default robots.txt because you’re using SEOmatic. Be sure to add your custom robots.txt to the SEOmatic settings in Craft.'));
+      }
     },
 
     public: function() {
@@ -194,5 +202,10 @@ module.exports = Generator.extend({
 
   end: function() {
     this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
+
+    // Output all closing statements
+    this.closingStatements.forEach(function(statement) {
+      console.log('\n' + statement);
+    });
   }
 });
