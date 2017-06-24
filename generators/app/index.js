@@ -23,9 +23,14 @@ module.exports = Generator.extend({
       this.options.isUsingGulp = true;
 
       // Compose with Gulp generator
+      var isCraft = this.options.platform == 'craft';
       this.composeWith(require.resolve('../gulp'), {
         projectName: this.options.projectName,
-        platform: this.options.platform
+        isCraft: isCraft,
+        rootDistPath: isCraft ? 'public/dist' : null,
+        templateSrc: isCraft ? 'craft/templates/' : null,
+        templateDist: isCraft ? 'craft/templates/' : null,
+        useProxy: isCraft ? true : null
       });
 
       // Compose with Craft generator

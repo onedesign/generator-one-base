@@ -2,6 +2,7 @@
 var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var prompts = require('./modules/prompts');
 
 module.exports = Generator.extend({
   initializing: function() {
@@ -9,7 +10,9 @@ module.exports = Generator.extend({
   },
 
   prompting: function() {
-    
+    return this.prompt(prompts(this.options)).then(function(options) {
+      Object.assign(this.options, options);
+    }.bind(this));
   },
 
   writing: {
@@ -32,7 +35,11 @@ module.exports = Generator.extend({
         this.templatePath('gulp/config.js'),
         this.destinationPath('gulp/config.js'), {
           projectName: this.options.projectName,
-          platform: this.options.platform
+          rootDistPath: this.options.rootDistPath,
+          templateSrc: this.options.templateSrc,
+          templateDist: this.options.templateDist,
+          isCraft: this.options.isCraft,
+          useProxy: this.options.useProxy
         }
       );
     }
