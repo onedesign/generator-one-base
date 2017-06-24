@@ -25,6 +25,7 @@ Thumbs.db
 /craft/plugins/*
 /craft/rev-manifest.json
 /craft/storage/*
+!/craft/storage/.htaccess
 
 # Craft Public
 # ---------------------------
