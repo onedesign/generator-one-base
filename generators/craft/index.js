@@ -41,6 +41,7 @@ module.exports = Generator.extend({
       del.sync([
         this.destinationPath('readme.txt'),
         this.destinationPath('public/index.php'),
+        this.destinationPath('public/htaccess'),
         this.destinationPath('craft/config/general.php'),
         this.destinationPath('craft/config/db.php'),
         this.destinationPath('craft/templates/news'),
@@ -55,9 +56,11 @@ module.exports = Generator.extend({
         this.templatePath('public/index.php'),
         this.destinationPath('public/index.php')
       );
-      this.fs.copy(
-        this.destinationPath('public/htaccess'),
-        this.destinationPath('public/.htaccess')
+      this.fs.copyTpl(
+        this.templatePath('public/htaccess'),
+        this.destinationPath('public/.htaccess'), {
+          projectName: this.options.projectName
+        }
       );
     },
 

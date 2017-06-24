@@ -1,0 +1,126 @@
+# Apache htacess file for Craft
+# 
+# Installation:
+# 1. Enable mod_rewrite and mod_expires in Apache (`> a2enmod mod_rewrite && a2enmod mod_expires`)
+# 2. Customize the domain names in rewrite rules as necessary 
+# 3. Uncomment the rewrite rules you need enabled
+# 4. Be sure that all assets are versioned properly. Browsers will cache assets for long periods
+
+# ----------------------------------------------------------------------
+# | Rewrite Rules - requires `mod_rewrite` to be enabled               |
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # This will set the environment variable HTTPS to "on"
+  # if the request is behind a load balancer which terminates SSL.
+  # In PHP, you can access this via $_SERVER['HTTPS']
+  SetEnvIf X-Forwarded-Proto https HTTPS=on
+
+  # Force redirect to HTTPS
+  # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # RewriteCond %{HTTPS} off
+  # RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
+
+  # Redirect non-www to www
+  # RewriteCond %{HTTP_HOST} !^www.<%= projectName %>.com [NC]
+  # RewriteRule ^(.*)$ https://www.<%= projectName %>.com/$1 [L,R=301,NC]
+
+  # Redirect www to non-www
+  # RewriteCond %{HTTP_HOST} ^www.<%= projectName %>.com [NC]
+  # RewriteRule ^(.*)$ https://<%= projectName %>.com/$1 [L,R=301,NC]
+
+  ###############################
+  # Start: Specific URL Rewrites
+  ###############################
+
+  # Redirect 301 /my/path/to/doc.pdf https://s3.amazonaws.com/new/path/to/doc.pdf
+
+  # RewriteCond %{REQUEST_URI} ^\/press\/releases\/.*\.aspx
+  # RewriteRule (.+) /press/releases [L]
+
+  #############################
+  # End: Specific URL Rewrites
+  #############################
+
+  # Send would-be 404 requests to Craft
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/(favicon\.ico|apple-touch-icon.*\.png)$ [NC]
+  RewriteRule (.+) index.php?p=$1 [QSA,L]
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# | Expires headers - requires `mod_expires` to be enabled             |
+# ----------------------------------------------------------------------
+
+# Serve resources with far-future expires headers.
+#
+# (!) If you don't control versioning with filename-based
+# cache busting, you should consider lowering the cache times
+# to something like one week.
+#
+# https://httpd.apache.org/docs/current/mod/mod_expires.html
+
+<IfModule mod_expires.c>
+
+    ExpiresActive on
+    ExpiresDefault                                      "access plus 1 month"
+
+  # CSS
+
+    ExpiresByType text/css                              "access plus 1 year"
+
+
+  # Favicon (cannot be renamed!) and cursor images
+
+    ExpiresByType image/vnd.microsoft.icon              "access plus 1 week"
+    ExpiresByType image/x-icon                          "access plus 1 week"
+
+  # HTML
+
+    ExpiresByType text/html                             "access plus 0 seconds"
+
+
+  # JavaScript
+
+    ExpiresByType application/javascript                "access plus 1 year"
+    ExpiresByType application/x-javascript              "access plus 1 year"
+    ExpiresByType text/javascript                       "access plus 1 year"
+
+
+  # Media files
+
+    ExpiresByType audio/ogg                             "access plus 1 year"
+    ExpiresByType image/bmp                             "access plus 1 year"
+    ExpiresByType image/gif                             "access plus 1 year"
+    ExpiresByType image/jpeg                            "access plus 1 year"
+    ExpiresByType image/png                             "access plus 1 year"
+    ExpiresByType image/svg+xml                         "access plus 1 year"
+    ExpiresByType image/webp                            "access plus 1 year"
+    ExpiresByType video/mp4                             "access plus 1 year"
+    ExpiresByType video/ogg                             "access plus 1 year"
+    ExpiresByType video/webm                            "access plus 1 year"
+
+
+  # Web fonts
+
+    # Embedded OpenType (EOT)
+    ExpiresByType application/vnd.ms-fontobject         "access plus 1 year"
+    ExpiresByType font/eot                              "access plus 1 year"
+
+    # OpenType
+    ExpiresByType font/opentype                         "access plus 1 year"
+
+    # TrueType
+    ExpiresByType application/x-font-ttf                "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 1.0
+    ExpiresByType application/font-woff                 "access plus 1 year"
+    ExpiresByType application/x-font-woff               "access plus 1 year"
+    ExpiresByType font/woff                             "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 2.0
+    ExpiresByType application/font-woff2                "access plus 1 year"
+</IfModule>
