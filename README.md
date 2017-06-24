@@ -46,3 +46,5 @@ If you want to add or update the gulp setup for an an existing project (or a pro
 cd project/to/run/generator
 yo one-base:gulp
 ```
+
+**Use with existing projects:** If you want to run this in a directory with an existing gulp setup, you _might_ want to run it using the `--force` flag (`yo one-base:gulp --force`) to force it to overwrite any existing files. Before you do this though, make absolutely sure that you have the existing files committed in git or saved in some other way, or they will be lost forever.
