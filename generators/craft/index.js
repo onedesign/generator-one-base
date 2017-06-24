@@ -13,7 +13,7 @@ var plugins = require('./modules/craft_plugins');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+    this.closingStatements = [];
   },
 
   prompting: function() {
@@ -105,6 +105,7 @@ module.exports = Generator.extend({
             projectName: this.options.projectName
           }
         );
+        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in /craft/config/imager.php'));
       }
     },
 
@@ -194,5 +195,10 @@ module.exports = Generator.extend({
 
   end: function() {
     this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
+
+    // Output all closing statements
+    this.closingStatements.forEach(function(statement) {
+      console.log('\n' + statement);
+    });
   }
 });
