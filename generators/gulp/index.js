@@ -38,7 +38,7 @@ module.exports = Generator.extend({
           rootDistPath: this.options.rootDistPath,
           templateSrc: this.options.templateSrc,
           templateDist: this.options.templateDist,
-          isCraft: this.options.isCraft,
+          platformTemplate: this.options.platformTemplate,
           useProxy: this.options.useProxy
         }
       );

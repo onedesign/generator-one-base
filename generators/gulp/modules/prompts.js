@@ -1,5 +1,20 @@
+var configForPlatform = require('./config_for_platform');
+
 module.exports = function(options) {
   var questions = [];
+
+  //
+  //   Platform Template Defaults
+  //
+  //////////////////////////////////////////////////////////////////////
+
+  // If a platformTemplate was explicitly passed in (by a parent generator, for instance)
+  // we should update the options with the defaults so we don't need to prompt the
+  // user for them again.
+
+  if (options.platformTemplate != null) {
+    options = Object.assign(options, configForPlatform(options.platformTemplate));
+  };
 
   //
   //   Project Name
@@ -15,6 +30,28 @@ module.exports = function(options) {
   };
 
   //
+  //   Platform Template
+  //
+  //////////////////////////////////////////////////////////////////////
+  if (options.platformTemplate == null) {
+    questions.push({
+      type: 'list',
+      name: 'platformTemplate',
+      message: 'Would you like to use a platform template? (this will automatically configure the build settings to work with common platforms',
+      choices: [
+        {
+          name: 'None',
+          value: 'none'
+        },
+        {
+          name: 'Craft',
+          value: 'craft'
+        }
+      ]
+    });
+  };
+
+  //
   //   Paths
   //
   //////////////////////////////////////////////////////////////////////
@@ -23,7 +60,9 @@ module.exports = function(options) {
       type: 'input',
       name: 'rootDistPath',
       message: 'Root path for all output files',
-      default: 'dist'
+      default: function(answers) {
+        return configForPlatform(answers.platformTemplate, 'rootDistPath');
+      }
     });
   };
   
@@ -32,7 +71,9 @@ module.exports = function(options) {
       type: 'input',
       name: 'templateSrc',
       message: 'Templates source path (leave blank for project root)',
-      default: ''
+      default: function(answers) {
+        return configForPlatform(answers.platformTemplate, 'templateSrc');
+      }
     })
   };
   if (options.templateDist == null) {
@@ -40,21 +81,9 @@ module.exports = function(options) {
       type: 'input',
       name: 'templateDist',
       message: 'Templates output path (leave blank for project root)',
-      default: ''
-    })
-  };
-
-  //
-  //   Craft
-  //
-  //////////////////////////////////////////////////////////////////////
-  if (options.isCraft == null) {
-    questions.push({
-      type: 'confirm',
-      name: 'isCraft',
-      message: 'Is this a Craft CMS project?',
-      default: false,
-      store: false
+      default: function(answers) {
+        return configForPlatform(answers.platformTemplate, 'templateDist');
+      }
     })
   };
 

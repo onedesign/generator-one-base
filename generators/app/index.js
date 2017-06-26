@@ -26,10 +26,7 @@ module.exports = Generator.extend({
       var isCraft = this.options.platform == 'craft';
       this.composeWith(require.resolve('../gulp'), {
         projectName: this.options.projectName,
-        isCraft: isCraft,
-        rootDistPath: isCraft ? 'public/dist' : null,
-        templateSrc: isCraft ? 'craft/templates/' : null,
-        templateDist: isCraft ? 'craft/templates/' : null,
+        platformTemplate: isCraft ? 'craft' : 'none',
         useProxy: isCraft ? true : null
       });
 
