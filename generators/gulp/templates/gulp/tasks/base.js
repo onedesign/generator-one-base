@@ -21,8 +21,7 @@ module.exports = gulp.task('base', function(callback) {
       'styles',
       'styles:copy',
       'scripts:copy',
-      'images',
-      'svg'
+      'images'
     ],
     callback
   );

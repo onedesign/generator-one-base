@@ -64,7 +64,6 @@ module.exports = Generator.extend({
         'gulp-rev',
         'gulp-sass',
         'gulp-shell',
-        'gulp-svg-sprite',
         'gulp-uglify',
         'gulp-util',
         'node-libs-browser',
