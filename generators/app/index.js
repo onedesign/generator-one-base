@@ -6,7 +6,7 @@ var prompts = require('./modules/prompts');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+
   },
 
   prompting: function() {
@@ -112,7 +112,7 @@ module.exports = Generator.extend({
 
     indexHtml: function() {
       if (this.options.platform != 'static') return;
-      
+
       this.fs.copyTpl(
         this.templatePath('index.html'),
         this.destinationPath('index.html'),
@@ -139,7 +139,7 @@ module.exports = Generator.extend({
   install: {
     installDependencies: function() {
       var dependencies = [
-
+        'dotenv'
       ];
 
       var self = this;
