@@ -139,7 +139,7 @@ module.exports = Generator.extend({
   install: {
     installDependencies: function() {
       var dependencies = [
-        'dotenv'
+
       ];
 
       var self = this;

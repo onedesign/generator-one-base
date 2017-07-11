@@ -5,11 +5,11 @@ var yosay = require('yosay');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+
   },
 
   prompting: function() {
-    
+
   },
 
   writing: {
@@ -50,6 +50,7 @@ module.exports = Generator.extend({
         'babel-preset-stage-2',
         'browser-sync',
         'del',
+        'dotenv',
         'eslint',
         'eslint-config-odc',
         'eslint-plugin-react',
@@ -85,6 +86,6 @@ module.exports = Generator.extend({
   },
 
   end: function() {
-    
+
   }
 });
