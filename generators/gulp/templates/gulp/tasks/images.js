@@ -14,7 +14,7 @@ Lossless optimization of image files
 
 module.exports = gulp.task('images', function() {
   return gulp.src([
-    config.paths.imageSrc + '**/*.{png,gif,jpg,svg}'
+    config.paths.imageSrc + '**/*'
   ])
   .pipe(changedInPlace({ firstPass: true }))
   .pipe(imagemin([
