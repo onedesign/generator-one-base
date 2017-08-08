@@ -5,11 +5,11 @@ var yosay = require('yosay');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+
   },
 
   prompting: function() {
-    
+
   },
 
   writing: {
@@ -50,6 +50,7 @@ module.exports = Generator.extend({
         'babel-preset-stage-2',
         'browser-sync',
         'del',
+        'dotenv',
         'eslint',
         'eslint-config-odc',
         'eslint-plugin-react',
@@ -64,7 +65,6 @@ module.exports = Generator.extend({
         'gulp-rev',
         'gulp-sass',
         'gulp-shell',
-        'gulp-svg-sprite',
         'gulp-uglify',
         'gulp-util',
         'node-libs-browser',
@@ -86,6 +86,6 @@ module.exports = Generator.extend({
   },
 
   end: function() {
-    
+
   }
 });
