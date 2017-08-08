@@ -1,6 +1,7 @@
 var config       = require('../config');
 var gulp         = require('gulp');
 var imagemin     = require('gulp-imagemin');
+var changed      = require('gulp-changed');
 
 //
 //   Images
@@ -15,6 +16,7 @@ module.exports = gulp.task('images', function() {
   return gulp.src([
     config.paths.imageSrc + '**/*.{png,gif,jpg,svg}'
   ])
+  .pipe(changed(config.paths.imageDist))
   .pipe(imagemin([
       imagemin.jpegtran({
         progressive: true
