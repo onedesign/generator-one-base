@@ -34,6 +34,5 @@ module.exports = gulp.task('images', function() {
       imagemin.optipng()
     ]
   ))
-  .pipe(gulp.dest(config.paths.imageDist))
-  .pipe(global.browserSync.reload({ stream: true, once: true }));
+  .pipe(gulp.dest(config.paths.imageDist));
 });
