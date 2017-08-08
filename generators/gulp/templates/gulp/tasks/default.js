@@ -19,6 +19,7 @@ module.exports = gulp.task('default', function(callback) {
       'watch',
       'images'
     ],
+    'images:watch',
     callback
   );
 });
