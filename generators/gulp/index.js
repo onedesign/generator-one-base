@@ -56,7 +56,7 @@ module.exports = Generator.extend({
         'eslint-plugin-react',
         'gulp',
         'autoprefixer',
-        'gulp-changed',
+        'gulp-changed-in-place',
         'gulp-css-globbing',
         'gulp-eslint',
         'gulp-postcss',
