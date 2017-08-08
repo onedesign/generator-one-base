@@ -2,15 +2,15 @@ var config       = require('../config');
 var gulp         = require('gulp');
 
 //
-//   Images Watch
+//   Reload Browser
 //
 //////////////////////////////////////////////////////////////////////
 
 /*
-Reloads the browser after images have been processed
+A generic task to reload the browser when another task is complete
 */
 
-module.exports = gulp.task('images:watch', function(done) {
+module.exports = gulp.task('reload', function(done) {
   global.browserSync.reload();
   done();
 });
