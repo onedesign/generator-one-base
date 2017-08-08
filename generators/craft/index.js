@@ -13,7 +13,7 @@ var plugins = require('./modules/craft_plugins');
 
 module.exports = Generator.extend({
   initializing: function() {
-    
+    this.closingStatements = [];
   },
 
   prompting: function() {
@@ -41,6 +41,7 @@ module.exports = Generator.extend({
       del.sync([
         this.destinationPath('readme.txt'),
         this.destinationPath('public/index.php'),
+        this.destinationPath('public/htaccess'),
         this.destinationPath('craft/config/general.php'),
         this.destinationPath('craft/config/db.php'),
         this.destinationPath('craft/templates/news'),
@@ -48,6 +49,14 @@ module.exports = Generator.extend({
         this.destinationPath('craft/templates/index.html'),
         this.destinationPath('craft/templates/404.html'),
       ]);
+
+      // If using SEOmatic, remove default robots.txt
+      if (this.options.craftPlugins.indexOf('seomatic') > -1) {
+        del.sync([
+          this.destinationPath('public/robots.txt')
+        ]);
+        this.closingStatements.push('robots.txt: ' + chalk.yellow('We removed the default robots.txt because you’re using SEOmatic. Be sure to add your custom robots.txt to the SEOmatic settings in Craft.'));
+      }
     },
 
     public: function() {
@@ -55,9 +64,11 @@ module.exports = Generator.extend({
         this.templatePath('public/index.php'),
         this.destinationPath('public/index.php')
       );
-      this.fs.copy(
-        this.destinationPath('public/htaccess'),
-        this.destinationPath('public/.htaccess')
+      this.fs.copyTpl(
+        this.templatePath('public/htaccess'),
+        this.destinationPath('public/.htaccess'), {
+          projectName: this.options.projectName
+        }
       );
     },
 
@@ -105,6 +116,7 @@ module.exports = Generator.extend({
             projectName: this.options.projectName
           }
         );
+        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in /craft/config/imager.php'));
       }
     },
 
@@ -194,5 +206,10 @@ module.exports = Generator.extend({
 
   end: function() {
     this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
+
+    // Output all closing statements
+    this.closingStatements.forEach(function(statement) {
+      console.log('\n' + statement);
+    });
   }
 });

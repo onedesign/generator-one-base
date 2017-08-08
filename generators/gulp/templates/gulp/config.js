@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //
 //   Config
 //
@@ -21,7 +23,7 @@ var paths = {
   craftPath: 'craft/',<% } %>
 
   styleCopyPaths: [
-  
+
   ],
 
   scriptCopyPaths: [
@@ -36,10 +38,10 @@ module.exports = {
   // If you want BrowserSync to proxy an existing URL,
   // change `useProxy` to true and enter your URL as `proxyUrl`
   useProxy: <%= useProxy %>,
-  proxyUrl: 'http://<%= projectName %>.dev',
+  proxyUrl: process.env.APP_SITE_URL,
 
   scripts: {
-    // entry files: 
+    // entry files:
     // each filename listed here (and found in scriptSrc)
     // will have a file generated for it in scriptDist
     // (with all of its dependencies included)
@@ -68,7 +70,7 @@ module.exports = {
     // }
 
     aliases: {
-      
+
     }
   }
 };
