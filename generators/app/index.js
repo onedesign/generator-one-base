@@ -110,6 +110,22 @@ module.exports = Generator.extend({
       );
     },
 
+    env: function() {
+      this.fs.copyTpl(
+        this.templatePath('env.sample'),
+        this.destinationPath('env.sample'),
+        {
+          projectName: this.options.projectName
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('env.sample'),
+        this.destinationPath('.env'), {
+          projectName: this.options.projectName
+        }
+      );
+    },
+
     indexHtml: function() {
       if (this.options.platform != 'static') return;
 
