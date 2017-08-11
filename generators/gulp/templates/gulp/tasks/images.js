@@ -1,6 +1,7 @@
-var config       = require('../config');
-var gulp         = require('gulp');
-var imagemin     = require('gulp-imagemin');
+var config          = require('../config');
+var gulp            = require('gulp');
+var imagemin        = require('gulp-imagemin');
+var changedInPlace  = require('gulp-changed-in-place');
 
 //
 //   Images
@@ -15,6 +16,7 @@ module.exports = gulp.task('images', function() {
   return gulp.src([
     config.paths.imageSrc + '**/*'
   ])
+  .pipe(changedInPlace({ firstPass: true }))
   .pipe(imagemin([
       imagemin.jpegtran({
         progressive: true
@@ -34,6 +36,5 @@ module.exports = gulp.task('images', function() {
       imagemin.optipng()
     ]
   ))
-  .pipe(gulp.dest(config.paths.imageDist))
-  .pipe(global.browserSync.reload({ stream: true, once: true }));
+  .pipe(gulp.dest(config.paths.imageDist));
 });
