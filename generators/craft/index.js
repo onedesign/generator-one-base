@@ -76,13 +76,15 @@ module.exports = Generator.extend({
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('env.sample'), {
-          projectName: this.options.projectName
+          projectName: this.options.projectName,
+          craftPlugins: this.options.craftPlugins
         }
       );
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('.env'), {
-          projectName: this.options.projectName
+          projectName: this.options.projectName,
+          craftPlugins: this.options.craftPlugins
         }
       );
     },
