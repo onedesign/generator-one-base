@@ -117,13 +117,15 @@ $font-stacks: (
 $type-styles: (
   a: (
     stack: helvetica,
-    line-height: 1.8,
-    text-transform: normal,
-    letter-spacing: 0,
     font-smoothing: false,
     sizes: (
       default: 13,
       medium: 27
+    ),
+    properties: (
+      line-height: 1.8,
+      text-transform: normal,
+      letter-spacing: 0
     )
   )
 );
