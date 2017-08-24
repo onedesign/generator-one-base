@@ -118,7 +118,7 @@ module.exports = Generator.extend({
             projectName: this.options.projectName
           }
         );
-        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in /craft/config/imager.php'));
+        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in .env'));
       }
     },
 
