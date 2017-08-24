@@ -20,8 +20,7 @@ module.exports = gulp.task('base', function(callback) {
       'scripts:bundle',
       'styles',
       'styles:copy',
-      'scripts:copy',
-      'images'
+      'scripts:copy'
     ],
     callback
   );

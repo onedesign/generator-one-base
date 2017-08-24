@@ -76,13 +76,15 @@ module.exports = Generator.extend({
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('env.sample'), {
-          projectName: this.options.projectName
+          projectName: this.options.projectName,
+          craftPlugins: this.options.craftPlugins
         }
       );
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('.env'), {
-          projectName: this.options.projectName
+          projectName: this.options.projectName,
+          craftPlugins: this.options.craftPlugins
         }
       );
     },
@@ -116,7 +118,7 @@ module.exports = Generator.extend({
             projectName: this.options.projectName
           }
         );
-        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in /craft/config/imager.php'));
+        this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in .env'));
       }
     },
 

@@ -16,8 +16,10 @@ module.exports = gulp.task('default', function(callback) {
     'base',
     [
       'browserSync',
-      'watch'
+      'watch',
+      'images'
     ],
+    'reload',
     callback
   );
 });
