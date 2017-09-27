@@ -16,6 +16,10 @@ return array(
       'siteUrl'                         => getenv('APP_SITE_URL')
     ),
 
+    // This appId is used to generate a unique prefix for session cookies and cache locations across our dev environments 
+
+    'appId'                              => getenv('APP_SITE_URL'),
+
     // FUZZY SEARCH
     
     'defaultSearchTermOptions' => array(
