@@ -1,7 +1,3 @@
-<% isCraft = platform == 'craft' -%>
-<% var rootSrcPath = isCraft ? 'public/dist' : 'dist' -%>
-<% var templatePath = isCraft ? 'craft/templates/' : '' -%>
-// Load our .env file into process.env
 require('dotenv').config();
 
 //
@@ -10,19 +6,19 @@ require('dotenv').config();
 //////////////////////////////////////////////////////////////////////
 
 var paths = {
-  dist: '<%= rootSrcPath %>/',
+  dist: '<%= rootDistPath %>/',
 
   styleSrc: 'src/styles/',
-  styleDist: '<%= rootSrcPath %>/styles/',
+  styleDist: '<%= rootDistPath %>/styles/',
 
   scriptSrc: 'src/scripts/',
-  scriptDist: '<%= rootSrcPath %>/scripts/',
+  scriptDist: '<%= rootDistPath %>/scripts/',
 
-  templateSrc: '<%= templatePath %>',
-  templateDist: '<%= templatePath %>',
+  templateSrc: '<%= templateSrc %>',
+  templateDist: '<%= templateDist %>',
 
   imageSrc: 'src/images/',
-  imageDist: '<%= rootSrcPath %>/images/',<% if (isCraft) { %>
+  imageDist: '<%= rootDistPath %>/images/',<% if (platformTemplate == 'craft') { %>
 
   craftPath: 'craft/',<% } %>
 
@@ -41,7 +37,7 @@ module.exports = {
   // By default, Browsersync will create a dev server for you.
   // If you want BrowserSync to proxy an existing URL,
   // change `useProxy` to true and enter your URL as `proxyUrl`
-  useProxy: <% if (isCraft) { %>true<% } else { %>false<% } %>,
+  useProxy: <%= useProxy %>,
   proxyUrl: process.env.APP_SITE_URL,
 
   scripts: {
