@@ -3,13 +3,10 @@
 <%= description %>
 
 ## Setup
-
-<% if (platform == 'craft') { %>### Craft
-
+<% if (platform == 'craft') { %>
 - Create a MySQL-compatible database called `<%= projectName %>`
-- `composer install`
+- `composer install`<% } %>
 - `cp env.sample .env` and modify the contents of `.env` to match your setup
-<% } %>
 
 ### Front End Dependencies
 
