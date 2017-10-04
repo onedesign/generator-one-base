@@ -14,7 +14,6 @@ module.exports = gulp.task('build', function(callback) {
   runSequence(
     'base',
     'images',
-    'scripts:uglify',
     'rev:clear',
     'rev',
     callback

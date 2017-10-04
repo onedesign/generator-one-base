@@ -73,7 +73,6 @@ module.exports = Generator.extend({
         'gulp-rev',
         'gulp-sass',
         'gulp-shell',
-        'gulp-uglify',
         'gulp-util',
         'node-libs-browser',
         'postcss-import',

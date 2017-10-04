@@ -21,4 +21,4 @@ While `gulp` is running, you can access the site at [http://localhost:3000](http
 
 ## Deployment
 
-Run `yarn run build` to build prepare all assets for deployment.
+Run `NODE_ENV=production yarn build` to build prepare all assets for deployment.
