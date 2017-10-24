@@ -2,7 +2,7 @@ module.exports = {
   assetrev: {
     name: 'Asset Rev',
     githubName: 'craft-asset-rev',
-    src: 'https://github.com/clubstudioltd/craft-asset-rev/archive/master.zip',
+    src: 'https://github.com/clubstudioltd/craft-asset-rev/archive/v5.zip',
     checked: true
   },
   imager: {
