@@ -1,5 +1,7 @@
 var config      = require('../config');
 var gulp        = require('gulp');
+var Notifier    = require('../utils/notifier')();
+
 
 //
 //   BrowserSync
@@ -34,15 +36,26 @@ module.exports = gulp.task('browserSync', function() {
         'color: rgb(255, 255, 255);'
       ]
     }
-  }
+  };
 
   if (config.useProxy) {
-    options.proxy = config.proxyUrl
+    options.proxy = config.proxyUrl;
   } else {
     options.server = {
       baseDir: './'
-    }
+    };
   }
 
+  // Initialize Browsersync
   global.browserSync.init(null, options);
+
+  // Reset the initial notifications
+  Notifier.create();
+
+  // Show any outstanding errors when client is connected
+  global.browserSync.emitter.on('client:connected', function() {
+    var notifications = Notifier.getFormatted();
+    global.browserSync.notify(notifications ? notifications : 'Connected!', notifications ? 50000 : 2000);
+    Notifier.reset();
+  });
 });
