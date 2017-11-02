@@ -16,10 +16,11 @@ module.exports = gulp.task('base', function(callback) {
     'rev:clear',
     [
       'templates',
-      'scripts:lint',
       'scripts:bundle',
+      'scripts:lint',
       'styles',
       'styles:copy',
+      'styles:lint',
       'scripts:copy'
     ],
     callback

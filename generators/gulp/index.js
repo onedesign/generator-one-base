@@ -27,6 +27,11 @@ module.exports = Generator.extend({
       );
 
       this.fs.copy(
+        this.templatePath('stylelintrc'),
+        this.destinationPath('.stylelintrc')
+      );
+
+      this.fs.copy(
         this.templatePath('gulp/tasks'),
         this.destinationPath('gulp/tasks')
       );
@@ -73,6 +78,8 @@ module.exports = Generator.extend({
         'gulp-rev',
         'gulp-sass',
         'gulp-shell',
+        'gulp-stylelint',
+        'stylelint-scss',
         'gulp-util',
         'node-libs-browser',
         'postcss-import',
