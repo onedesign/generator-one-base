@@ -79,6 +79,7 @@ module.exports = Generator.extend({
         'gulp-sass',
         'gulp-shell',
         'gulp-stylelint',
+        'stylelint',
         'stylelint-scss',
         'gulp-util',
         'node-libs-browser',
