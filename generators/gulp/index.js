@@ -31,6 +31,11 @@ module.exports = Generator.extend({
         this.destinationPath('gulp/tasks')
       );
 
+      this.fs.copy(
+        this.templatePath('gulp/utils'),
+        this.destinationPath('gulp/utils')
+      );
+
       this.fs.copyTpl(
         this.templatePath('gulp/config.js'),
         this.destinationPath('gulp/config.js'), {
@@ -74,6 +79,7 @@ module.exports = Generator.extend({
         'gulp-sass',
         'gulp-shell',
         'gulp-util',
+        'jsonfile',
         'node-libs-browser',
         'postcss-import',
         'require-dir',
