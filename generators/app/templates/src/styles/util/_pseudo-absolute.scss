@@ -1,18 +1,12 @@
-
-//===============================================================
+// ===============================================================
 // Pseudo Absolute
-//===============================================================
-
-
+// ===============================================================
 /*
-Pseudo Absolute
-
 Some base styles for an absolutely positioned pseudo element
-
 */
 
 @mixin pseudo-absolute() {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
 }
