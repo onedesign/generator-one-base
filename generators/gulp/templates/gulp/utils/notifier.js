@@ -11,7 +11,8 @@ module.exports = function() {
   var self = {
     dirPath: path.resolve('./tmp'),
     filePath: path.resolve('./tmp/errors.json'),
-    defaultContents: { errors: [] }
+    defaultContents: { errors: [] },
+    divider: '<br/>--------------------------------------------------------------------------------<br/>'
   };
 
 
@@ -21,7 +22,9 @@ module.exports = function() {
   //////////////////////////////////////////////////////////////////////
 
   var _init = function() {
-
+    if (typeof global.messageQueue === 'undefined') {
+      global.messageQueue = [];
+    }
   };
 
 
@@ -30,42 +33,96 @@ module.exports = function() {
   //
   //////////////////////////////////////////////////////////////////////
 
+  /**
+   * Create a JSON file to contain errors (if it doesn't exist)
+   */
   self.create = function() {
-    // Create the temporary directory if it doesn't already exist
     if (!fs.existsSync(self.dirPath)) { fs.mkdirSync(self.dirPath); }
-
-    // Attempt to read an existing file
     var file = jsonfile.readFileSync(self.filePath, { throws: false });
-
-    // If file not found, create it
     if (!file) { self.reset(); }
   };
 
+  /**
+   * Reset the contents of the JSON file
+   */
   self.reset = function() {
     jsonfile.writeFileSync(self.filePath, self.defaultContents);
   };
 
+  /**
+   * Get all `errors` in the current JSON file
+   * @return {array} All current error messages (returns null if empty)
+   */
   self.get = function() {
-    // Attempt to read an existing file
     var file = jsonfile.readFileSync(self.filePath, { throws: false });
     if (file) { return file.errors; }
     return null;
   };
 
+  /**
+   * Get a pre-formatted list of all messages in the JSON file
+   * @return {string} Formatted list of messages (null if empty)
+   */
   self.getFormatted = function() {
     var messages = self.get();
     if (messages.length) {
-      return messages.join('<br/>--------------------------------------------------------------------------------<br/>');
+      return messages.join(self.divider);
     }
     return null;
   };
 
+  /**
+   * Get a pre-formatted list of messages in the in-memory queue
+   * @return {string} Formatted list of messages (null if empty)
+   */
+  self.getFormattedQueue = function() {
+    if (global.messageQueue.length) {
+      return global.messageQueue.join(self.divider);
+    }
+    return null;
+  };
+
+  /**
+   * Add a message to the JSON file
+   * @param {string} title The title or subject of the message
+   * @param {string} msg   The body of the message
+   */
   self.add = function(title, msg) {
     var file = self.get();
     if (!file) { self.create(); }
     var errors = self.get();
-    errors.push([`<span>${title}</span>`, msg].join(' | '));
+    errors.push((self.formatMessage(title, msg)));
     jsonfile.writeFileSync(self.filePath, { errors: errors });
+  };
+
+  /**
+   * Applys consistent formatting to a message
+   * @param  {string} title The title or subject of the message
+   * @param  {string} msg   The body of the message
+   * @return {string}       A nicely formatted version of the message
+   */
+  self.formatMessage = function(title, msg) {
+    return [`<span>${title}</span>`, msg].join(' | ');
+  };
+
+  /**
+   * Adds a message to the in-memory queue to be shown later
+   * @param  {string} title The title or subject of the message
+   * @param  {string} msg   The body of the message
+   */
+  self.queue = function(title, msg) {
+    global.messageQueue.push(self.formatMessage(title, msg));
+  };
+
+  /**
+   * Broadcasts all messages in the current queue and clears the queue
+   * @param  {integer} duration The number of ms to show the message for
+   */
+  self.notify = function(duration) {
+    if (!global.messageQueue.length) return;
+    if (typeof duration === 'undefined') { duration = 50000; }
+    global.browserSync.notify(self.getFormattedQueue(), duration);
+    global.messageQueue = [];
   };
 
 
