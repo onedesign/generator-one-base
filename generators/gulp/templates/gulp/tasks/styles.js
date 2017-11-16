@@ -6,6 +6,7 @@ var autoprefixer = require('autoprefixer');
 var pixrem       = require('gulp-pixrem');
 var postcss      = require('gulp-postcss');
 var importCss    = require('postcss-import');
+var Notifier     = require('../utils/notifier')();
 
 //
 //   Styles
@@ -29,20 +30,20 @@ module.exports = gulp.task('styles', function() {
   ];
 
   return gulp.src([
-    config.paths.styleSrc + 'main.scss',
+    config.paths.styleSrc + 'main.scss'
   ])
-  .pipe(cssGlobbing({
-    extensions: ['.scss']
-  }))
-  .pipe(sass({
-    outputStyle: 'compressed',
-    includePaths: ['./node_modules']
-  }).on('error', function(error) {
-    global.browserSync.notify(error.message, 30000);
-    sass.logError.call(this, error);
-  }))
-  .pipe(postcss(postCssProcessors, {}))
-  .pipe(pixrem({ rootValue: '10px' }))
-  .pipe(gulp.dest(config.paths.styleDist))
-  .pipe(global.browserSync.reload({ stream: true }));
+    .pipe(cssGlobbing({
+      extensions: ['.scss']
+    }))
+    .pipe(sass({
+      outputStyle: 'compressed',
+      includePaths: ['./node_modules']
+    }).on('error', function(error) {
+      Notifier.queue('styles', error.message);
+      sass.logError.call(this, error);
+    }))
+    .pipe(postcss(postCssProcessors, {}))
+    .pipe(pixrem({ rootValue: '10px' }))
+    .pipe(gulp.dest(config.paths.styleDist))
+    .pipe(global.browserSync.reload({ stream: true }));
 });
