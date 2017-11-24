@@ -152,7 +152,9 @@ module.exports = Generator.extend({
           composerPlugins.push(plugin);
           return;
         };
-        var downloadPromise = download(plugin.src, self.destinationPath('craft/plugins/downloads'), {
+        var downloadUrl = plugin.src + 'archive/' + plugin.branch + '.zip';
+        console.log('downloadUrl', downloadUrl);
+        var downloadPromise = download(downloadUrl, self.destinationPath('craft/plugins/downloads'), {
           extract: true
         })
         installationPromises.push(downloadPromise);
@@ -176,7 +178,8 @@ module.exports = Generator.extend({
       this.options.craftPlugins.forEach(function(option) {
         var plugin = plugins[option];
         if (plugin.src.indexOf('http') == -1) return;
-        var pluginDirPath = self.destinationPath('craft/plugins/downloads/' + plugin.githubName + '-master/' + option);
+        var pluginDirName = plugin.src.match(/\/(.*)\.zip$/)
+        var pluginDirPath = self.destinationPath('craft/plugins/downloads/' + plugin.githubName + '-' + plugin.branch.replace(/^v/, '') + '/' + option);
         if (!fs.existsSync(pluginDirPath)) return;
         fs.renameSync(pluginDirPath, self.destinationPath('craft/plugins/' + option));
       });
