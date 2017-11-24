@@ -20,7 +20,7 @@ module.exports = {
   mntwigperversion: {
     name: 'Twig Perversion',
     githubName: 'craft-twig_perversion',
-    src: 'https://github.com/marionnewlevant/craft-twig_perversion/archive/master.zip',
+    src: 'https://github.com/marionnewlevant/craft-twig_perversion/archive/v1.zip',
     checked: true
   },
   supertable: {
