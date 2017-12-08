@@ -13,7 +13,7 @@ if (!function_exists('siteUrlSetting')) {
      *
      * If the APP_SITE_URL environment variable is set, that is returned. Otherwise,
      * this function builds a site URL dynamically using server variables. This allows
-     * us to use multiple domains to for the same craft instance.
+     * us to use multiple domains for the same craft instance.
      *
      * @return string site url
      */
