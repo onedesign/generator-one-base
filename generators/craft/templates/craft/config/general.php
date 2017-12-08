@@ -7,21 +7,45 @@
  * You can see a list of the default settings in craft/app/etc/config/defaults/general.php
  */
 
+if (!function_exists('siteUrlSetting')) {
+    /**
+     * If the APP_SITE_URL environment variable is set, that is returned. Otherwise,
+     * this function builds a site URL dynamically using server variables. This allows
+     * us to use multiple domains to for the same craft instance.
+     *
+     * @return string site url
+     */
+    function siteUrlSetting() {
+        $envVar = getenv('APP_SITE_URL');
+
+        if (!empty($envVar)) {
+            return $envVar;
+        }
+
+        // The @ is used to suppress errors when this file is executed from the command line.
+
+        $sslOn = (!empty(@$_SERVER['HTTPS']) && @$_SERVER['HTTPS'] !== 'off') || @$_SERVER['SERVER_PORT'] == 443;
+        $port = !in_array(@$_SERVER['SERVER_PORT'], array(null, '80', '443')) ? ':' . @$_SERVER['SERVER_PORT'] : '';
+
+        return 'http' . ($sslOn ? 's' : '') . '://' . @$_SERVER['SERVER_NAME'] . $port;
+    }
+}
+
 
 return array(
 
     // This is needed so that things like { siteUrl } can be used in the Craft Admin
-    
+
     'environmentVariables' => array(
-      'siteUrl'                         => getenv('APP_SITE_URL')
+      'siteUrl'                         => siteUrlSetting()
     ),
 
-    // This appId is used to generate a unique prefix for session cookies and cache locations across our dev environments 
+    // This appId is used to generate a unique prefix for session cookies and cache locations across our environments
 
-    'appId'                              => getenv('APP_SITE_URL'),
+    'appId'                              => siteUrlSetting(),
 
     // FUZZY SEARCH
-    
+
     'defaultSearchTermOptions' => array(
         'subLeft' => true,
         'subRight' => true,
@@ -42,7 +66,7 @@ return array(
     // URLS
 
     'omitScriptNameInUrls'               => true,
-    'siteUrl'                            => getenv('APP_SITE_URL'),
+    'siteUrl'                            => siteUrlSetting(),
 
     // CACHING
 
