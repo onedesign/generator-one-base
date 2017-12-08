@@ -9,6 +9,8 @@
 
 if (!function_exists('siteUrlSetting')) {
     /**
+     * NOTE: THIS WILL NOT WORK AS EXPECTED WHEN TEMPLATE CACHING IS ENABLED!
+     *
      * If the APP_SITE_URL environment variable is set, that is returned. Otherwise,
      * this function builds a site URL dynamically using server variables. This allows
      * us to use multiple domains to for the same craft instance.
