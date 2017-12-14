@@ -1,13 +1,11 @@
 var plugins = require('./craft_plugins');
-var pluginChoices = [];
-for (var key in plugins) {
-  var plugin = plugins[key];
-  pluginChoices.push({
+var pluginChoices = plugins.map(function(plugin) {
+  return {
     name: plugin.name,
-    value: key,
+    value: plugin.src,
     checked: plugin.checked
-  });
-}
+  }
+});
 
 module.exports = [
   //

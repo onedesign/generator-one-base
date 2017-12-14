@@ -28,7 +28,14 @@ module.exports = Generator.extend({
     },
 
     downloadCraft: function() {
-      child_process.execSync(`composer create-project -s RC craftcms/craft ${this.options.projectName}`);
+      child_process.execSync(`composer create-project -s RC craftcms/craft ${this.options.projectName}-craft`);
+    },
+
+    move: function() {
+      child_process.execSync(`mv ${this.options.projectName}-craft/* ./`);
+      del.sync([
+        this.destinationPath(this.options.projectName)
+      ]);
     },
 
     clean: function() {
@@ -81,6 +88,10 @@ module.exports = Generator.extend({
     },
 
     config: function() {
+      del.sync([
+        this.destinationPath('config/general.php'),
+        this.destinationPath('config/db.php')
+      ]);
       // General
       this.fs.copy(
         this.templatePath('config/general.php'),
@@ -128,12 +139,9 @@ module.exports = Generator.extend({
         this.destinationPath('composer.json'),
         this.destinationPath('composer.lock')
       ]);
-      this.fs.copyTpl(
-        this.templatePath('composer.json'),
-        this.destinationPath('composer.json'), {
-          plugins: this.options.craftPlugins
-        }
-      );
+      this.options.craftPlugins.forEach(function(plugin) {
+        child_process.execSync(`composer require ${plugin}`);
+      });
     }
   },
 
