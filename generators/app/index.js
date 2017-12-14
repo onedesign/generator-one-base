@@ -22,20 +22,29 @@ module.exports = Generator.extend({
       // Use gulp
       this.options.isUsingGulp = true;
 
-      // Compose with Gulp generator
-      var isCraft = this.options.platform == 'craft';
-      this.composeWith(require.resolve('../gulp'), {
-        projectName: this.options.projectName,
-        platformTemplate: isCraft ? 'craft' : 'none',
-        useProxy: isCraft ? true : null
-      });
+      // Are we using Craft?
+      var isCraft = this.options.platform.indexOf('craft' > 0);
 
-      // Compose with Craft generator
-      if (this.options.platform == 'craft') {
-        this.composeWith(require.resolve('../craft'), {
+      // Compose with Craft 2 generator
+      if (this.options.platform == 'craft2') {
+        this.composeWith(require.resolve('../craft2'), {
           projectName: this.options.projectName
         });
       }
+
+      // Compose with Craft 3 generator
+      if (this.options.platform == 'craft3') {
+        this.composeWith(require.resolve('../craft3'), {
+          projectName: this.options.projectName
+        });
+      }
+
+      // Compose with Gulp generator
+      this.composeWith(require.resolve('../gulp'), {
+        projectName: this.options.projectName,
+        platformTemplate: isCraft ? this.options.platform : 'none',
+        useProxy: isCraft ? true : null
+      });
     }.bind(this));
   },
 

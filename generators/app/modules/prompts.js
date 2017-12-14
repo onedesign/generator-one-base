@@ -124,8 +124,12 @@ module.exports = [
         value: 'static'
       },
       {
-        name: 'Craft',
-        value: 'craft'
+        name: 'Craft 2',
+        value: 'craft2'
+      },
+      {
+        name: 'Craft 3',
+        value: 'craft3'
       }
     ]
   }
