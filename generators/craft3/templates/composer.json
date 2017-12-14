@@ -1,12 +1,25 @@
 {
-    "repositories": [
-      
-    ],
+  "repositories": [
+    
+  ],
 
-    "require": {<% plugins.forEach(function(plugin) { %>
-       "<%= plugin.src %>": "^1.0",<% }) %>
-       "vlucas/phpdotenv": "2.2"
-    },
+  "require": {<% plugins.forEach(function(plugin) { %>
+    "<%= plugin.src %>": "^1.0",<% }) %>
+    "php": ">=7.0.0",
+    "craftcms/cms": "^3.0.0-RC1",
+    "vlucas/phpdotenv": "^2.4.0",
+    "roave/security-advisories": "dev-master"
+  },
 
-    "minimum-stability": "dev"
+  "autoload": {
+    "psr-4": {
+      "modules\\": "modules/"
+    }
+  },
+  
+  "config": {
+    "optimize-autoloader": true
+  },
+
+  "minimum-stability": "dev"
 }

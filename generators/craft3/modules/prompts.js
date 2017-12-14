@@ -11,18 +11,6 @@ for (var key in plugins) {
 
 module.exports = [
   //
-  //   Craft License
-  //
-  //////////////////////////////////////////////////////////////////////
-  {
-    type: 'confirm',
-    name: 'acceptCraftLicense',
-    message: 'Do you accept the Craft license? (https://craftcms.com/license)',
-    default: true,
-    store: true
-  },
-
-  //
   //   Optional Craft Plugins
   //
   //////////////////////////////////////////////////////////////////////

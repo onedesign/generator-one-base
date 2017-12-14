@@ -33,7 +33,9 @@ module.exports = Generator.extend({
 
     clean: function() {
       del.sync([
-        // this.destinationPath('readme.txt')
+        this.destinationPath('LICENSE.md'),
+        this.destinationPath('README.md'),
+        this.destinationPath('craft.bat')
       ]);
 
       // If using SEOmatic, remove default robots.txt
@@ -46,10 +48,9 @@ module.exports = Generator.extend({
     },
 
     public: function() {
-      this.fs.copy(
-        this.templatePath('web/index.php'),
-        this.destinationPath('web/index.php')
-      );
+      del.sync([
+        this.destinationPath('web/.htaccess')
+      ]);
       this.fs.copyTpl(
         this.templatePath('web/htaccess'),
         this.destinationPath('web/.htaccess'), {
@@ -59,6 +60,10 @@ module.exports = Generator.extend({
     },
 
     env: function() {
+      del.sync([
+        this.destinationPath('.env'),
+        this.destinationPath('.env.example')
+      ]);
       this.fs.copyTpl(
         this.templatePath('env.sample'),
         this.destinationPath('env.sample'), {
@@ -78,21 +83,21 @@ module.exports = Generator.extend({
     config: function() {
       // General
       this.fs.copy(
-        // this.templatePath('craft/config/general.php'),
-        // this.destinationPath('craft/config/general.php')
+        this.templatePath('config/general.php'),
+        this.destinationPath('config/general.php')
       );
 
       // Database
       this.fs.copy(
-        // this.templatePath('craft/config/db.php'),
-        // this.destinationPath('craft/config/db.php')
+        this.templatePath('config/db.php'),
+        this.destinationPath('config/db.php')
       );
 
       // Asset Rev
       if (this.options.craftPlugins.indexOf('assetrev') > -1) {
         this.fs.copy(
-          this.templatePath('craft/config/assetrev.php'),
-          this.destinationPath('craft/config/assetrev.php')
+          this.templatePath('config/assetrev.php'),
+          this.destinationPath('config/assetrev.php')
         );
       }
     },
@@ -110,14 +115,19 @@ module.exports = Generator.extend({
         this.templatePath('templates/404.html'),
         this.destinationPath('templates/404.html')
       );
-      this.fs.copy(
-        this.templatePath('templates/_partials'),
-        this.destinationPath('templates/_partials')
+      this.fs.copyTpl(
+        this.templatePath('templates/_partials/head.html'),
+        this.destinationPath('templates/_partials/head.html'), {
+          craftPlugins: this.options.craftPlugins
+        }
       );
     },
 
     downloadPlugins: function() {
-      // Render composer.json
+      del.sync([
+        this.destinationPath('composer.json'),
+        this.destinationPath('composer.lock')
+      ]);
       this.fs.copyTpl(
         this.templatePath('composer.json'),
         this.destinationPath('composer.json'), {

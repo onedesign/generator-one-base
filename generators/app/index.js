@@ -23,7 +23,7 @@ module.exports = Generator.extend({
       this.options.isUsingGulp = true;
 
       // Are we using Craft?
-      var isCraft = this.options.platform.indexOf('craft' > 0);
+      var isCraft = this.options.platform.indexOf('craft' > -1);
 
       // Compose with Craft 2 generator
       if (this.options.platform == 'craft2') {

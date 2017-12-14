@@ -18,23 +18,21 @@ Thumbs.db
 
 # Compiled Files
 # ---------------------------
-/dist/<% if (platform == 'craft') { %>
+/dist/<% if (platform.indexOf('craft') > -1) { %>
 
 # Craft
 # ---------------------------
-/craft/plugins/*
-/craft/rev-manifest.json
-/craft/storage/*
-!/craft/storage/.htaccess
+rev-manifest.json
+/storage/*
 
 # Craft Public
 # ---------------------------
-/public/*
-!/public/.htaccess
-!/public/index.php
-!/public/*.txt
-!/public/*.png
-!/public/*.ico<% } %>
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico<% } %>
 
 # Package Managers
 # ---------------------------
