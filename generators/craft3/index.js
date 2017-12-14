@@ -152,9 +152,8 @@ module.exports = Generator.extend({
   install: {
     composer: function() {
       this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-      this.options.craftPlugins.forEach(function(plugin) {
-        child_process.execSync(`composer require ${plugin}`);
-      });
+      var pluginList = this.options.craftPlugins.join(' ');
+      child_process.execSync(`composer require ${pluginList}`);
     }
   },
 
