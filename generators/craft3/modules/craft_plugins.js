@@ -10,16 +10,6 @@ module.exports = [
     checked: true
   },
   {
-    name: 'Redactor',
-    src: 'craftcms/redactor',
-    checked: false
-  },
-  {
-    name: 'Simple Text',
-    src: 'craftcms/simple-text',
-    checked: false
-  },
-  {
     name: 'Snitch',
     src: 'marionnewlevant/snitch',
     checked: true
@@ -35,11 +25,6 @@ module.exports = [
     checked: true
   },
   {
-    name: 'Typogrify',
-    src: 'nystudio107/craft3-typogrify',
-    checked: false
-  },
-  {
     name: 'Dumper',
     src: 'studioespresso/craft-dumper',
     checked: true
@@ -53,5 +38,20 @@ module.exports = [
     name: 'Expanded Singles',
     src: 'verbb/expanded-singles',
     checked: true
+  },
+  {
+    name: 'Redactor',
+    src: 'craftcms/redactor',
+    checked: false
+  },
+  {
+    name: 'Simple Text',
+    src: 'craftcms/simple-text',
+    checked: false
+  },
+  {
+    name: 'Typogrify',
+    src: 'nystudio107/craft3-typogrify',
+    checked: false
   }
 ]
