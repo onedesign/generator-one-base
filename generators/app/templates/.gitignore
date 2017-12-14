@@ -18,11 +18,26 @@ Thumbs.db
 
 # Compiled Files
 # ---------------------------
-/dist/<% if (platform.indexOf('craft') > -1) { %>
+/dist/<% if (platform == 'craft2') { %>
 
 # Craft
 # ---------------------------
-rev-manifest.json
+/craft/plugins/*
+/craft/rev-manifest.json
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico<% } %><% if (platform == 'craft3') { %>
+
+# Craft
+# ---------------------------
 /storage/*
 
 # Craft Public
