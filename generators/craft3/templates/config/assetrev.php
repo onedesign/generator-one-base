@@ -9,8 +9,8 @@ return array(
             },
         ],
         'pipeline' => 'manifest|querystring|passthrough',
-        'manifestPath' => '/web/dist/rev-manifest.json',
-        'assetsBasePath' => '/web/dist/',
+        'manifestPath' => 'web/dist/rev-manifest.json',
+        'assetsBasePath' => 'web/dist/',
         'assetUrlPrefix' => '/dist/'
     )
 );
