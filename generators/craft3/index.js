@@ -2,11 +2,8 @@
 var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
-var download = require('download');
 var del = require('del');
 var fs = require('fs');
-var PleasantProgress = require('pleasant-progress');
-var progress = new PleasantProgress();
 var child_process = require('child_process');
 var prompts = require('./modules/prompts');
 var plugins = require('./modules/craft_plugins');
