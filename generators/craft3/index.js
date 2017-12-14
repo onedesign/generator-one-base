@@ -34,7 +34,7 @@ module.exports = Generator.extend({
     move: function() {
       child_process.execSync(`mv ${this.options.projectName}-craft/* ./`);
       del.sync([
-        this.destinationPath(this.options.projectName)
+        this.destinationPath(`${this.options.projectName}-craft`)
       ]);
     },
 
@@ -105,7 +105,7 @@ module.exports = Generator.extend({
       );
 
       // Asset Rev
-      if (this.options.craftPlugins.indexOf('assetrev') > -1) {
+      if (this.options.craftPlugins.indexOf('clubstudioltd/craft-asset-rev') > -1) {
         this.fs.copy(
           this.templatePath('config/assetrev.php'),
           this.destinationPath('config/assetrev.php')
@@ -145,6 +145,7 @@ module.exports = Generator.extend({
           plugins: this.options.craftPlugins
         }
       );
+      this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
     }
   },
 

@@ -7,7 +7,7 @@
  * list of the available settings in vendor/craftcms/cms/src/config/GeneralConfig.php.
  */
 
-return array[
+return [
     '*' => [
       // This appId is used to generate a unique prefix for session cookies and cache locations across our dev environments 
 
