@@ -134,21 +134,26 @@ module.exports = Generator.extend({
       );
     },
 
-    downloadPlugins: function() {
+    composer: function() {
       del.sync([
         this.destinationPath('composer.json'),
         this.destinationPath('composer.lock')
       ]);
-      this.options.craftPlugins.forEach(function(plugin) {
-        child_process.execSync(`composer require ${plugin}`);
-      });
+      this.fs.copyTpl(
+        this.templatePath('composer.json'),
+        this.destinationPath('composer.json'), {
+          plugins: this.options.craftPlugins
+        }
+      );
     }
   },
 
   install: {
     composer: function() {
       this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-      child_process.execSync('composer install');
+      this.options.craftPlugins.forEach(function(plugin) {
+        child_process.execSync(`composer require ${plugin}`);
+      });
     }
   },
 
