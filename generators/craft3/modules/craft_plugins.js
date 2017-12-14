@@ -12,12 +12,12 @@ module.exports = [
   {
     name: 'Redactor',
     src: 'craftcms/redactor',
-    checked: true
+    checked: false
   },
   {
     name: 'Simple Text',
     src: 'craftcms/simple-text',
-    checked: true
+    checked: false
   },
   {
     name: 'Snitch',
@@ -37,7 +37,7 @@ module.exports = [
   {
     name: 'Typogrify',
     src: 'nystudio107/craft3-typogrify',
-    checked: true
+    checked: false
   },
   {
     name: 'Dumper',
