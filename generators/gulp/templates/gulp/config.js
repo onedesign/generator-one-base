@@ -18,7 +18,7 @@ var paths = {
   templateDist: '<%= templateDist %>',
 
   imageSrc: 'src/images/',
-  imageDist: '<%= rootDistPath %>/images/',<% if (platformTemplate == 'craft') { %>
+  imageDist: '<%= rootDistPath %>/images/',<% if (platformTemplate == 'craft2') { %>
 
   craftPath: 'craft/',<% } %>
 

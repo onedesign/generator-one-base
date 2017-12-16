@@ -120,12 +120,16 @@ module.exports = [
     message: 'What platform should the project use?',
     choices: [
       {
-        name: 'Static',
-        value: 'static'
+        name: 'Craft 3',
+        value: 'craft3'
       },
       {
-        name: 'Craft',
-        value: 'craft'
+        name: 'Craft 2',
+        value: 'craft2'
+      },
+      {
+        name: 'Static',
+        value: 'static'
       }
     ]
   }

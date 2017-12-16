@@ -18,7 +18,7 @@ Thumbs.db
 
 # Compiled Files
 # ---------------------------
-/dist/<% if (platform == 'craft') { %>
+/dist/<% if (platform == 'craft2') { %>
 
 # Craft
 # ---------------------------
@@ -34,7 +34,20 @@ Thumbs.db
 !/public/index.php
 !/public/*.txt
 !/public/*.png
-!/public/*.ico<% } %>
+!/public/*.ico<% } %><% if (platform == 'craft3') { %>
+
+# Craft
+# ---------------------------
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico<% } %>
 
 # Package Managers
 # ---------------------------
