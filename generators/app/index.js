@@ -77,13 +77,9 @@ module.exports = Generator.extend({
     },
 
     styles: function() {
-      this.fs.copy(
-        this.templatePath('src/styles'),
-        this.destinationPath('src/styles')
-      );
       this.fs.copyTpl(
-        this.templatePath('src/styles/main.scss'),
-        this.destinationPath('src/styles/main.scss'), {
+        this.templatePath('src/styles'),
+        this.destinationPath('src/styles'), {
           deps: this.options.optionalDeps
         }
       );
