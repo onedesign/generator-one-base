@@ -87,7 +87,7 @@ module.exports = [
       },
       {
         name: 'susy',
-        value: 'susy',
+        value: 'susy@2.2.12',
         checked: true
       },
       {
