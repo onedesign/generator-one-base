@@ -8,10 +8,16 @@ module.exports =  function(platform, key) {
       templateDist: ''
     },
 
-    craft: {
+    craft2: {
       rootDistPath: 'public/dist',
       templateSrc: 'craft/templates/',
       templateDist: 'craft/templates/'
+    },
+
+    craft3: {
+      rootDistPath: 'web/dist',
+      templateSrc: 'templates/',
+      templateDist: 'templates/'
     }
   }
 
