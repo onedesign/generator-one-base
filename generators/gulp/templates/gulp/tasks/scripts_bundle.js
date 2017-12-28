@@ -100,7 +100,8 @@ gulp.task('scripts:bundle', function(callback) {
         chunks: false,
         colors: true,
         version: false,
-        hash: false
+        hash: false,
+        modulesSort: '!size'
       }));
     }
 
