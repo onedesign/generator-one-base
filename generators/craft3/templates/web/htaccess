@@ -20,6 +20,7 @@
   # Force redirect to HTTPS
   # RewriteCond %{HTTP:X-Forwarded-Proto} !https
   # RewriteCond %{HTTPS} off
+  # RewriteCond %{HTTP_HOST} ^<%= projectName %>.com [NC]
   # RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
 
   # Redirect non-www to www
