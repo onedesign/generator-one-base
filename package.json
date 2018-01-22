@@ -1,8 +1,8 @@
 {
   "name": "generator-one-base",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A foundation for One Design Company projects on the web.",
-  "homepage": "",
+  "homepage": "http://github.com/onedesign/generator-one-base",
   "author": {
     "name": "One Design Company",
     "email": "dev@onedesigncompany.com",
