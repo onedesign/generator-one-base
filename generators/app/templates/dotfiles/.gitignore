@@ -1,0 +1,37 @@
+# System
+# ---------------------------
+.DS_Store
+Thumbs.db
+
+# Config
+# ---------------------------
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.tmproject
+.env
+.env.*
+.idea
+.project
+.settings
+
+# Compiled Files
+# ---------------------------
+/dist/
+
+# Package Managers
+# ---------------------------
+/vendor/
+/node_modules/
+
+# Temp
+# ---------------------------
+.cache
+*.log
+/logs/
+/tmp
+
+# VM
+# ---------------------------
+.vagrant/*
