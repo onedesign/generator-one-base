@@ -71,9 +71,13 @@ module.exports = class extends Generator {
       'eslint',
       'eslint-config-odc',
       'eslint-plugin-react',
-      'babel-eslint'
+      'babel-eslint',
+      'husky'
     ];
-    const scripts = {};
+    const scripts = {
+      precommit: 'lint-staged'
+    };
+
     const usingBlendid = this.props.buildProcess === 'blendid';
 
     if (usingBlendid) {
@@ -88,9 +92,6 @@ module.exports = class extends Generator {
       // Add our ODC dependencies
     }
 
-
-    // TODO: precommit hook
-    // TODO: license
     extend(pkg, {
       name: this.props.name,
       description: this.props.description,
@@ -106,6 +107,10 @@ module.exports = class extends Generator {
       },
       eslintConfig: {
         extends: ['odc']
+      },
+      license: this.options.odc ? 'proprietary' : 'MIT',
+      "lint-staged": {
+        "*.js": ["eslint --fix", "git add"]
       }
     });
 

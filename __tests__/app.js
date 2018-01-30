@@ -42,6 +42,13 @@ describe('generator-one-base:app', () => {
         },
         eslintConfig: {
           extends: ['odc']
+        },
+        scripts: {
+          precommit: 'lint-staged'
+        },
+        license: 'MIT',
+        "lint-staged": {
+          "*.js": ["eslint --fix", "git add"]
         }
       });
     });
@@ -71,7 +78,8 @@ describe('generator-one-base:app', () => {
           name: 'One Design Company',
           email: 'dev@onedesigncompany',
           url: 'https://onedesigncompany.com'
-        }
+        },
+        license: 'proprietary'
       });
     });
   });
