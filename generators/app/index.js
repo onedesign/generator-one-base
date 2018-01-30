@@ -28,6 +28,7 @@ module.exports = class extends Generator {
       yosay('Welcome to the legendary ' + chalk.red('generator-one-base') + ' generator!')
     );
 
+    // I don't love this syntax, but it works pretty well.
     const prompts = [
       ...packagePrompts.base,
       ...!this.options.odc ? packagePrompts.author : [],
@@ -66,7 +67,12 @@ module.exports = class extends Generator {
 
     const pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     const dependencies = [];
-    const devDependencies = [];
+    const devDependencies = [
+      'eslint',
+      'eslint-config-odc',
+      'eslint-plugin-react',
+      'babel-eslint'
+    ];
     const scripts = {};
     const usingBlendid = this.props.buildProcess === 'blendid';
 
@@ -82,8 +88,9 @@ module.exports = class extends Generator {
       // Add our ODC dependencies
     }
 
+
     // TODO: precommit hook
-    // TODO: eslintconfig in packageJSON
+    // TODO: license
     extend(pkg, {
       name: this.props.name,
       description: this.props.description,
@@ -93,11 +100,24 @@ module.exports = class extends Generator {
         email: this.props.authorEmail,
         url: this.props.authorUrl
       },
-      devDependencies,
-      dependencies
+      engines: {
+        node: '>=6.11.1',
+        npm: '>=3.10.3'
+      },
+      eslintConfig: {
+        extends: ['odc']
+      }
     });
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+
+    this.yarnInstall(dependencies, { silent: true }).then(() => {
+      this.log(chalk.green('Successfully installed dependencies.'));
+    });
+
+    this.yarnInstall(devDependencies, { dev: true, silent: true }).then(() => {
+      this.log(chalk.green('Success! Installed dev dependencies.'));
+    });
 
     this.log('Creating dotfiles ...');
 
@@ -143,12 +163,7 @@ module.exports = class extends Generator {
     );
   }
 
-  install() {
-    // Don't bother installing deps in test mode
-    if (!this.skipInstall) {
-      this.installDependencies({ bower: false });
-    }
-  }
+  install() {}
 
   end() {
     this.log('Thanks!');

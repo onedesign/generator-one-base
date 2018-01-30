@@ -32,13 +32,16 @@ describe('generator-one-base:app', () => {
     });
 
     it('popuplates the package.json with the correct data.', () => {
-      assert.JSONFileContent('package.json', {
+      assert.jsonFileContent('package.json', {
         name: prompts.name,
         description: prompts.description,
         author: {
           name: prompts.authorName,
           email: prompts.authorEmail,
           url: prompts.authorUrl
+        },
+        eslintConfig: {
+          extends: ['odc']
         }
       });
     });
@@ -54,7 +57,7 @@ describe('generator-one-base:app', () => {
     });
   });
 
-  describe('odc option', () => {
+  describe('--odc', () => {
     beforeAll(() => {
       return helpers
         .run(path.join(__dirname, '../generators/app'))
@@ -87,11 +90,7 @@ describe('generator-one-base:app', () => {
         scripts: {
           start: 'blendid',
           build: 'NODE_ENV=production blendid build'
-        },
-        dependencies: [
-          'blendid',
-          'dotenv'
-        ]
+        }
       });
     });
   });

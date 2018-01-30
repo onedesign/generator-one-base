@@ -4,7 +4,7 @@ module.exports = {
       name: 'buildProcess',
       type: 'list',
       message: 'What build process would you like to use?',
-      default: [0],
+      default: 0,
       choices: [
         {
           name: 'Blendid',
