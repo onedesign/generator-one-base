@@ -66,12 +66,16 @@ module.exports = class extends Generator {
       platform: this.props.platform,
       craftApiVersion: this.props.ccraftApiVersion
     });
+
+    this.composeWith(require.resolve('../styles'), {
+      oneToolkit: true
+    });
   }
 
   writing() {
     const pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    const dependencies = [];
-    const devDependencies = [
+    this.dependencies = [];
+    this.devDependencies = [
       'eslint',
       'eslint-config-odc',
       'eslint-plugin-react',
@@ -85,7 +89,7 @@ module.exports = class extends Generator {
     const usingBlendid = this.props.buildProcess === 'blendid';
 
     if (usingBlendid) {
-      dependencies.push(
+      this.dependencies.push(
         'blendid',
         'dotenv'
       );
@@ -121,13 +125,6 @@ module.exports = class extends Generator {
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
     this.log(chalk.green(`Created package.json.`));
 
-    this.yarnInstall(dependencies, { silent: true }).then(() => {
-      this.log(chalk.green('Installed dependencies.'));
-    });
-
-    this.yarnInstall(devDependencies, { dev: true, silent: true }).then(() => {
-      this.log(chalk.green('Installed dev dependencies.'));
-    });
 
     const dotfiles = [
       '.editorconfig',
@@ -173,7 +170,16 @@ module.exports = class extends Generator {
     this.log(chalk.green(`Created README.`));
   }
 
-  install() {}
+  install() {
+    this.yarnInstall(this.dependencies, { silent: true }).then(() => {
+      this.log(chalk.green('Installed dependencies.'));
+    });
+
+    this.yarnInstall(this.devDependencies, { dev: true, silent: true }).then(() => {
+      this.log(chalk.green('Installed dev dependencies.'));
+    });
+
+  }
 
   end() {
     this.log('Thanks!');

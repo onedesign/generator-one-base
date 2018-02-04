@@ -1,0 +1,13 @@
+// ===============================================================
+// Image Replacement
+// ===============================================================
+/*
+Sets up text to be replaced with a background image.
+*/
+
+@mixin image-replace {
+  border: 0;
+  font: 0/0 'a';
+  text-shadow: none;
+  color: transparent;
+}

@@ -15,13 +15,14 @@ module.exports = class extends Generator {
     });
   }
 
-  writing() {
-
+  initializing() {
     this.fs.copy(
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')
     );
+  }
 
+  writing() {
     const appendOptions = {
       separator: `${os.EOL}${os.EOL}`
     };
@@ -40,14 +41,14 @@ module.exports = class extends Generator {
     }
     this.log(chalk.green(`Created .gitignore.`));
 
+    this.spawnCommandSync('git', ['init', '--quiet']);
+    this.log(chalk.green('Initialized git repo.'));
+
     this.fs.copy(
       this.templatePath('.github'),
       this.destinationPath('.github')
     );
     this.log(chalk.green(`Created .github folder.`));
-
-    this.spawnCommandSync('git', ['init']);
-    this.log(chalk.green('Initialized git repo.'));
 
     this.spawnCommandSync('cp', [
       this.templatePath('hooks/pre-commit'),
@@ -55,11 +56,13 @@ module.exports = class extends Generator {
     ]);
     this.log(chalk.green('Configured git hooks.'));
 
-
     this.spawnCommandSync('chmod', [
       '+x',
       this.destinationPath('.git/hooks/pre-commit')
     ]);
     this.log(chalk.green('Git hooks configured.'));
+  }
+
+  end() {
   }
 };

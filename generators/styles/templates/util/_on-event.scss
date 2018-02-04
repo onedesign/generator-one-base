@@ -1,0 +1,23 @@
+// ===============================================================
+// On Event
+// ===============================================================
+/*
+  Adds hover, active, and focus event styles to an element.
+*/
+
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+// Vendor<% if (deps.indexOf('susy') > -1) { %>
+@import 'susy/sass/susy';<% } %><% if (deps.indexOf('sass-mq') > -1) { %>
+@import 'sass-mq/mq';<% } %>
+
+// Resets
+@import 'vendor/normalize';
+@import 'vendor/reset';
+
+// Utilities
+@import 'util/*';
+
+// Variables
+@import 'base/variables';<% if (deps.indexOf('one-sass-toolkit') > -1) { %>
+
+// Toolkit
+@import 'one-sass-toolkit/color';
+@import 'one-sass-toolkit/fluid-size';
+@import 'one-sass-toolkit/type-styles';<% } %>
+
+// Helpers
+@import 'helpers/*';
+
+// Base
+@import 'base/base';
+@import 'base/helpers';
+
+// Components
+@import 'layout/*';
+@import 'objects/*';
+
+// Vendor Customizations
+@import 'vendor-customization/*';
