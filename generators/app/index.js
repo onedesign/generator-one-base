@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const packagePrompts = require('./prompts/package');
 const build = require('./prompts/build');
+const platform = require('./prompts/platform');
 const extend = require('deep-extend');
 const mkdirp = require('mkdirp');
 const _isArray = require('lodash/isArray');
@@ -32,11 +33,11 @@ module.exports = class extends Generator {
     const prompts = [
       ...packagePrompts.base,
       ...!this.options.odc ? packagePrompts.author : [],
-      ...build.whichProcess
+      ...build.buildProcess,
+      ...platform
     ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       if (this.options.odc) {
         this.props = extend(props, {
           authorName: 'One Design Company',
@@ -60,11 +61,14 @@ module.exports = class extends Generator {
       mkdirp(this.props.name);
       this.destinationRoot(this.destinationPath(this.props.name));
     }
+
+    this.composeWith(require.resolve('../git'), {
+      platform: this.props.platform,
+      craftApiVersion: this.props.ccraftApiVersion
+    });
   }
 
   writing() {
-    this.log(`Creating package.json file ...`);
-
     const pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     const dependencies = [];
     const devDependencies = [
@@ -115,16 +119,15 @@ module.exports = class extends Generator {
     });
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+    this.log(chalk.green(`Created package.json.`));
 
     this.yarnInstall(dependencies, { silent: true }).then(() => {
-      this.log(chalk.green('Successfully installed dependencies.'));
+      this.log(chalk.green('Installed dependencies.'));
     });
 
     this.yarnInstall(devDependencies, { dev: true, silent: true }).then(() => {
-      this.log(chalk.green('Success! Installed dev dependencies.'));
+      this.log(chalk.green('Installed dev dependencies.'));
     });
-
-    this.log('Creating dotfiles ...');
 
     const dotfiles = [
       '.editorconfig',
@@ -156,7 +159,7 @@ module.exports = class extends Generator {
       }
     });
 
-    this.log('Creating README ...');
+    this.log(chalk.green(`Created dotfiles.`));
 
     this.fs.copyTpl(
       this.templatePath('README.md'),
@@ -166,6 +169,8 @@ module.exports = class extends Generator {
         description: this.props.description
       }
     );
+
+    this.log(chalk.green(`Created README.`));
   }
 
   install() {}

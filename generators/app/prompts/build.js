@@ -1,5 +1,5 @@
 module.exports = {
-  whichProcess: [
+  buildProcess: [
     {
       name: 'buildProcess',
       type: 'list',

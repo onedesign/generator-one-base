@@ -1,0 +1,246 @@
+# System
+# ---------------------------
+.DS_Store
+Thumbs.db
+
+# Config
+# ---------------------------
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.tmproject
+.env
+.env.php
+.idea
+.project
+.settings
+
+# Package Managers
+# ---------------------------
+/vendor/
+/node_modules/
+
+# Temp
+# ---------------------------
+.cache
+*.log
+/logs/
+/tmp
+
+# VM
+# ---------------------------
+.vagrant/*
+
+# Compiled Files
+# ---------------------------
+/dist/
+# Craft 2.X
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-2.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-3.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-2.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-3.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-2.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-3.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-2.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-3.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-2.txt
+
+/Users/brianhanson/Development/odc/generator-one-base/generators/git/templates/gitignore-craft-3.txt
+
+# Craft 2.X
+# ---------------------------
+
+# Plugins
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+
+# Storage
+# ---------------------------
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
+
+# Craft 3.X
+# ---------------------------
+
+# Storage
+# ---------------------------
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+
+# Craft 2.X
+# ---------------------------
+
+# Plugins
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+
+# Storage
+# ---------------------------
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
+
+# Craft 3.X
+# ---------------------------
+
+# Storage
+# ---------------------------
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+
+# Craft 3.X
+# ---------------------------
+
+# Storage
+# ---------------------------
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+
+# Craft 2.X
+# ---------------------------
+
+# Plugins
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+
+# Storage
+# ---------------------------
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
+
+# Craft 3.X
+# ---------------------------
+
+# Storage
+# ---------------------------
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+
+# Craft 2.X
+# ---------------------------
+
+# Plugins
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+
+# Storage
+# ---------------------------
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
+
+# Craft 2.X
+# ---------------------------
+
+# Plugins
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+
+# Storage
+# ---------------------------
+/craft/storage/*
+!/craft/storage/.htaccess
+
+# Craft Public
+# ---------------------------
+/public/*
+!/public/.htaccess
+!/public/index.php
+!/public/*.txt
+!/public/*.png
+!/public/*.ico
