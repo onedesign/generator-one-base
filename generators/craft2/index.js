@@ -120,6 +120,13 @@ module.exports = Generator.extend({
         );
         this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in .env'));
       }
+
+      if (this.options.craftPlugins.indexOf('environmentlabel') > -1) {
+        this.fs.copyTpl(
+          this.templatePath('craft/config/environmentlabel.php'),
+          this.destinationPath('craft/config/environmentlabel.php')
+        );
+      }
     },
 
     templates: function() {
