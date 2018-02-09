@@ -108,6 +108,14 @@ module.exports = Generator.extend({
           this.destinationPath('config/assetrev.php')
         );
       }
+
+      // Environment Label
+      if (this.options.craftPlugins.indexOf('topshelfcraft/environment-label') > -1) {
+        this.fs.copyTpl(
+          this.templatePath('craft/config/environment-label.php'),
+          this.destinationPath('craft/config/environment-label.php')
+        );
+      }
     },
 
     templates: function() {
