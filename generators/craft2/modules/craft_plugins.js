@@ -65,5 +65,5 @@ module.exports = {
     src: 'https://github.com/madebykind/craft.labelenvironment/',
     branch: 'master',
     checked: true
-  },
+  }
 }
