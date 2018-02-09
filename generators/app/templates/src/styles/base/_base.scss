@@ -1,7 +1,7 @@
 html,
 body {
-  overflow-x: hidden;
-  background-color: color(white);
+  overflow-x: hidden;<% if (deps.indexOf('one-sass-toolkit') > -1) { %>
+  background-color: color(white);<% } %>
 }
 
 html {
@@ -9,9 +9,9 @@ html {
   box-sizing: border-box;
 }
 
-body {
+body {<% if (deps.indexOf('one-sass-toolkit') > -1) { %>
   @include type-style(a);
-  color: color(black);
+  color: color(black);<% } %>
 }
 
 *, *:before, *:after {
