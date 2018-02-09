@@ -53,10 +53,5 @@ module.exports = [
     name: 'Typogrify',
     src: 'nystudio107/craft3-typogrify',
     checked: false
-  },
-  {
-    name: 'Environment Label',
-    src: 'topshelfcraft/environment-label',
-    checked: true
   }
 ]
