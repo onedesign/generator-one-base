@@ -1,4 +1,4 @@
-// Vendor<% if (deps.indexOf('susy') > -1) { %>
+// Vendor<% if (deps.indexOf('susy2') > -1) { %>
 @import 'susy/sass/susy';<% } %><% if (deps.indexOf('sass-mq') > -1) { %>
 @import 'sass-mq/mq';<% } %>
 

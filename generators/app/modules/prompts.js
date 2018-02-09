@@ -86,14 +86,14 @@ module.exports = [
         checked: true
       },
       {
-        name: 'susy',
-        value: 'susy@2.2.12',
-        checked: true
-      },
-      {
         name: 'one-sass-toolkit',
         value: 'one-sass-toolkit',
         checked: true
+      },
+      {
+        name: 'susy2',
+        value: 'susy@2.2.12',
+        checked: false
       }
     ]
   },

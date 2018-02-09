@@ -27,7 +27,7 @@ $mq-breakpoints: (
   medium: 768px,
   large: 1024px,
   xlarge: 1280px
-);<% } %><% if (deps.indexOf('susy') > -1) { %>
+);<% } %><% if (deps.indexOf('susy2') > -1) { %>
 
 
 // ---------------------------------------------------------------
