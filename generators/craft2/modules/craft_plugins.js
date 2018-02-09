@@ -59,7 +59,7 @@ module.exports = {
     src: 'nystudio107/retour',
     checked: true
   },
-  labelenvironment: {
+  environmentlabel: {
     name: 'Craft Environment Label',
     githubName: 'craft.labelenvironment',
     src: 'https://github.com/madebykind/craft.labelenvironment/',
