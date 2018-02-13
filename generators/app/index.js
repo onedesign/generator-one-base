@@ -18,8 +18,6 @@ module.exports = class extends Generator {
     this.option('skip-install');
     this.option('odc');
 
-    this.testMode = false;
-
     this.skipInstall = this.options['skip-install'];
   }
 
@@ -67,9 +65,9 @@ module.exports = class extends Generator {
       craftApiVersion: this.props.ccraftApiVersion
     });
 
-    this.composeWith(require.resolve('../styles'), {
-      oneToolkit: true
-    });
+    this.composeWith(require.resolve('../styles'));
+
+    this.composeWith(require.resolve('../scripts'));
   }
 
   writing() {
