@@ -4,14 +4,25 @@ module.exports =  function(platform, key) {
   var platformDefaults = {
     static: {
       rootDistPath: 'dist',
+      templateSrc: './',
+      templateDist: './',
+      serverBaseDir: './',
+      useProxy: false
+    },
+
+    staticNunjucks: {
+      rootDistPath: 'dist',
       templateSrc: 'src/templates/',
-      templateDist: 'dist/'
+      templateDist: 'dist/',
+      serverBaseDir: 'dist/',
+      useProxy: false
     },
 
     craft2: {
       rootDistPath: 'public/dist',
       templateSrc: 'craft/templates/',
       templateDist: 'craft/templates/',
+      useProxy: true,
       serverBaseDir: './'
     },
 
@@ -19,6 +30,7 @@ module.exports =  function(platform, key) {
       rootDistPath: 'web/dist',
       templateSrc: 'templates/',
       templateDist: 'templates/',
+      useProxy: true,
       serverBaseDir: './'
     }
   }
