@@ -92,6 +92,20 @@ module.exports = function(options) {
   };
 
   //
+  //   nunjucks
+  //
+  //////////////////////////////////////////////////////////////////////
+  if (options.useNunjucks == null) {
+    questions.push({
+      type: 'confirm',
+      name: 'useNunjucks',
+      message: 'Would you like to use nunjucks for templating?',
+      default: true,
+      store: true
+    })
+  };
+
+  //
   //   Browsersync
   //
   //////////////////////////////////////////////////////////////////////
@@ -102,6 +116,16 @@ module.exports = function(options) {
       message: 'Use a proxy URL for Browsersync?',
       default: false,
       store: false
+    })
+  };
+  if (options.serverBaseDir == null) {
+    questions.push({
+      type: 'input',
+      name: 'serverBaseDir',
+      message: 'Base directory for Browsersync server',
+      default: function(answers) {
+        return answers.useNunjucks ? './dist' : './';
+      }
     })
   };
 

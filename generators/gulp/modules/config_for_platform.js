@@ -1,23 +1,25 @@
 module.exports =  function(platform, key) {
-  if (typeof platform === 'undefined') platform = 'none';
+  if (typeof platform === 'undefined') platform = 'static';
 
   var platformDefaults = {
-    none: {
+    static: {
       rootDistPath: 'dist',
-      templateSrc: '',
-      templateDist: ''
+      templateSrc: 'src/templates/',
+      templateDist: 'dist/'
     },
 
     craft2: {
       rootDistPath: 'public/dist',
       templateSrc: 'craft/templates/',
-      templateDist: 'craft/templates/'
+      templateDist: 'craft/templates/',
+      serverBaseDir: './'
     },
 
     craft3: {
       rootDistPath: 'web/dist',
       templateSrc: 'templates/',
-      templateDist: 'templates/'
+      templateDist: 'templates/',
+      serverBaseDir: './'
     }
   }
 
