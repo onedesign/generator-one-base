@@ -42,7 +42,7 @@ module.exports = gulp.task('browserSync', function() {
     options.proxy = config.proxyUrl;
   } else {
     options.server = {
-      baseDir: './'
+      baseDir: config.serverBaseDir
     };
   }
 
