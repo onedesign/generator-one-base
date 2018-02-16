@@ -8,12 +8,12 @@ module.exports = function(options) {
   //
   //////////////////////////////////////////////////////////////////////
 
-  // If a platformTemplate was explicitly passed in (by a parent generator, for instance)
+  // If a platform was explicitly passed in (by a parent generator, for instance)
   // we should update the options with the defaults so we don't need to prompt the
   // user for them again.
 
-  if (options.platformTemplate != null) {
-    options = Object.assign(options, configForPlatform(options.platformTemplate));
+  if (options.platform != null) {
+    options = Object.assign(options, configForPlatform(options.platform));
   };
 
   //
@@ -33,16 +33,12 @@ module.exports = function(options) {
   //   Platform Template
   //
   //////////////////////////////////////////////////////////////////////
-  if (options.platformTemplate == null) {
+  if (options.platform == null) {
     questions.push({
       type: 'list',
-      name: 'platformTemplate',
+      name: 'platform',
       message: 'Would you like to use a platform template? (this will automatically configure the build settings to work with common platforms',
       choices: [
-        {
-          name: 'None',
-          value: 'none'
-        },
         {
           name: 'Craft 2',
           value: 'craft2'
@@ -50,6 +46,14 @@ module.exports = function(options) {
         {
           name: 'Craft 3',
           value: 'craft3'
+        },
+        {
+          name: 'Static',
+          value: 'static'
+        },
+        {
+          name: 'Static w/ Nunjucks',
+          value: 'staticNunjucks'
         }
       ]
     });
@@ -65,7 +69,7 @@ module.exports = function(options) {
       name: 'rootDistPath',
       message: 'Root path for all output files',
       default: function(answers) {
-        return configForPlatform(answers.platformTemplate, 'rootDistPath');
+        return configForPlatform(answers.platform, 'rootDistPath');
       }
     });
   };
@@ -74,9 +78,9 @@ module.exports = function(options) {
     questions.push({
       type: 'input',
       name: 'templateSrc',
-      message: 'Templates source path (leave blank for project root)',
+      message: 'Templates source path',
       default: function(answers) {
-        return configForPlatform(answers.platformTemplate, 'templateSrc');
+        return configForPlatform(answers.platform, 'templateSrc');
       }
     })
   };
@@ -84,9 +88,9 @@ module.exports = function(options) {
     questions.push({
       type: 'input',
       name: 'templateDist',
-      message: 'Templates output path (leave blank for project root)',
+      message: 'Templates output path',
       default: function(answers) {
-        return configForPlatform(answers.platformTemplate, 'templateDist');
+        return configForPlatform(answers.platform, 'templateDist');
       }
     })
   };
@@ -100,8 +104,19 @@ module.exports = function(options) {
       type: 'confirm',
       name: 'useProxy',
       message: 'Use a proxy URL for Browsersync?',
-      default: false,
-      store: false
+      default: function(answers) {
+        return configForPlatform(answers.platform, 'useProxy');
+      }
+    })
+  };
+  if (options.serverBaseDir == null) {
+    questions.push({
+      type: 'input',
+      name: 'serverBaseDir',
+      message: 'Base directory for Browsersync server',
+      default: function(answers) {
+        return configForPlatform(answers.platform, 'serverBaseDir');
+      }
     })
   };
 

@@ -18,7 +18,7 @@ var paths = {
   templateDist: '<%= templateDist %>',
 
   imageSrc: 'src/images/',
-  imageDist: '<%= rootDistPath %>/images/',<% if (platformTemplate == 'craft2') { %>
+  imageDist: '<%= rootDistPath %>/images/',<% if (platform == 'craft2') { %>
 
   craftPath: 'craft/',<% } %>
 
@@ -39,6 +39,7 @@ module.exports = {
   // change `useProxy` to true and enter your URL as `proxyUrl`
   useProxy: <%= useProxy %>,
   proxyUrl: process.env.APP_SITE_URL,
+  serverBaseDir: '<%= serverBaseDir %>',
 
   scripts: {
     // entry files:

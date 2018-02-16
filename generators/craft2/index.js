@@ -160,7 +160,6 @@ module.exports = Generator.extend({
           return;
         };
         var downloadUrl = plugin.src + 'archive/' + plugin.branch + '.zip';
-        console.log('downloadUrl', downloadUrl);
         var downloadPromise = download(downloadUrl, self.destinationPath('craft/plugins/downloads'), {
           extract: true
         })

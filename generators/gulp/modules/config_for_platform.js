@@ -1,23 +1,37 @@
 module.exports =  function(platform, key) {
-  if (typeof platform === 'undefined') platform = 'none';
+  if (typeof platform === 'undefined') platform = 'static';
 
   var platformDefaults = {
-    none: {
+    static: {
       rootDistPath: 'dist',
-      templateSrc: '',
-      templateDist: ''
+      templateSrc: './',
+      templateDist: './',
+      serverBaseDir: './',
+      useProxy: false
+    },
+
+    staticNunjucks: {
+      rootDistPath: 'dist',
+      templateSrc: 'src/templates/',
+      templateDist: 'dist/',
+      serverBaseDir: 'dist/',
+      useProxy: false
     },
 
     craft2: {
       rootDistPath: 'public/dist',
       templateSrc: 'craft/templates/',
-      templateDist: 'craft/templates/'
+      templateDist: 'craft/templates/',
+      useProxy: true,
+      serverBaseDir: './'
     },
 
     craft3: {
       rootDistPath: 'web/dist',
       templateSrc: 'templates/',
-      templateDist: 'templates/'
+      templateDist: 'templates/',
+      useProxy: true,
+      serverBaseDir: './'
     }
   }
 

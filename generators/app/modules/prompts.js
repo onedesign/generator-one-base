@@ -130,6 +130,10 @@ module.exports = [
       {
         name: 'Static',
         value: 'static'
+      },
+      {
+        name: 'Static w/ Nunjucks',
+        value: 'staticNunjucks'
       }
     ]
   }

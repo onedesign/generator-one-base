@@ -15,7 +15,8 @@ module.exports = gulp.task('base', function(callback) {
     'clean',
     'rev:clear',
     [
-      'templates',
+      'templates',<% if (platform == 'staticNunjucks') { %>
+      'nunjucks',<% } %>
       'scripts:bundle',
       'scripts:lint',
       'styles',

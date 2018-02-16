@@ -22,9 +22,6 @@ module.exports = Generator.extend({
       // Use gulp
       this.options.isUsingGulp = true;
 
-      // Are we using Craft?
-      var isCraft = this.options.platform.indexOf('craft' > -1);
-
       // Compose with Craft 2 generator
       if (this.options.platform == 'craft2') {
         this.composeWith(require.resolve('../craft2'), {
@@ -42,8 +39,7 @@ module.exports = Generator.extend({
       // Compose with Gulp generator
       this.composeWith(require.resolve('../gulp'), {
         projectName: this.options.projectName,
-        platformTemplate: isCraft ? this.options.platform : 'none',
-        useProxy: isCraft ? true : null
+        platform: this.options.platform
       });
     }.bind(this));
   },
@@ -129,18 +125,6 @@ module.exports = Generator.extend({
         this.templatePath('env.sample'),
         this.destinationPath('.env'), {
           projectName: this.options.projectName
-        }
-      );
-    },
-
-    indexHtml: function() {
-      if (this.options.platform != 'static') return;
-
-      this.fs.copyTpl(
-        this.templatePath('index.html'),
-        this.destinationPath('index.html'),
-        {
-          projectTitle: this.options.projectTitle
         }
       );
     },

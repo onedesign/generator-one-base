@@ -31,9 +31,15 @@ module.exports = Generator.extend({
         this.destinationPath('.stylelintrc')
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('gulp/tasks'),
-        this.destinationPath('gulp/tasks')
+        this.destinationPath('gulp/tasks'), {
+          platform: this.options.platform
+        }, {}, {
+          globOptions: {
+            ignore: this.options.platform == 'staticNunjucks' ? [] : ['**/nunjucks.js']
+          }
+        }
       );
 
       this.fs.copy(
@@ -48,8 +54,32 @@ module.exports = Generator.extend({
           rootDistPath: this.options.rootDistPath,
           templateSrc: this.options.templateSrc,
           templateDist: this.options.templateDist,
-          platformTemplate: this.options.platformTemplate,
+          platform: this.options.platform,
+          serverBaseDir: this.options.serverBaseDir,
           useProxy: this.options.useProxy
+        }
+      );
+    },
+
+    indexHtml: function() {
+      if (this.options.platform != 'static') return;
+
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('index.html'),
+        {
+          projectTitle: this.options.projectTitle
+        }
+      );
+    },
+
+    nunjucks: function() {
+      if (!this.options.platform == 'staticNunjucks') return;
+
+      this.fs.copyTpl(
+        this.templatePath('templates'),
+        this.destinationPath('src/templates'), {
+          projectTitle: this.options.projectTitle
         }
       );
     }
@@ -94,6 +124,11 @@ module.exports = Generator.extend({
         'script-loader',
         'strip-ansi'
       ];
+
+      // Add nunjucks if desired
+      if (this.options.platform == 'staticNunjucks') {
+        devDependencies.push('gulp-nunjucks-render');
+      }
 
       var self = this;
 
