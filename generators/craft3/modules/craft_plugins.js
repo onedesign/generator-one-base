@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     name: 'Minify',
-    src: 'nystudio107/craft3-minify',
+    src: 'nystudio107/craft-minify',
     checked: true
   },
   {
@@ -51,7 +51,7 @@ module.exports = [
   },
   {
     name: 'Typogrify',
-    src: 'nystudio107/craft3-typogrify',
+    src: 'nystudio107/craft-typogrify',
     checked: false
   }
 ]
