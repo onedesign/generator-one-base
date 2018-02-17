@@ -92,26 +92,25 @@ $font-stacks: (
 // Type – Styles
 // ---------------------------------------------------------------
 /*
-  Map that contains all of the type styles used across the site.
-  New styles should always be added to this map and never as
-  one off instances elsewhere in the codebase.
+  Map that contains all of the type styles used across the site,
+  intended to be used with the one-sass-tolkit type-related
+  utilities (https://github.com/onedesign/one-sass-toolkit)
+  such as `type-style()`. New styles should always be added
+  to this map and never as one off instances elsewhere
+  in the codebase.
 
-  The name for the top level keys should be comprised of the
-  font style and desktop/largest size.
+  The name for the top level keys can be anything, but should
+  generally help you identify the style as this will be the value
+  you refer to throughout your styles.
 
   The 'stack' key correlates to the $font-stacks map above.
 
-  Sizes Map: The nested 'sizes' map corelates to the sizes across breakpoints.
-  The default being the base size and others being defined across
+  `sizes` map: The nested 'sizes' map corelates to the sizes across breakpoints.
+  The 'default' being the base size and others being defined across
   breakpoints. The names (small, medium, large, etc.) correlate to
   the $mq-breakpoints map defined in the _base/_variables.scss file.
 
-  Supports 'text-transform' and 'letter-spacing' as optional keys.
-  If these aren't include for a particular style they will simply be
-  omitted from the type-styles mixin output.
-
-  See typograhpic styleguide for a list of available styles:
-  /styleguide/typography
+  The 'properties' map can contain any standard CSS properties
 */
 
 $type-styles: (
