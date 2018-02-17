@@ -2,6 +2,6 @@
 // Remove Focus Outline
 // ===============================================================
 
-@mixin remove-focuse-outline {
+@mixin remove-focus-outline {
   &:focus { outline: 0; }
 }
