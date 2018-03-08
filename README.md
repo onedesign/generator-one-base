@@ -3,7 +3,11 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-one-base using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+### Dependencies
+- [node.js](https://nodejs.org/) v6.11.1+
+- [npm](https://www.npmjs.com/) v3.10.3+
+
+First, install [Yeoman](http://yeoman.io) and generator-one-base:
 
 ```bash
 npm install -g yo
