@@ -1,16 +1,16 @@
 # generator-one-base [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A tool to generate app structure for One Design Company projects on the web.
+> A tool to generate app structure and configuration for One Design Company projects on the web.
 
 ## What is this?
 
 This is a set of generators based on [yeoman-generator][yeoman-url] to aid in setting up commonly-used dependencies and application structure for One Design Company projects.
 
-TThe generator is made up of a few sub generators
+The generator is made up of sub generators:
   - `app` — Generates the app structure for one of the following:
     - Craft 3
     - Craft 2
     - Static
-  - `git` — Initializes a git repo and sets up hooks and templates
+  - `git` — Initializes a git repo and sets up hooks and Github templates
   - `styles` — Adds style dendencies like `suzy`, `one-sass-toolkit`, and other foundational styles
 
 ## Installation
