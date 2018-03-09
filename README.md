@@ -1,13 +1,25 @@
 # generator-one-base [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A foundation for One Design Company projects on the web.
+> A tool to generate app structure for One Design Company projects on the web.
+
+## What is this?
+
+This is a set of generators based on [yeoman-generator][yeoman-url] to aid in setting up commonly-used dependencies and application structure for One Design Company projects.
+
+TThe generator is made up of a few sub generators
+  - `app` — Generates the app structure for one of the following:
+    - Craft 3
+    - Craft 2
+    - Static
+  - `git` — Initializes a git repo and sets up hooks and templates
+  - `styles` — Adds style dendencies like `suzy`, `one-sass-toolkit`, and other foundational styles
 
 ## Installation
 
 ### Dependencies
-- [node.js](https://nodejs.org/) v6.11.1+
-- [npm](https://www.npmjs.com/) v3.10.3+
+- [node.js][node-url] v6.11.1+
+- [npm][npm-url] v3.10.3+
 
-First, install [Yeoman](http://yeoman.io) and generator-one-base:
+First, install [Yeoman][yeoman-url] and generator-one-base:
 
 ```bash
 npm install -g yo
@@ -20,13 +32,12 @@ Then generate your new project:
 yo one-base
 ```
 
-## Structure
- - The generator is made up of a few sub generators
-    - App — Generates the basic files
-    - Git — Initializes a git repo and sets up some hooks and templates
-    - Gulp — Adds our gulp setup
-    - Craft — Initializes a Craft project (2.X or 3.X)
-    - Static — Static site project
+## Creating a new generator
+
+* `npm install -g generator-generator` installs the generator-generator
+* `yo generator:subgenerator <name>` generates a subgenerator with the name `<name>`
+
+[Read the generator-generator docs][yeoman-generator-docs] for details about using it.
 
 ## License
 
@@ -39,3 +50,7 @@ MIT © [One Design Company](https://onedesigncompany.com)
 [travis-url]: https://travis-ci.org/onedesign/generator-one-base
 [daviddm-image]: https://david-dm.org/onedesign/generator-one-base.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/onedesign/generator-one-base
+[yeoman-url]: http://yeoman.io/authoring
+[npm-url]: https://www.npmjs.com/
+[node-url]: https://nodejs.org/
+[yeoman-generator-docs]: https://github.com/yeoman/generator-generator
