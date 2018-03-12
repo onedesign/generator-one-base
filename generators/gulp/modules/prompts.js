@@ -58,10 +58,10 @@ module.exports = function(options) {
   //    Engines
   //
   //////////////////////////////////////////////////////////////////////
-  if (options.includeNunjucks == null) {
+  if (options.useNunjucks == null) {
     questions.push({
       type: 'confirm',
-      name: 'includeNunjucks',
+      name: 'useNunjucks',
       message: 'Add support for nunjucks template engine?',
       default: false
     });

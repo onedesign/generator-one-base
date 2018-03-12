@@ -6,6 +6,7 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:gulp', () => {
   describe('default', () => {
     beforeAll(() => {
+      jest.setTimeout(60000);
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           rootDistPath: 'dist',
@@ -21,13 +22,20 @@ describe('generator-one-base:gulp', () => {
       assert.file([
         'gulpfile.js',
         '.stylelintrc',
-        'gulp/tasks'
+        'gulp/tasks',
+        'gulp/tasks/base.js',
+        'gulp/tasks/build.js'
       ]);
+    });
+
+    it('doesn\'t create index.html', () => {
+      assert.noFile('index.html');
     });
   });
 
   describe('with nunjucks enabled', () => {
     beforeAll(() => {
+      jest.setTimeout(60000);
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           rootDistPath: 'dist',
@@ -39,10 +47,16 @@ describe('generator-one-base:gulp', () => {
         });
     });
 
-    it('creates nunjucks build file', () => {
+    it('creates nunjucks build files', () => {
       assert.file([
         'gulp/tasks/nunjucks.js'
       ]);
+      assert.fileContent('gulp/tasks/base.js', "'nunjucks',");
+      assert.fileContent('gulp/tasks/watch.js', "runSequence('nunjucks')");
+    });
+
+    it('creates nunjucks index.html', () => {
+      assert.file('index.html');
     });
   });
 });

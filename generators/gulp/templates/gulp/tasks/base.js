@@ -1,5 +1,5 @@
-var gulp         = require('gulp');
-var runSequence  = require('run-sequence');
+var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 //
 //   Base
@@ -15,7 +15,7 @@ module.exports = gulp.task('base', function(callback) {
     'clean',
     'rev:clear',
     [
-      'templates',<% if (includeNunjucks) { %>
+      'templates',<% if (useNunjucks) { %>
       'nunjucks',<% } %>
       'scripts:bundle',
       'scripts:lint',
