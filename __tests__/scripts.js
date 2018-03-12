@@ -22,41 +22,12 @@ describe('generator-one-base:scripts', () => {
     });
   });
 
-  describe('jquery and lodash enabled', () => {
+  describe('enabling one-router', () => {
     beforeAll(() => {
-      jest.setTimeout(60000);
-      return helpers.run(path.join(__dirname, '../generators/scripts'))
-        .withPrompts({
-          deps: ['jquery', 'lodash']
-        })
-        .withOptions({
-          skipInstall: false
-        });
-    });
-
-    it('adds jQuery as a dependency via yarn', () => {
-      assert.fileContent('package.json', '"jquery":');
-    });
-
-    it('adds LoDash as a dependency via yarn', () => {
-      assert.fileContent('package.json', '"lodash":');
-    });
-  });
-
-  describe('one-router option enabled', () => {
-    beforeAll(() => {
-      jest.setTimeout(60000);
       return helpers.run(path.join(__dirname, '../generators/scripts'))
         .withPrompts({
           deps: ['one-router']
-        })
-        .withOptions({
-          skipInstall: false
         });
-    });
-
-    it('adds one-router as a dependency via yarn', () => {
-      assert.fileContent('package.json', '"one-router":');
     });
 
     it('adds one-router init code', () => {
