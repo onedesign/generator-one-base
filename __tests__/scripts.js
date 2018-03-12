@@ -25,6 +25,7 @@ describe('generator-one-base:scripts', () => {
 
   describe('jquery and lodash enabled', () => {
     beforeAll(() => {
+      jest.setTimeout(20000);
       return helpers.run(path.join(__dirname, '../generators/scripts'))
         .withPrompts({
           deps: ['jquery', 'lodash']
@@ -45,6 +46,7 @@ describe('generator-one-base:scripts', () => {
 
   describe('one-router option enabled', () => {
     beforeAll(() => {
+      jest.setTimeout(20000);
       return helpers.run(path.join(__dirname, '../generators/scripts'))
         .withPrompts({
           deps: ['one-router']
