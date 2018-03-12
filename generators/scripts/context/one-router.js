@@ -1,5 +1,5 @@
 const imports = `
-const oneRouter = require('one-router');
+const OneRouter = require('one-router');
 `;
 
 const globalAppVars = `
