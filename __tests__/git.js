@@ -3,7 +3,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('git', () => {
+describe('generator-one-base:git', () => {
   describe('default', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/git'));
