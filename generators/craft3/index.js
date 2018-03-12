@@ -5,34 +5,35 @@ const del = require('del');
 const childProcess = require('child_process');
 const prompts = require('./modules/prompts');
 
-module.exports = Generator.extend({
+module.exports = class extends Generator {
   initializing() {
     this.closingStatements = [];
-  },
+  }
 
   prompting() {
     return this.prompt(prompts).then(function(options) {
       Object.assign(this.options, options);
     }.bind(this));
-  },
+  }
 
-  writing: {
-    setRoot: function() {
+  writing() {
+
+    (function setRoot() {
       this.destinationRoot('./');
-    },
+    })();
 
-    downloadCraft: function() {
+    (function downloadCraft() {
       childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.options.projectName}-craft`);
-    },
+    })();
 
-    move: function() {
+    (function move() {
       childProcess.execSync(`mv ${this.options.projectName}-craft/* ./`);
       del.sync([
         this.destinationPath(`${this.options.projectName}-craft`)
       ]);
-    },
+    })();
 
-    clean: function() {
+    (function clean() {
       del.sync([
         this.destinationPath('LICENSE.md'),
         this.destinationPath('README.md'),
@@ -46,9 +47,9 @@ module.exports = Generator.extend({
         ]);
         this.closingStatements.push('robots.txt: ' + chalk.yellow('We removed the default robots.txt because you’re using SEOmatic. Be sure to add your custom robots.txt to the SEOmatic settings in Craft.'));
       }
-    },
+    })();
 
-    public: function() {
+    (function publicFiles() {
       del.sync([
         this.destinationPath('web/.htaccess')
       ]);
@@ -58,9 +59,9 @@ module.exports = Generator.extend({
           projectName: this.options.projectName
         }
       );
-    },
+    })();
 
-    env: function() {
+    (function env() {
       del.sync([
         this.destinationPath('.env'),
         this.destinationPath('.env.example')
@@ -79,35 +80,9 @@ module.exports = Generator.extend({
           craftPlugins: this.options.craftPlugins
         }
       );
-    },
+    })();
 
-    config: function() {
-      del.sync([
-        this.destinationPath('config/general.php'),
-        this.destinationPath('config/db.php')
-      ]);
-      // General
-      this.fs.copy(
-        this.templatePath('config/general.php'),
-        this.destinationPath('config/general.php')
-      );
-
-      // Database
-      this.fs.copy(
-        this.templatePath('config/db.php'),
-        this.destinationPath('config/db.php')
-      );
-
-      // Asset Rev
-      if (this.options.craftPlugins.indexOf('clubstudioltd/craft-asset-rev') > -1) {
-        this.fs.copy(
-          this.templatePath('config/assetrev.php'),
-          this.destinationPath('config/assetrev.php')
-        );
-      }
-    },
-
-    templates: function() {
+    (function templates() {
       this.fs.copy(
         this.templatePath('templates/_layout.html'),
         this.destinationPath('templates/_layout.html')
@@ -126,9 +101,9 @@ module.exports = Generator.extend({
           craftPlugins: this.options.craftPlugins
         }
       );
-    },
+    })();
 
-    composer() {
+    (function composer() {
       del.sync([
         this.destinationPath('composer.json'),
         this.destinationPath('composer.lock')
@@ -140,25 +115,53 @@ module.exports = Generator.extend({
         }
       );
       this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
-    },
+    })();
 
-    git() {
+    (function git() {
       this.composeWith(require.resolve('../git'));
 
       this.fs.copy(
         this.templatePath('templates/.gitignore'),
         this.destinationPath('templates/.gitignore')
       );
-    }
-  },
+    })();
+  }
 
-  install: {
-    composer: function() {
-      this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-      const pluginList = this.options.craftPlugins.join(' ');
-      childProcess.execSync(`composer require ${pluginList}`);
+  configuring() {
+    del.sync([
+      this.destinationPath('config/general.php'),
+      this.destinationPath('config/db.php')
+    ]);
+    // General
+    this.fs.copy(
+      this.templatePath('config/general.php'),
+      this.destinationPath('config/general.php')
+    );
+
+    // Database
+    this.fs.copy(
+      this.templatePath('config/db.php'),
+      this.destinationPath('config/db.php')
+    );
+
+    // Asset Rev
+    if (this.options.craftPlugins.indexOf('clubstudioltd/craft-asset-rev') > -1) {
+      this.fs.copy(
+        this.templatePath('config/assetrev.php'),
+        this.destinationPath('config/assetrev.php')
+      );
     }
-  },
+  }
+
+  install() {
+    return {
+      composer: function() {
+        this.log(chalk.yellow('\nInstalling dependencies via composer: '));
+        const pluginList = this.options.craftPlugins.join(' ');
+        childProcess.execSync(`composer require ${pluginList}`);
+      }
+    };
+  }
 
   end() {
     this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
@@ -169,4 +172,4 @@ module.exports = Generator.extend({
       that.log('\n' + statement);
     });
   }
-});
+};
