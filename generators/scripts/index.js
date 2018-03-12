@@ -2,7 +2,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const dependencies = require('./prompts/dependencies');
-const merge = require('lodash/merge');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -34,11 +33,7 @@ module.exports = class extends Generator {
       this.destinationPath('src/scripts/modules/.gitkeep')
     );
 
-    let context = require('./context/default');
-
     if (deps.includes('one-router')) {
-      context = merge(require('./context/one-router'));
-
       this.fs.copy(
         this.templatePath('routes/*'),
         this.destinationPath('src/scripts/routes')
@@ -48,7 +43,9 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('main.ejs'),
       this.destinationPath('src/scripts/main.js'),
-      context
+      {
+        deps
+      }
     );
   }
 

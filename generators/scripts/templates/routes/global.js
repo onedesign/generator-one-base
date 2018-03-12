@@ -1,5 +1,5 @@
-const globalTest = () => {
-  console.log('Global route filed.');
+const globalRoute = () => {
+  // This is where global route code should live
 };
 
-export default globalTest;
+export default globalRoute;

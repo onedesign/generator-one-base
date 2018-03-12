@@ -1,4 +1,6 @@
-<%- imports %>
+<% if (deps.includes('one-router')) { %>
+const OneRouter = require('one-router');
+<% } %>
 
 //
 //   Global App Variable
@@ -6,7 +8,10 @@
 //////////////////////////////////////////////////////////////////////
 
 window.APP = window.APP || {};
-<%- globalAppVars %>
+<% if (deps.includes('one-router')) { %>
+APP.globalRoute = require('./routes/global');
+APP.homeRoute = require('./routes/home');
+<% } %>
 
 
 //
@@ -15,7 +20,20 @@ window.APP = window.APP || {};
 //////////////////////////////////////////////////////////////////////
 
 APP.init = function() {
-  <%- initFunction %>
+  <% if (deps.includes('one-router')) { %>
+
+    // Configure Routing
+    // Each route should be defined in a routename.js file in /scripts/routes
+
+    var routes = {
+      '^/$': APP.indexRoute
+    };
+
+    APP.router = new OneRouter(routes);
+
+    // Trigger Global Setup
+    APP.globalRoute();
+  <% } %>
 };
 
 

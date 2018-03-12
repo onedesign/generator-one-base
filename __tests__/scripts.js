@@ -2,7 +2,6 @@
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const oneRouterContext = require(path.join(__dirname, '../generators/scripts/context/one-router.js'));
 
 describe('generator-one-base:scripts', () => {
   describe('default', () => {
@@ -61,7 +60,7 @@ describe('generator-one-base:scripts', () => {
     });
 
     it('adds one-router init code', () => {
-      assert.fileContent('src/scripts/main.js', oneRouterContext.imports);
+      assert.fileContent('src/scripts/main.js', "require('one-router')");
     });
   });
 });
