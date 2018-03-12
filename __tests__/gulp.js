@@ -6,7 +6,6 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:gulp', () => {
   describe('default', () => {
     beforeAll(() => {
-      jest.setTimeout(60000);
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           rootDistPath: 'dist',
@@ -35,7 +34,6 @@ describe('generator-one-base:gulp', () => {
 
   describe('with nunjucks enabled', () => {
     beforeAll(() => {
-      jest.setTimeout(60000);
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           rootDistPath: 'dist',
