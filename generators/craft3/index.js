@@ -33,11 +33,11 @@ module.exports = class extends Generator {
         authorName: 'One Design Company',
         authorEmail: 'dev@onedesigncompany',
         authorUrl: 'https://onedesigncompany.com',
-        githubName: 'onedesign'
-      });
+        githubName: 'onedesign',
 
-      // Generates a random security key to be used in .env
-      this.props.securityKey = guid.raw();
+        // Generates a random security key to be used in .env
+        securityKey: guid.raw()
+      });
 
       // To access props use this.props.someAnswer;
     });
@@ -106,25 +106,20 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('web/htaccess'),
-      this.destinationPath('web/.htaccess'), {
-        projectName: this.props.projectName
-      }
+      this.destinationPath('web/.htaccess'),
+      this.props
     );
 
     this.fs.copyTpl(
       this.templatePath('env.sample'),
-      this.destinationPath('env.sample'), {
-        projectName: this.props.projectName,
-        craftPlugins: this.props.craftPlugins
-      }
+      this.destinationPath('env.sample'),
+      this.props
     );
 
     this.fs.copyTpl(
       this.templatePath('env.sample'),
-      this.destinationPath('.env'), {
-        projectName: this.props.projectName,
-        craftPlugins: this.props.craftPlugins
-      }
+      this.destinationPath('.env'),
+      this.props
     );
 
     this.fs.copy(
@@ -140,9 +135,8 @@ module.exports = class extends Generator {
     // Craft Templates
     this.fs.copyTpl(
       this.templatePath('templates/'),
-      this.destinationPath('templates/'), {
-        craftPlugins: this.props.craftPlugins
-      }
+      this.destinationPath('templates/'),
+      this.props
     );
 
     // Asset Rev
@@ -173,6 +167,13 @@ module.exports = class extends Generator {
       this.props
     );
 
+    // README
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'),
+      this.props
+    );
+
     // Editor
     this.fs.copy(
       this.templatePath('.editorconfig'),
@@ -182,17 +183,15 @@ module.exports = class extends Generator {
     // Composer
     this.fs.copyTpl(
       this.templatePath('composer.json'),
-      this.destinationPath('composer.json'), {
-        plugins: this.props.craftPlugins
-      }
+      this.destinationPath('composer.json')
     );
-    this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
   }
 
   install() {
     this.log(chalk.yellow('\nInstalling dependencies via composer: '));
     const pluginList = this.props.craftPlugins.join(' ');
     childProcess.execSync(`composer require ${pluginList}`);
+    this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
   }
 
   end() {

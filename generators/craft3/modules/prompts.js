@@ -1,5 +1,6 @@
 const plugins = require('./available-plugins');
 const _isEmpty = require('lodash/isEmpty');
+const _kebab = require('lodash/kebabCase');
 
 const pluginChoices = plugins.map(function(plugin) {
   return {
@@ -16,10 +17,21 @@ module.exports = [
   //////////////////////////////////////////////////////////////////////
   {
     type: 'input',
+    name: 'projectTitle',
+    message: 'What is the title of this project?',
+    validate: value => {
+      return _isEmpty(value) ? 'Please enter a project title.' : true;
+    }
+  },
+  {
+    type: 'input',
     name: 'projectName',
-    message: 'What is the name of this project?',
+    message: 'What is the name of this project (used as repo name)?',
     validate: value => {
       return _isEmpty(value) ? 'Please enter a project name.' : true;
+    },
+    default(answers) {
+      return _kebab(answers.projectTitle);
     }
   },
   {

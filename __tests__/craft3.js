@@ -6,6 +6,7 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:craft-3', () => {
   describe('default', () => {
     const promptAnswers = {
+      projectTitle: 'Test Project',
       projectName: 'test-project',
       projectDescription: 'project description this is',
       craftPlugins: ['clubstudioltd/craft-asset-rev']
@@ -40,6 +41,10 @@ describe('generator-one-base:craft-3', () => {
 
     it('adds .gitignore', () => {
       assert.fileContent('.gitignore', '# Craft');
+    });
+
+    it('adds a README.md', () => {
+      assert.fileContent('README.md', `# ${promptAnswers.projectTitle}`);
     });
 
     it('writes a package.json with project details', () => {
