@@ -29,5 +29,9 @@ describe('generator-one-base:craft-3', () => {
     it('installs plugins with composer', () => {
       assert.fileContent('composer.json', '"clubstudioltd/craft-asset-rev":');
     });
+
+    it('configures assetrev plugin', () => {
+      assert.file('config/assetrev.php');
+    });
   });
 });

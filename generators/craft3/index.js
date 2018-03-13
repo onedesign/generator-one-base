@@ -19,8 +19,16 @@ module.exports = class extends Generator {
 
   prompting() {
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
+      if (this.options.odc) {
+        this.props = extend(props, {
+          authorName: 'One Design Company',
+          authorEmail: 'dev@onedesigncompany',
+          authorUrl: 'https://onedesigncompany.com'
+        });
+      } else {
+        this.props = props;
+      }
+      // To access props use this.props.someAnswer;
     });
   }
 
@@ -35,6 +43,25 @@ module.exports = class extends Generator {
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')
     );
+  }
+
+  styles() {
+    this.composeWith(require.resolve('../styles'));
+  }
+
+  scripts() {
+    this.composeWith(require.resolve('../scripts'));
+  }
+
+  // Currently only supports gulp for building
+  build() {
+    this.composeWith(require.resolve('../gulp'), {
+      rootDistPath: 'web/dist',
+      templateSrc: 'templates/',
+      templateDist: 'templates/',
+      useProxy: true,
+      serverBaseDir: './'
+    });
   }
 
   writing() {
