@@ -17,6 +17,44 @@ describe('generator-one-base:styles', () => {
         'src/styles/vendor'
       ]);
     });
+  });
 
+  describe('Sass MQ option', () => {
+    beforeAll(() => {
+      return helpers.run(path.join(__dirname, '../generators/styles'))
+        .withPrompts({
+          deps: ['sass-mq']
+        });
+    });
+
+    it('adds Sass MQ', () => {
+      assert.fileContent('src/styles/base/_variables.scss', '// Sass MQ');
+    });
+  });
+
+  describe('One Sass Toolkit option', () => {
+    beforeAll(() => {
+      return helpers.run(path.join(__dirname, '../generators/styles'))
+        .withPrompts({
+          deps: ['one-sass-toolkit']
+        });
+    });
+
+    it('adds one-sass-toolkit', () => {
+      assert.fileContent('src/styles/base/_variables.scss', '// One Sass Toolkit');
+    });
+  });
+
+  describe('Susy option', () => {
+    beforeAll(() => {
+      return helpers.run(path.join(__dirname, '../generators/styles'))
+        .withPrompts({
+          deps: ['susy']
+        });
+    });
+
+    it('adds susy', () => {
+      assert.fileContent('src/styles/base/_variables.scss', '// Susy Config');
+    });
   });
 });
