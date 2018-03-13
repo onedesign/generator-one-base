@@ -37,7 +37,7 @@ There are many types of generators which can reference other generators. For exa
 ### Dependencies
 - [node.js][node-url] v6.11.1+
 - [npm][npm-url] v3.10.3+
-- [composer][composer-url] for craft3 and craft2 generators
+- [composer][composer-url] 1.6.2+ (for `craft3` and `craft2` generators)
 
 First, install [Yeoman][yeoman-url]:
 

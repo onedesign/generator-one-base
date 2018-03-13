@@ -17,6 +17,13 @@ module.exports = class extends Generator {
 
   initializing() {
     this.closingStatements = [];
+
+    try {
+      childProcess.execSync('composer --version');
+    } catch (e) {
+      this.log(chalk.red('Composer is not installed. You must install it to use this generator. See https://getcomposer.org/download/.'));
+      process.exit(1);
+    }
   }
 
   prompting() {
