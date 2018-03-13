@@ -29,7 +29,7 @@ module.exports = [
   {
     type: 'input',
     name: 'description',
-    message: 'What is a brief description of this project?',
+    message: 'What is a 1 sentence description of this project?',
     validate: value => {
       return _isEmpty(value) ? 'Please enter a project description.' : true;
     }

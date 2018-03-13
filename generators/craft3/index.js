@@ -23,7 +23,8 @@ module.exports = class extends Generator {
         this.props = extend(props, {
           authorName: 'One Design Company',
           authorEmail: 'dev@onedesigncompany',
-          authorUrl: 'https://onedesigncompany.com'
+          authorUrl: 'https://onedesigncompany.com',
+          githubName: 'onedesign'
         });
       } else {
         this.props = props;
@@ -34,11 +35,18 @@ module.exports = class extends Generator {
 
   configuring() {
     this.destinationRoot('./');
+
+    this.fs.copy(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      this.props
+    );
   }
 
   git() {
     this.composeWith(require.resolve('../git'));
 
+    // TODO: append, not copy
     this.fs.copy(
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')
@@ -53,8 +61,8 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../scripts'));
   }
 
-  // Currently only supports gulp for building
   build() {
+    // Currently only supports gulp for building
     this.composeWith(require.resolve('../gulp'), {
       rootDistPath: 'web/dist',
       templateSrc: 'templates/',
@@ -175,9 +183,9 @@ module.exports = class extends Generator {
 
   end() {
     this.log("\n\n\n");
-    this.log('===============================');
-    this.log('====== Install Notes ==========');
-    this.log('===============================');
+    this.log(chalk.green('==============================='));
+    this.log(chalk.green('====== Install Notes =========='));
+    this.log(chalk.green('==============================='));
     this.log(`Database: Create a MySQL database named '${chalk.cyan(this.props.projectName)}' if you haven’t already.`);
 
     const that = this;

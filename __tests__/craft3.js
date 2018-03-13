@@ -5,13 +5,17 @@ const helpers = require('yeoman-test');
 
 describe('generator-one-base:craft-3', () => {
   describe('default', () => {
+    const promptAnswers = {
+      projectName: 'test-project',
+      projectDescription: 'project description this is',
+      craftPlugins: ['clubstudioltd/craft-asset-rev']
+    };
+
     beforeAll(() => {
       jest.setTimeout(30000); // it takes a bit to install craft
       return helpers
         .run(path.join(__dirname, '../generators/craft3'))
-        .withPrompts({
-          craftPlugins: ['clubstudioltd/craft-asset-rev']
-        });
+        .withPrompts(promptAnswers);
     });
 
     it('downloads craft', () => {
@@ -27,11 +31,20 @@ describe('generator-one-base:craft-3', () => {
     });
 
     it('installs plugins with composer', () => {
-      assert.fileContent('composer.json', '"clubstudioltd/craft-asset-rev":');
+      assert.fileContent('composer.json', `"${promptAnswers.craftPlugins[0]}":`);
     });
 
     it('configures assetrev plugin', () => {
       assert.file('config/assetrev.php');
+    });
+
+    it('appends to the default .gitignore', () => {
+
+    });
+
+    it('writes a package.json with project details', () => {
+      assert.fileContent('package.json', `"name": "${promptAnswers.projectName}",`);
+      assert.fileContent('package.json', `"description": "${promptAnswers.projectDescription}",`);
     });
   });
 });
