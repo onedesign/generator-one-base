@@ -1,0 +1,21 @@
+{
+  "name": "<%= projectName %>",
+  "description": "<%= description %>",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= githubName %>/<%= projectName %>"
+  },
+  "author": {
+    "name": "<%= authorName %>",
+    "email": "<%= authorEmail %>",
+    "url": "<%= authorWebsite %>"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "lint": "gulp scripts:lint & gulp styles:lint"
+  }
+}
