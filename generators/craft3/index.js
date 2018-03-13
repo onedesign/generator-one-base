@@ -32,7 +32,7 @@ module.exports = class extends Generator {
   }
 
   configuring() {
-    this.destinationRoot('./');
+    this.destinationRoot(`./`);
   }
 
   git() {
@@ -59,10 +59,12 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.log(chalk.yellow('Installing Craft...'));
+
     // download craft
     childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.props.projectName}-craft`);
 
-    // move install since composer requires a directory name that isn't ./
+    // move install to this dir since composer requires installing to a sub directory
     childProcess.execSync(`mv ${this.props.projectName}-craft/* ./`);
     del.sync([
       this.destinationPath(`${this.props.projectName}-craft`)
@@ -75,7 +77,11 @@ module.exports = class extends Generator {
       this.destinationPath('craft.bat'),
       this.destinationPath('web/.htaccess'),
       this.destinationPath('.env'),
-      this.destinationPath('.env.example')
+      this.destinationPath('.env.example'),
+      this.destinationPath('config/general.php'),
+      this.destinationPath('config/db.php'),
+      this.destinationPath('composer.json'),
+      this.destinationPath('composer.lock')
     ]);
 
     // If using SEOmatic, remove default robots.txt
@@ -109,9 +115,17 @@ module.exports = class extends Generator {
       }
     );
 
-    //
+    this.fs.copy(
+      this.templatePath('config/general.php'),
+      this.destinationPath('config/general.php')
+    );
+
+    this.fs.copy(
+      this.templatePath('config/db.php'),
+      this.destinationPath('config/db.php')
+    );
+
     // Craft Templates
-    //
     this.fs.copyTpl(
       this.templatePath('templates/'),
       this.destinationPath('templates/'), {
@@ -119,25 +133,7 @@ module.exports = class extends Generator {
       }
     );
 
-    //
-    // Overriding default configuration
-    //
-    del.sync([
-      this.destinationPath('config/general.php'),
-      this.destinationPath('config/db.php')
-    ]);
-    this.fs.copy(
-      this.templatePath('config/general.php'),
-      this.destinationPath('config/general.php')
-    );
-    this.fs.copy(
-      this.templatePath('config/db.php'),
-      this.destinationPath('config/db.php')
-    );
-
-    //
     // Asset Rev
-    //
     if (this.props.craftPlugins.includes('clubstudioltd/craft-asset-rev') > -1) {
       this.fs.copy(
         this.templatePath('config/assetrev.php'),
@@ -145,10 +141,8 @@ module.exports = class extends Generator {
       );
     }
 
-    //
     // Git
-    //
-    if (this.fs.exists(this.destinationPath('.gitignore'))) {
+    if (this.fs.exists('.gitignore')) {
       this.fs.append(
         this.destinationPath('.gitignore'),
         fs.readFileSync(this.templatePath('.gitignore'))
@@ -160,22 +154,20 @@ module.exports = class extends Generator {
       );
     }
 
-    //
     // Package
-    //
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
       this.props
     );
 
-    //
+    // Editor
+    this.fs.copy(
+      this.templatePath('.editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+
     // Composer
-    //
-    del.sync([
-      this.destinationPath('composer.json'),
-      this.destinationPath('composer.lock')
-    ]);
     this.fs.copyTpl(
       this.templatePath('composer.json'),
       this.destinationPath('composer.json'), {

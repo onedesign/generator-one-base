@@ -17,5 +17,6 @@
     "start": "gulp",
     "build": "gulp build",
     "lint": "gulp scripts:lint & gulp styles:lint"
-  }
+  },
+  "license": "UNLICENSED"
 }
