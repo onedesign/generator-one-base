@@ -17,7 +17,7 @@ module.exports = [
   //////////////////////////////////////////////////////////////////////
   {
     type: 'input',
-    name: 'name',
+    name: 'projectName',
     message: 'What is the name of this project?',
     validate: value => {
       return _isEmpty(value) ? 'Please enter a project name.' : true;
@@ -28,7 +28,7 @@ module.exports = [
   },
   {
     type: 'input',
-    name: 'description',
+    name: 'projectDescription',
     message: 'What is a 1 sentence description of this project?',
     validate: value => {
       return _isEmpty(value) ? 'Please enter a project description.' : true;

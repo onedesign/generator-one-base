@@ -1,34 +1,9 @@
-# System
-# ---------------------------
-.DS_Store
-Thumbs.db
-
-# Config
-# ---------------------------
-*.esproj
-*.sublime-project
-*.sublime-workspace
-*.tmproj
-*.tmproject
-.env
-.env.php
-.idea
-.project
-.settings
-
-# Compiled Files
-# ---------------------------
-/dist/
-
 # Craft
 # ---------------------------
 /craft/plugins/*
 /craft/rev-manifest.json
 /craft/storage/*
 !/craft/storage/.htaccess
-
-# Craft
-# ---------------------------
 /storage/*
 
 # Craft Public
@@ -38,20 +13,10 @@ Thumbs.db
 !/web/index.php
 !/web/*.txt
 !/web/*.png
-!/web/*.ico<% } %>
+!/web/*.ico
 
 # Package Managers
 # ---------------------------
 /vendor/
 /node_modules/
-
-# Temp
-# ---------------------------
-.cache
-*.log
-/logs/
-/tmp
-
-# VM
-# ---------------------------
-.vagrant/*
+/private/var/folders/qb/zd76s9nd3qj97gqsrrmc_8180000gn/T/1bd5da08d79a72148d72760166b46db75c6a1b8e/.gitignore

@@ -12,7 +12,7 @@ describe('generator-one-base:craft-3', () => {
     };
 
     beforeAll(() => {
-      jest.setTimeout(30000); // it takes a bit to install craft
+      jest.setTimeout(60000); // it takes a bit to install craft
       return helpers
         .run(path.join(__dirname, '../generators/craft3'))
         .withPrompts(promptAnswers);
@@ -38,8 +38,8 @@ describe('generator-one-base:craft-3', () => {
       assert.file('config/assetrev.php');
     });
 
-    it('appends to the default .gitignore', () => {
-
+    it('adds .gitignore', () => {
+      assert.fileContent('.gitignore', '# Craft');
     });
 
     it('writes a package.json with project details', () => {

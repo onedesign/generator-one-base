@@ -1,6 +1,6 @@
 {
   "name": "<%= projectName %>",
-  "description": "<%= description %>",
+  "description": "<%= projectDescription %>",
   "version": "0.0.0",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "author": {
     "name": "<%= authorName %>",
     "email": "<%= authorEmail %>",
-    "url": "<%= authorWebsite %>"
+    "url": "<%= authorUrl %>"
   },
   "devDependencies": {},
   "dependencies": {},

@@ -4,6 +4,8 @@ const chalk = require('chalk');
 const del = require('del');
 const childProcess = require('child_process');
 const prompts = require('./modules/prompts');
+const fs = require('fs');
+const extend = require('lodash/extend');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -19,38 +21,22 @@ module.exports = class extends Generator {
 
   prompting() {
     return this.prompt(prompts).then(props => {
-      if (this.options.odc) {
-        this.props = extend(props, {
-          authorName: 'One Design Company',
-          authorEmail: 'dev@onedesigncompany',
-          authorUrl: 'https://onedesigncompany.com',
-          githubName: 'onedesign'
-        });
-      } else {
-        this.props = props;
-      }
+      this.props = extend(props, {
+        authorName: 'One Design Company',
+        authorEmail: 'dev@onedesigncompany',
+        authorUrl: 'https://onedesigncompany.com',
+        githubName: 'onedesign'
+      });
       // To access props use this.props.someAnswer;
     });
   }
 
   configuring() {
     this.destinationRoot('./');
-
-    this.fs.copy(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      this.props
-    );
   }
 
   git() {
     this.composeWith(require.resolve('../git'));
-
-    // TODO: append, not copy
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
-    );
   }
 
   styles() {
@@ -158,6 +144,30 @@ module.exports = class extends Generator {
         this.destinationPath('config/assetrev.php')
       );
     }
+
+    //
+    // Git
+    //
+    if (this.fs.exists(this.destinationPath('.gitignore'))) {
+      this.fs.append(
+        this.destinationPath('.gitignore'),
+        fs.readFileSync(this.templatePath('.gitignore'))
+      );
+    } else {
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    }
+
+    //
+    // Package
+    //
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      this.props
+    );
 
     //
     // Composer
