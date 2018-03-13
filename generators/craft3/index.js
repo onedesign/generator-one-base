@@ -43,10 +43,6 @@ module.exports = class extends Generator {
     });
   }
 
-  configuring() {
-    this.destinationRoot(`./`);
-  }
-
   git() {
     this.composeWith(require.resolve('../git'));
   }
@@ -77,7 +73,7 @@ module.exports = class extends Generator {
     childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.props.projectName}-craft`);
 
     // move install to this dir since composer requires installing to a sub directory
-    childProcess.execSync(`mv ${this.props.projectName}-craft/* ./`);
+    childProcess.execSync(`mv ${this.props.projectName}-craft/* ${this.destinationRoot()}`);
     del.sync([
       this.destinationPath(`${this.props.projectName}-craft`)
     ]);
