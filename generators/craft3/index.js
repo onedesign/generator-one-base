@@ -6,15 +6,22 @@ const childProcess = require('child_process');
 const prompts = require('./modules/prompts');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this.props = {
+      craftPlugins: []
+    };
+  }
+
   initializing() {
     this.closingStatements = [];
-    this.options.craftPlugins = [];
   }
 
   prompting() {
-    return this.prompt(prompts).then(function(options) {
-      Object.assign(this.options, options);
-    }.bind(this));
+    return this.prompt(prompts).then(props => {
+      // To access props later use this.props.someAnswer;
+      this.props = props;
+    });
   }
 
   configuring() {
@@ -32,12 +39,12 @@ module.exports = class extends Generator {
 
   writing() {
     // download craft
-    childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.options.projectName}-craft`);
+    childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.props.projectName}-craft`);
 
     // move install since composer requires a directory name that isn't ./
-    childProcess.execSync(`mv ${this.options.projectName}-craft/* ./`);
+    childProcess.execSync(`mv ${this.props.projectName}-craft/* ./`);
     del.sync([
-      this.destinationPath(`${this.options.projectName}-craft`)
+      this.destinationPath(`${this.props.projectName}-craft`)
     ]);
 
     // Clean the default Craft install
@@ -51,7 +58,7 @@ module.exports = class extends Generator {
     ]);
 
     // If using SEOmatic, remove default robots.txt
-    if (this.options.craftPlugins.indexOf('seomatic') > -1) {
+    if (this.props.craftPlugins.includes('seomatic') > -1) {
       del.sync([
         this.destinationPath('web/robots.txt')
       ]);
@@ -61,23 +68,23 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('web/htaccess'),
       this.destinationPath('web/.htaccess'), {
-        projectName: this.options.projectName
+        projectName: this.props.projectName
       }
     );
 
     this.fs.copyTpl(
       this.templatePath('env.sample'),
       this.destinationPath('env.sample'), {
-        projectName: this.options.projectName,
-        craftPlugins: this.options.craftPlugins
+        projectName: this.props.projectName,
+        craftPlugins: this.props.craftPlugins
       }
     );
 
     this.fs.copyTpl(
       this.templatePath('env.sample'),
       this.destinationPath('.env'), {
-        projectName: this.options.projectName,
-        craftPlugins: this.options.craftPlugins
+        projectName: this.props.projectName,
+        craftPlugins: this.props.craftPlugins
       }
     );
 
@@ -87,7 +94,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('templates/'),
       this.destinationPath('templates/'), {
-        craftPlugins: this.options.craftPlugins
+        craftPlugins: this.props.craftPlugins
       }
     );
 
@@ -110,7 +117,7 @@ module.exports = class extends Generator {
     //
     // Asset Rev
     //
-    if (this.options.craftPlugins.indexOf('clubstudioltd/craft-asset-rev') > -1) {
+    if (this.props.craftPlugins.includes('clubstudioltd/craft-asset-rev') > -1) {
       this.fs.copy(
         this.templatePath('config/assetrev.php'),
         this.destinationPath('config/assetrev.php')
@@ -127,7 +134,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('composer.json'),
       this.destinationPath('composer.json'), {
-        plugins: this.options.craftPlugins
+        plugins: this.props.craftPlugins
       }
     );
     this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
@@ -135,12 +142,12 @@ module.exports = class extends Generator {
 
   install() {
     this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-    const pluginList = this.options.craftPlugins.join(' ');
+    const pluginList = this.props.craftPlugins.join(' ');
     childProcess.execSync(`composer require ${pluginList}`);
   }
 
   end() {
-    this.log('(be sure to create a ' + chalk.cyan(this.options.projectName) + ' database if you haven’t already)');
+    this.log('(be sure to create a ' + chalk.cyan(this.props.projectName) + ' database if you haven’t already)');
 
     const that = this;
     // Output all closing statements

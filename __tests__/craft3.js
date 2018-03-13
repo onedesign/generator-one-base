@@ -6,7 +6,7 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:craft-3', () => {
   describe('default', () => {
     beforeAll(() => {
-      jest.setTimeout(30000);
+      jest.setTimeout(30000); // it takes a bit to install craft
       return helpers
         .run(path.join(__dirname, '../generators/craft3'))
         .withPrompts({
