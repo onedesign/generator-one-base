@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
-const dependencies = require('./dependencies');
+const dependencies = require('./prompts/dependencies');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -34,25 +34,25 @@ module.exports = class extends Generator {
     );
 
     if (deps.includes('one-router')) {
-      const context = require('./context/one-router');
-
       this.fs.copy(
         this.templatePath('routes/*'),
         this.destinationPath('src/scripts/routes')
       );
-
-      this.fs.copyTpl(
-        this.templatePath('main.ejs'),
-        this.destinationPath('src/scripts/main.js'),
-        context
-      );
     }
+
+    this.fs.copyTpl(
+      this.templatePath('main.ejs'),
+      this.destinationPath('src/scripts/main.js'),
+      {
+        deps
+      }
+    );
   }
 
   install() {
     if (this.props.deps && this.props.deps.length) {
       this.yarnInstall(this.props.deps, { silent: true }).then(() => {
-        this.log(chalk.green('Installed script depenencies.'));
+        this.log(chalk.green('Installed script dependencies.'));
       });
     }
   }
