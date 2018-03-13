@@ -11,7 +11,8 @@ There are many types of generators which can reference other generators. For exa
 
 ### Platforms
 
-- `one-base:craft` - generates a basic Craft 2 or Craft 3 app
+- `one-base:craft3` - generates a basic Craft 3 app
+- `one-base:craft2` - generates a basic Craft 2 app
 - `one-base:static` - generates a simple front end app with no back end
 - `one-base:rails` - generates a Ruby on Rails app
 
@@ -36,6 +37,7 @@ There are many types of generators which can reference other generators. For exa
 ### Dependencies
 - [node.js][node-url] v6.11.1+
 - [npm][npm-url] v3.10.3+
+- [composer][composer-url] for craft3 and craft2 generators
 
 First, install [Yeoman][yeoman-url]:
 
@@ -71,3 +73,4 @@ MIT © [One Design Company](https://onedesigncompany.com)
 [yeoman-url]: http://yeoman.io/authoring
 [npm-url]: https://www.npmjs.com/
 [node-url]: https://nodejs.org/
+[composer-url]: https://getcomposer.org/

@@ -8,6 +8,7 @@ const prompts = require('./modules/prompts');
 module.exports = class extends Generator {
   initializing() {
     this.closingStatements = [];
+    this.options.craftPlugins = [];
   }
 
   prompting() {
@@ -15,7 +16,6 @@ module.exports = class extends Generator {
       Object.assign(this.options, options);
     }.bind(this));
   }
-
 
   configuring() {
     this.destinationRoot('./');
@@ -25,8 +25,8 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../git'));
 
     this.fs.copy(
-      this.templatePath('templates/.gitignore'),
-      this.destinationPath('templates/.gitignore')
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore')
     );
   }
 
@@ -84,21 +84,9 @@ module.exports = class extends Generator {
     //
     // Craft Templates
     //
-    this.fs.copy(
-      this.templatePath('templates/_layout.html'),
-      this.destinationPath('templates/_layout.html')
-    );
-    this.fs.copy(
-      this.templatePath('templates/index.html'),
-      this.destinationPath('templates/index.html')
-    );
-    this.fs.copy(
-      this.templatePath('templates/404.html'),
-      this.destinationPath('templates/404.html')
-    );
     this.fs.copyTpl(
-      this.templatePath('templates/_partials/head.html'),
-      this.destinationPath('templates/_partials/head.html'), {
+      this.templatePath('templates/'),
+      this.destinationPath('templates/'), {
         craftPlugins: this.options.craftPlugins
       }
     );
