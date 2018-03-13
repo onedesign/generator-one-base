@@ -6,6 +6,7 @@ const childProcess = require('child_process');
 const prompts = require('./modules/prompts');
 const fs = require('fs');
 const extend = require('lodash/extend');
+const guid = require('guid');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -34,6 +35,10 @@ module.exports = class extends Generator {
         authorUrl: 'https://onedesigncompany.com',
         githubName: 'onedesign'
       });
+
+      // Generates a random security key to be used in .env
+      this.props.securityKey = guid.raw();
+
       // To access props use this.props.someAnswer;
     });
   }
