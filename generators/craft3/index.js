@@ -147,7 +147,11 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.log('(be sure to create a ' + chalk.cyan(this.props.projectName) + ' database if you haven’t already)');
+    this.log("\n\n\n");
+    this.log('===============================');
+    this.log('====== Install Notes ==========');
+    this.log('===============================');
+    this.log(`Database: Create a MySQL database named '${chalk.cyan(this.props.projectName)}' if you haven’t already.`);
 
     const that = this;
     // Output all closing statements
