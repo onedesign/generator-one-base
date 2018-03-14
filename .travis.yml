@@ -4,8 +4,6 @@ dist: trusty
 language: node_js
 node_js:
   - "6.12"
-php:
-  - "7.1"
 env:
   global:
     - NODE_ENV=test
