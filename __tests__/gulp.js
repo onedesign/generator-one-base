@@ -30,6 +30,10 @@ describe('generator-one-base:gulp', () => {
     it('doesn\'t create index.html', () => {
       assert.noFile('index.html');
     });
+
+    it('adds .gitgnore rules', () => {
+      assert.fileContent('.gitignore', '/dist');
+    });
   });
 
   describe('with nunjucks enabled', () => {

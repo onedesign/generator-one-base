@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const prompts = require('./modules/prompts');
+const fs = require('fs');
 
 module.exports = class extends Generator {
   prompting() {
@@ -11,6 +12,8 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.log(chalk.green('Writing gulp files...'));
+
     this.fs.copy(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js')
@@ -29,6 +32,18 @@ module.exports = class extends Generator {
         }
       }
     );
+
+    if (this.fs.exists('.gitignore')) {
+      this.fs.append(
+        this.destinationPath('.gitignore'),
+        fs.readFileSync(this.templatePath('.gitignore'))
+      );
+    } else {
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    }
 
     this.fs.copy(
       this.templatePath('gulp/utils'),
@@ -98,12 +113,10 @@ module.exports = class extends Generator {
       devDependencies.push('gulp-nunjucks-render');
     }
 
-    const self = this;
-
     // Display a message
     this.log(chalk.yellow('\nInstalling gulp-related dependencies via yarn: '));
 
     // Install dev dependencies
-    self.yarnInstall(devDependencies, { 'dev': true });
+    this.yarnInstall(devDependencies, { 'dev': true });
   }
 };

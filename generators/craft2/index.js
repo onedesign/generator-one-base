@@ -5,11 +5,10 @@ const chalk = require('chalk');
 const download = require('download');
 const del = require('del');
 const fs = require('fs');
-const PleasantProgress = require('pleasant-progress');
-const progress = new PleasantProgress();
 const childProcess = require('child_process');
+const extend = require('lodash/extend');
 const prompts = require('./modules/prompts');
-const plugins = require('./modules/craft_plugins');
+const plugins = require('./modules/available-plugins');
 
 module.exports = class extends Generator {
   initializing() {
@@ -22,15 +21,29 @@ module.exports = class extends Generator {
         authorName: 'One Design Company',
         authorEmail: 'dev@onedesigncompany',
         authorUrl: 'https://onedesigncompany.com',
-        githubName: 'onedesign'
+        githubName: 'onedesign',
+        composerPlugins: [],
+        githubPlugins: []
+      });
+
+      const self = this;
+
+      // Determine github vs composer plugins
+      this.props.craftPlugins.forEach(function(idx) {
+        const plugin = plugins[idx];
+        if (!plugin) {
+          throw new Error(`Plugin "${idx}" is not in the list of available plugins.`);
+        }
+        plugin.key = idx;
+        if (plugin.src.indexOf('http') == -1) {
+          self.props.composerPlugins.push(plugin);
+        } else {
+          self.props.githubPlugins.push(plugin);
+        }
       });
 
       // To access props use this.props.someAnswer;
     });
-  }
-
-  configuring() {
-    this.destinationRoot('./');
   }
 
   git() {
@@ -45,7 +58,7 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../scripts'));
   }
 
-  build() {
+  gulp() {
     // Currently only supports gulp for building
     this.composeWith(require.resolve('../gulp'), {
       rootDistPath: 'public/dist',
@@ -56,17 +69,41 @@ module.exports = class extends Generator {
     });
   }
 
-  writing() {
-    // TODO: await
-    (function downloadCraft() {
-      const craftDownloadUrl = 'http://buildwithcraft.com/latest.zip?accept_license=yes';
-      progress.start('Installing Craft');
-      return download(craftDownloadUrl, this.destinationPath(), {
-        extract: true
-      }).then(function() {
-        progress.stop();
+  downloadCraft() {
+    this.log(chalk.green('Downloading Craft...'));
+    const self = this;
+    const craftDownloadUrl = 'http://buildwithcraft.com/latest.zip?accept_license=yes';
+    return download(craftDownloadUrl, this.destinationPath(), {
+      extract: true
+    })
+      .then(() => true)
+      .catch((err) => {
+        self.log(chalk.red(err));
       });
-    }).bind(this)();
+  }
+
+  // Downloads all plugins that can't be installed with composer
+  downloadGithubPlugins() {
+    this.log(chalk.green('Downloading Github Plugins...'));
+    const self = this;
+    const installationPromises = [];
+    self.props.githubPlugins.forEach(function(plugin) {
+      const downloadUrl = plugin.src + 'archive/' + plugin.branch + '.zip';
+      const downloadPromise = download(downloadUrl, self.destinationPath('craft/plugins/downloads'), {
+        extract: true
+      });
+      installationPromises.push(downloadPromise);
+    });
+
+    return Promise.all(installationPromises)
+      .then(() => true)
+      .catch((err) => {
+        self.log(chalk.red(err));
+      });
+  }
+
+  writing() {
+    this.log(chalk.green('Configuring Craft2...'));
 
     // Cleans up default Craft install
     del.sync([
@@ -110,7 +147,6 @@ module.exports = class extends Generator {
       this.props
     );
 
-    // Copy config
     // General
     this.fs.copy(
       this.templatePath('craft/config/general.php'),
@@ -135,14 +171,13 @@ module.exports = class extends Generator {
     if (this.props.craftPlugins.includes('imager')) {
       this.fs.copyTpl(
         this.templatePath('craft/config/imager.php'),
-        this.destinationPath('craft/config/imager.php'), {
-          projectName: this.props.projectName
-        }
+        this.destinationPath('craft/config/imager.php'),
+        this.props
       );
       this.closingStatements.push('Imager: ' + chalk.yellow('If you’re planning on using AWS with Imager, be sure to uncomment the AWS-related lines in .env'));
     }
 
-    if (this.props.craftPlugins.indexOf('environmentlabel') > -1) {
+    if (this.props.craftPlugins.includes('environmentlabel')) {
       this.fs.copyTpl(
         this.templatePath('craft/config/environmentlabel.php'),
         this.destinationPath('craft/config/environmentlabel.php')
@@ -155,70 +190,59 @@ module.exports = class extends Generator {
       this.destinationPath('craft/templates/')
     );
 
-    // TODO: await
-    (function downloadPlugins() {
-      progress.start('Installing Craft Plugins');
-      const installationPromises = [];
-      const composerPlugins = [];
-      const self = this;
-      this.options.craftPlugins.forEach(function(option) {
-        const plugin = plugins[option];
-        if (plugin.src.indexOf('http') == -1) {
-          composerPlugins.push(plugin);
-          return;
-        }
-        const downloadUrl = plugin.src + 'archive/' + plugin.branch + '.zip';
-        const downloadPromise = download(downloadUrl, self.destinationPath('craft/plugins/downloads'), {
-          extract: true
-        });
-        installationPromises.push(downloadPromise);
-      });
+    // Composer
+    this.fs.copyTpl(
+      this.templatePath('composer.json'),
+      this.destinationPath('composer.json')
+    );
 
-      // Render composer.json
-      this.fs.copyTpl(
-        this.templatePath('composer.json'),
-        this.destinationPath('composer.json')
+    // Git
+    if (this.fs.exists('.gitignore')) {
+      this.fs.append(
+        this.destinationPath('.gitignore'),
+        fs.readFileSync(this.templatePath('.gitignore'))
       );
+    } else {
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    }
 
-      return Promise.all(installationPromises).then(function() {
-        progress.stop();
-      });
-    }).bind(this)();
-
-    // Moves plugins
+    // Moves plugins that were just downloaded
     const self = this;
-    this.options.craftPlugins.forEach(function(option) {
-      const plugin = plugins[option];
-      if (plugin.src.indexOf('http') == -1) return;
-      // const pluginDirName = plugin.src.match(/\/(.*)\.zip$/)
-      const pluginDirPath = self.destinationPath('craft/plugins/downloads/' + plugin.githubName + '-' + plugin.branch.replace(/^v/, '') + '/' + option);
+    this.props.githubPlugins.forEach(function(plugin) {
+      const pluginDirPath = self.destinationPath('craft/plugins/downloads/' + plugin.githubName + '-' + plugin.branch.replace(/^v/, '') + '/' + plugin.key);
       if (!fs.existsSync(pluginDirPath)) return;
-      fs.renameSync(pluginDirPath, self.destinationPath('craft/plugins/' + option));
+      fs.renameSync(pluginDirPath, self.destinationPath('craft/plugins/' + plugin.key));
     });
-    del.sync([self.destinationPath('craft/plugins/downloads/')]);
+
+    del.sync([
+      this.destinationPath('craft/plugins/downloads/')
+    ]);
 
     // Sets necessary permissions
     this.log(chalk.green('> Setting global permissions to 755 / 644'));
-    childProcess.execSync('chmod -R 755 *');
+    childProcess.execSync(`chmod -R 755 ${this.destinationPath()}`);
     childProcess.execSync('find . -type f -exec chmod 644 {} \\;');
 
     this.log(chalk.green('> Setting permissions on craft/app to 775 / 644'));
-    childProcess.execSync('chmod -R 775 craft/app');
-    childProcess.execSync('find craft/app/ -type f -exec chmod 664 {} \\;');
+    childProcess.execSync(`chmod -R 775 ${this.destinationPath('craft/app')}`);
+    childProcess.execSync(`find ${this.destinationPath('craft/app')} -type f -exec chmod 664 {} \\;`);
 
     this.log(chalk.green('> Setting permissions on craft/config to 775 / 644'));
-    childProcess.execSync('chmod -R 775 craft/config');
-    childProcess.execSync('find craft/config/ -type f -exec chmod 664 {} \\;');
+    childProcess.execSync(`chmod -R 775 ${this.destinationPath('craft/config')}`);
+    childProcess.execSync(`find ${this.destinationPath('craft/config')} -type f -exec chmod 664 {} \\;`);
 
     this.log(chalk.green('> Setting permissions on craft/storage to 775 / 644'));
-    childProcess.execSync('chmod -R 775 craft/storage');
-    childProcess.execSync('find craft/storage/ -type f -exec chmod 664 {} \\;');
+    childProcess.execSync(`chmod -R 775 ${this.destinationPath('craft/storage')}`);
+    childProcess.execSync(`find ${this.destinationPath('craft/storage')} -type f -exec chmod 664 {} \\;`);
   }
 
   install() {
-    this.log(chalk.yellow('\nInstalling dependencies via composer: '));
-    const pluginList = this.props.craftPlugins.join(' ');
-    childProcess.execSync(`composer require ${pluginList}`);
+    this.log(chalk.green('\nInstalling dependencies via composer...'));
+    const pluginList = this.props.composerPlugins.map((plugin) => plugin.src).join(' ');
+    childProcess.execSync(`composer require --no-progress ${pluginList}`);
     this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
   }
 

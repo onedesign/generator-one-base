@@ -6,22 +6,22 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:craft-3', () => {
   describe('default', () => {
     const promptAnswers = {
-      projectTitle: 'Test Project',
-      projectName: 'test-project',
-      projectDescription: 'project description this is',
-      craftPlugins: ['clubstudioltd/craft-asset-rev']
+      projectTitle: 'Craft2 Project',
+      projectName: 'craft2-project',
+      projectDescription: 'Craft2 project description',
+      craftPlugins: ['minify']
     };
 
     beforeAll(() => {
       return helpers
-        .run(path.join(__dirname, '../generators/craft3'))
+        .run(path.join(__dirname, '../generators/craft2'))
         .withPrompts(promptAnswers);
     });
 
     it('downloads craft', () => {
       assert.file([
-        'web/index.php',
-        'templates/index.html'
+        'public/index.php',
+        'craft/templates/index.html'
       ]);
     });
 
@@ -34,12 +34,8 @@ describe('generator-one-base:craft-3', () => {
       assert.fileContent('composer.json', `"${promptAnswers.craftPlugins[0]}":`);
     });
 
-    it('configures assetrev plugin', () => {
-      assert.file('config/assetrev.php');
-    });
-
     it('adds .gitignore', () => {
-      assert.fileContent('.gitignore', '# Craft 3');
+      assert.fileContent('.gitignore', '# Craft');
     });
 
     it('adds a README.md', () => {

@@ -43,6 +43,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.log(chalk.green('Writing styles files...'));
     this.fs.copy(
       this.templatePath('main.scss'),
       this.destinationPath('src/styles/main.scss')
@@ -65,10 +66,11 @@ module.exports = class extends Generator {
 
     // inject variables
     if (this.props.deps && this.props.deps.length) {
+      const self = this;
       this.props.deps.map(dep => {
         if (config[dep]) {
-          this.fs.append(
-            this.destinationPath('src/styles/base/_variables.scss'),
+          self.fs.append(
+            self.destinationPath('src/styles/base/_variables.scss'),
             config[dep],
             {
               separator: `${os.EOL}${os.EOL}`
