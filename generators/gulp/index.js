@@ -11,8 +11,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.destinationRoot('./');
-
     this.fs.copy(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js')

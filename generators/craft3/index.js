@@ -9,15 +9,11 @@ const extend = require('lodash/extend');
 const guid = require('guid');
 
 module.exports = class extends Generator {
-  constructor(args, opts) {
-    super(args, opts);
+  initializing() {
+    this.closingStatements = [];
     this.props = {
       craftPlugins: []
     };
-  }
-
-  initializing() {
-    this.closingStatements = [];
 
     try {
       childProcess.execSync('composer --version');
@@ -41,10 +37,6 @@ module.exports = class extends Generator {
 
       // To access props use this.props.someAnswer;
     });
-  }
-
-  configuring() {
-    this.destinationRoot(`./`);
   }
 
   git() {
@@ -77,7 +69,7 @@ module.exports = class extends Generator {
     childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.props.projectName}-craft`);
 
     // move install to this dir since composer requires installing to a sub directory
-    childProcess.execSync(`mv ${this.props.projectName}-craft/* ./`);
+    childProcess.execSync(`mv ${this.props.projectName}-craft/* ${this.destinationRoot()}`);
     del.sync([
       this.destinationPath(`${this.props.projectName}-craft`)
     ]);
@@ -93,7 +85,8 @@ module.exports = class extends Generator {
       this.destinationPath('config/general.php'),
       this.destinationPath('config/db.php'),
       this.destinationPath('composer.json'),
-      this.destinationPath('composer.lock')
+      this.destinationPath('composer.lock'),
+      this.destinationPath('package.json')
     ]);
 
     // If using SEOmatic, remove default robots.txt

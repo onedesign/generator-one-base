@@ -21,18 +21,17 @@ APP.homeRoute = require('./routes/home');
 
 APP.init = function() {
   <% if (deps.includes('one-router')) { %>
+  // Configure Routing
+  // Each route should be defined in a routename.js file in /scripts/routes
 
-    // Configure Routing
-    // Each route should be defined in a routename.js file in /scripts/routes
+  const routes = {
+    '^/$': APP.indexRoute
+  };
 
-    var routes = {
-      '^/$': APP.indexRoute
-    };
+  APP.router = new OneRouter(routes);
 
-    APP.router = new OneRouter(routes);
-
-    // Trigger Global Setup
-    APP.globalRoute();
+  // Trigger Global Setup
+  APP.globalRoute();
   <% } %>
 };
 
