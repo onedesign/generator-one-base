@@ -43,7 +43,8 @@
     "yosay": "^2.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "cacheDirectory": ".tmp/"
   },
   "scripts": {
     "prepublish": "nsp check",
