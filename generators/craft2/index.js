@@ -196,6 +196,26 @@ module.exports = class extends Generator {
       this.destinationPath('composer.json')
     );
 
+    // Package
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      this.props
+    );
+
+    // README
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'),
+      this.props
+    );
+
+    // Editor
+    this.fs.copy(
+      this.templatePath('.editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+
     // Git
     if (this.fs.exists('.gitignore')) {
       this.fs.append(

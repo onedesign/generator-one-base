@@ -3,7 +3,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-one-base:craft-3', () => {
+describe('generator-one-base:craft-2', () => {
   describe('default', () => {
     const promptAnswers = {
       projectTitle: 'Craft2 Project',
@@ -26,16 +26,16 @@ describe('generator-one-base:craft-3', () => {
     });
 
     it('configures craft', () => {
-      assert.fileContent('config/general.php', "getenv('APP_SITE_URL')");
-      assert.fileContent('config/db.php', "getenv('APP_DB_SERVER')");
+      assert.fileContent('craft/config/general.php', "getenv('APP_SITE_URL')");
+      assert.fileContent('craft/config/db.php', "getenv('APP_DB_SERVER')");
     });
 
     it('installs plugins with composer', () => {
-      assert.fileContent('composer.json', `"${promptAnswers.craftPlugins[0]}":`);
+      assert.fileContent('composer.json', `"${promptAnswers.craftPlugins['minify'].src}":`);
     });
 
     it('adds .gitignore', () => {
-      assert.fileContent('.gitignore', '# Craft');
+      assert.fileContent('.gitignore', '# Craft 2');
     });
 
     it('adds a README.md', () => {
