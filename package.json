@@ -42,7 +42,8 @@
     "yosay": "^2.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "<rootDir>/.jest-setup.js"
   },
   "scripts": {
     "prepublish": "nsp check",
