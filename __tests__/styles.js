@@ -6,9 +6,9 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:styles', () => {
   describe('default', () => {
     beforeAll(() => {
+      process.env.TMPDIR = '/buddy/generator-one-base-1/build-tmp';
       return helpers
-        .run(path.join(__dirname, '../generators/styles'))
-        .inDir(path.resolve('../build-tmp'));
+        .run(path.join(__dirname, '../generators/styles'));
     });
 
     it('creates files', () => {
