@@ -6,7 +6,9 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:styles', () => {
   describe('default', () => {
     beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/styles'));
+      return helpers
+        .inDir(path.resolve('../build-tmp'))
+        .run(path.join(__dirname, '../generators/styles'));
     });
 
     it('creates files', () => {
