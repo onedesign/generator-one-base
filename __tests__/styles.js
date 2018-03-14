@@ -7,8 +7,8 @@ describe('generator-one-base:styles', () => {
   describe('default', () => {
     beforeAll(() => {
       return helpers
-        .inDir(path.resolve('../build-tmp'))
-        .run(path.join(__dirname, '../generators/styles'));
+        .run(path.join(__dirname, '../generators/styles'))
+        .inDir(path.resolve('../build-tmp'));
     });
 
     it('creates files', () => {
