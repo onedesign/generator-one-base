@@ -48,7 +48,7 @@
   },
   "scripts": {
     "prepublish": "nsp check",
-    "pretest": "eslint .",
+    "pretest": "node build-test.js",
     "precommit": "lint-staged",
     "test": "jest"
   },
