@@ -16,7 +16,8 @@ describe('generator-one-base:craft-3', () => {
       jest.setTimeout(60000); // it takes a bit to install craft
       return helpers
         .run(path.join(__dirname, '../generators/craft3'))
-        .withPrompts(promptAnswers);
+        .withPrompts(promptAnswers)
+        .inDir(path.resolve('../build-tmp'));
     });
 
     it('downloads craft', () => {
