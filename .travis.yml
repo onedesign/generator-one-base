@@ -1,6 +1,27 @@
+sudo: required
+dist: trusty
 language: node_js
 node_js:
-  - v9
-  - v8
-  - v6
-  - v4
+  - "6.12"
+php:
+  - "7.1"
+addons:
+  apt:
+    packages:
+      - zip
+      - php-composer
+      - php-curl
+      - php-zip
+      - php-dom
+before_install:
+  #- apt-get update && apt-get install -y apt-transport-https lsb-release ca-certificates
+  #- wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+  #- echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list
+  #- apt-get update && apt-get install -y zip php7.1 php7.1-curl php7.1-dom php7.1-xml php7.1-zip
+  #- curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  - npm install -g yarn
+install:
+  - yarn install
+env:
+  global:
+    - NODE_ENV=test
