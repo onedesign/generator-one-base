@@ -1,15 +1,20 @@
 sudo: required
+os: linux
 dist: trusty
 language: node_js
 node_js:
   - "6.12"
 php:
   - "7.1"
+env:
+  global:
+    - NODE_ENV=test
 addons:
   apt:
     packages:
       - zip
 before_install:
+  - phpenv global 7.1
   - php -v
   #- apt-get update && apt-get install -y apt-transport-https lsb-release ca-certificates
   #- wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -19,6 +24,6 @@ before_install:
   - npm install -g yarn
 install:
   - yarn install
-env:
-  global:
-    - NODE_ENV=test
+script:
+  - npm test
+
