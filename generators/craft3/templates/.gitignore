@@ -1,0 +1,22 @@
+# Craft
+# ---------------------------
+/craft/plugins/*
+/craft/rev-manifest.json
+/craft/storage/*
+!/craft/storage/.htaccess
+/storage/*
+
+# Craft Public
+# ---------------------------
+/web/*
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+
+# Package Managers
+# ---------------------------
+/vendor/
+/node_modules/
+

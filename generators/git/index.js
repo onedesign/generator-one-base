@@ -1,19 +1,21 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
+const fs = require('fs');
 
 module.exports = class extends Generator {
-  constructor(args, options) {
-    super(args, options);
-  }
-
-  initializing() {}
-
   writing() {
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
-    );
+    if (this.fs.exists(this.destinationPath('.gitignore'))) {
+      this.fs.append(
+        this.destinationPath('.gitignore'),
+        fs.readFileSync(this.templatePath('.gitignore'))
+      );
+    } else {
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    }
     this.log(chalk.green(`Created .gitignore.`));
 
     this.spawnCommandSync('git', ['init', '--quiet']);
@@ -37,6 +39,4 @@ module.exports = class extends Generator {
     ]);
     this.log(chalk.green('Git hooks configured.'));
   }
-
-  end() {}
 };
