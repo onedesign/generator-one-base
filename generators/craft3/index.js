@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const del = require('del');
 const childProcess = require('child_process');
+const yosay = require('yosay');
 const prompts = require('./modules/prompts');
 const fs = require('fs');
 const extend = require('lodash/extend');
@@ -24,6 +25,10 @@ module.exports = class extends Generator {
   }
 
   prompting() {
+    this.log(yosay(
+      'Welcome to the impressive ' + chalk.red('Craft 3') + ' generator!'
+    ));
+
     return this.prompt(prompts).then(props => {
       this.props = extend(props, {
         authorName: 'One Design Company',

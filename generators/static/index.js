@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const prompts = require('./modules/prompts');
 const fs = require('fs');
 const extend = require('lodash/extend');
+const yosay = require('yosay');
 
 module.exports = class extends Generator {
   initializing() {
@@ -11,6 +12,10 @@ module.exports = class extends Generator {
   }
 
   prompting() {
+    this.log(yosay(
+      'Welcome to the impressive ' + chalk.red('Static Site') + ' generator!'
+    ));
+
     return this.prompt(prompts).then(props => {
       this.props = extend(props, {
         authorName: 'One Design Company',

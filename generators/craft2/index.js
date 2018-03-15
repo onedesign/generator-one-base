@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
-// const yosay = require('yosay');
+const yosay = require('yosay');
 const download = require('download');
 const del = require('del');
 const fs = require('fs');
@@ -16,6 +16,10 @@ module.exports = class extends Generator {
   }
 
   prompting() {
+    this.log(yosay(
+      'Welcome to the impressive ' + chalk.red('Craft 2') + ' generator!'
+    ));
+
     return this.prompt(prompts).then(props => {
       this.props = extend(props, {
         authorName: 'One Design Company',
