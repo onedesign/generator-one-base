@@ -8,6 +8,7 @@ describe('generator-one-base:gulp', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
+          skipInstall: false,
           rootDistPath: 'dist',
           templateSrc: 'src/templates/',
           templateDist: 'dist/',
@@ -34,12 +35,31 @@ describe('generator-one-base:gulp', () => {
     it('adds .gitgnore rules', () => {
       assert.fileContent('.gitignore', '/dist');
     });
+
+    it('adds dependencies', () => {
+      assert.fileContent('package.json', 'gulp');
+      assert.fileContent('package.json', 'dotenv');
+      assert.fileContent('package.json', 'run-sequence');
+    });
+
+    it("doesn't create nunjucks build files", () => {
+      assert.noFile([
+        'gulp/tasks/nunjucks.js'
+      ]);
+      assert.noFileContent('gulp/tasks/base.js', "'nunjucks',");
+      assert.noFileContent('gulp/tasks/watch.js', "runSequence('nunjucks')");
+    });
+
+    it("doesn't add nunjucks as a dep", () => {
+      assert.noFileContent('package.json', 'gulp-nunjucks-render');
+    });
   });
 
   describe('with nunjucks enabled', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
+          skipInstall: false,
           rootDistPath: 'dist',
           templateSrc: 'src/templates/',
           templateDist: 'dist/',
@@ -59,6 +79,10 @@ describe('generator-one-base:gulp', () => {
 
     it('creates nunjucks index.html', () => {
       assert.file('index.html');
+    });
+
+    it('adds nunjucks as a dep', () => {
+      assert.fileContent('package.json', 'gulp-nunjucks-render');
     });
   });
 });

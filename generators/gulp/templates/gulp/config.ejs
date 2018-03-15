@@ -36,7 +36,7 @@ module.exports = {
   // If you want BrowserSync to proxy an existing URL,
   // change `useProxy` to true and enter your URL as `proxyUrl`
   useProxy: <%= useProxy %>,
-  proxyUrl: process.env.APP_SITE_URL,
+  proxyUrl: process.env.APP_SITE_URL || undefined,
   serverBaseDir: '<%= serverBaseDir %>',
 
   scripts: {

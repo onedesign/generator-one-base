@@ -109,7 +109,7 @@ module.exports = class extends Generator {
     ];
 
     // Add nunjucks if desired
-    if (this.options.includeNunjucks) {
+    if (this.options.useNunjucks) {
       devDependencies.push('gulp-nunjucks-render');
     }
 
