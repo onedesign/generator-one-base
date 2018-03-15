@@ -14,22 +14,17 @@ There are many types of generators which can reference other generators. For exa
 - `one-base:craft3` - generates a basic Craft 3 app
 - `one-base:craft2` - generates a basic Craft 2 app
 - `one-base:static` - generates a simple front end app with no back end
-- `one-base:rails` - generates a Ruby on Rails app
 
 ### Front End
 
 - `one-base:style` - installs common ODC style modules and dependencies and sets up a main.css
 - `one-base:scripts` - creates the ODC javascripts structure and sets up an example main.js
-- `one-base:router` - installs the one-router and sets up example templates
 - `one-base:gulp` - installs a gulp build configuration
-- `one-base:blendid` - installs a blendid build configuration
 
 ### Development Tools
 
 - `one-base:git` - initializes a git repo and installs hooks and Github templates
-- `one-base:husky` - installs the javascript/JSON prettifier and ODC husky config
-- `one-base:eslint` - installs the ODC rules and rc files for auto-linting javascript
-- `one-base:rubocop` - installs the ODC rules for Ruby projects
+- `one-base:eslint` - installs the ODC rules and rc files for linting javascript
 
 
 ## Installation
@@ -56,7 +51,12 @@ npm link
 Finally, generate your new project:
 
 ```bash
-yo one-base:craft
+yo one-base:craft3
+# or
+yo one-base:craft2
+# or
+yo one-base:static
+# or ... any other included generator
 ```
 
 ## License
