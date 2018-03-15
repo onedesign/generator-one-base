@@ -39,7 +39,7 @@ describe('generator-one-base:craft-3', () => {
     });
 
     it('adds .gitignore', () => {
-      assert.fileContent('.gitignore', '# Craft');
+      assert.fileContent('.gitignore', '# Craft 3');
     });
 
     it('adds a README.md', () => {

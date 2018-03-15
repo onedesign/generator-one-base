@@ -26,6 +26,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.log(chalk.green('Writing scripts files...'));
     const { deps = [] } = this.props;
 
     this.fs.copy(
