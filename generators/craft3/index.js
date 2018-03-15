@@ -32,7 +32,7 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       this.props = extend(props, {
         authorName: 'One Design Company',
-        authorEmail: 'dev@onedesigncompany',
+        authorEmail: 'dev@onedesigncompany.com',
         authorUrl: 'https://onedesigncompany.com',
         githubName: 'onedesign',
 
