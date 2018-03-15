@@ -6,10 +6,13 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:craft-3', () => {
   describe('default', () => {
     const promptAnswers = {
-      projectTitle: 'Test Project',
-      projectName: 'test-project',
-      projectDescription: 'project description this is',
-      craftPlugins: ['clubstudioltd/craft-asset-rev']
+      projectTitle: 'Test Project Craft 3',
+      projectName: 'test-craft-3',
+      projectDescription: 'Craft 3 production description',
+      craftPlugins: [
+        'clubstudioltd/craft-asset-rev',
+        'topshelfcraft/environment-label'
+      ]
     };
 
     beforeAll(() => {
@@ -36,6 +39,10 @@ describe('generator-one-base:craft-3', () => {
 
     it('configures assetrev plugin', () => {
       assert.file('config/assetrev.php');
+    });
+
+    it('configures environment label plugin', () => {
+      assert.file('config/environment-label.php');
     });
 
     it('adds .gitignore', () => {

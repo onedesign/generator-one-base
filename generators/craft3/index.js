@@ -138,10 +138,18 @@ module.exports = class extends Generator {
     );
 
     // Asset Rev
-    if (this.props.craftPlugins.includes('clubstudioltd/craft-asset-rev') > -1) {
+    if (this.props.craftPlugins.includes('clubstudioltd/craft-asset-rev')) {
       this.fs.copy(
         this.templatePath('config/assetrev.php'),
         this.destinationPath('config/assetrev.php')
+      );
+    }
+
+    // Environment Label
+    if (this.props.craftPlugins.includes('topshelfcraft/environment-label')) {
+      this.fs.copy(
+        this.templatePath('config/environment-label.php'),
+        this.destinationPath('config/environment-label.php')
       );
     }
 
