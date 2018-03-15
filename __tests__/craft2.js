@@ -9,7 +9,10 @@ describe('generator-one-base:craft-2', () => {
       projectTitle: 'Craft2 Project',
       projectName: 'craft2-project',
       projectDescription: 'Craft2 project description',
-      craftPlugins: ['minify']
+      craftPlugins: [
+        'minify', // composer plugin
+        'imager' // Github downloaded plugin
+      ]
     };
 
     beforeAll(() => {
@@ -20,8 +23,8 @@ describe('generator-one-base:craft-2', () => {
 
     it('downloads craft', () => {
       assert.file([
-        'public/index.php',
-        'craft/templates/index.html'
+        'craft/app/Craft.php',
+        'craft/app/index.php'
       ]);
     });
 
@@ -32,6 +35,10 @@ describe('generator-one-base:craft-2', () => {
 
     it('installs plugins with composer', () => {
       assert.fileContent('composer.json', `"${promptAnswers.craftPlugins['minify'].src}":`);
+    });
+
+    it('installs plugins by downloading from Github', () => {
+      assert.file('craft/plugins/imager/');
     });
 
     it('adds .gitignore', () => {
@@ -45,6 +52,10 @@ describe('generator-one-base:craft-2', () => {
     it('writes a package.json with project details', () => {
       assert.fileContent('package.json', `"name": "${promptAnswers.projectName}",`);
       assert.fileContent('package.json', `"description": "${promptAnswers.projectDescription}",`);
+    });
+
+    it('does not leave the downloads directory around', () => {
+      assert.noFile('craft/plugins/downloads/');
     });
   });
 });
