@@ -62,7 +62,7 @@ module.exports = function(options) {
     questions.push({
       type: 'confirm',
       name: 'useNunjucks',
-      message: 'Add support for nunjucks template engine?',
+      message: 'Add support for nunjucks template engine to gulp build process?',
       default: false
     });
   }
