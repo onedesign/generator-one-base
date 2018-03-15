@@ -11,6 +11,10 @@ module.exports = class extends Generator {
     }.bind(this));
   }
 
+  eslint() {
+    this.composeWith(require.resolve('../eslint'));
+  }
+
   writing() {
     this.log(chalk.green('Writing gulp files...'));
 
@@ -73,16 +77,12 @@ module.exports = class extends Generator {
     const devDependencies = [
       'webpack',
       'babel-core',
-      'babel-eslint',
       'babel-loader',
       'babel-preset-env',
       'babel-preset-react',
       'browser-sync',
       'del',
       'dotenv',
-      'eslint',
-      'eslint-config-odc',
-      'eslint-plugin-react',
       'gulp',
       'autoprefixer',
       'gulp-changed-in-place',

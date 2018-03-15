@@ -33,7 +33,7 @@ module.exports = gulp.task('scripts:lint', function() {
     '!' + config.paths.scriptSrc + 'vendor/**/*.js'
   ])
     .pipe(eslint({
-      configFile: './node_modules/eslint-config-odc/eslintrc.json',
+      configFile: '.eslintrc.json',
       useEslintrc: false
     }))
     .pipe(eslint.result(_resultNotifications))
