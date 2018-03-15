@@ -28,7 +28,7 @@ module.exports = class extends Generator {
 
       const self = this;
 
-      // Determine github vs composer plugins
+      // Separate Github vs composer plugins
       this.props.craftPlugins.forEach(function(idx) {
         const plugin = plugins[idx];
         if (!plugin) {
@@ -69,6 +69,9 @@ module.exports = class extends Generator {
     });
   }
 
+  /**
+   * Downloads and unzips Craft
+   */
   downloadCraft() {
     this.log(chalk.green('Downloading Craft...'));
     const self = this;
@@ -82,7 +85,9 @@ module.exports = class extends Generator {
       });
   }
 
-  // Downloads all plugins that can't be installed with composer
+  /**
+   * Downloads all plugins that can't be installed with composer
+   */
   downloadGithubPlugins() {
     this.log(chalk.green('Downloading Github Plugins...'));
     const self = this;

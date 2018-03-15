@@ -1,3 +1,17 @@
+/**
+ * This is a list of Craft plugins that can be installed in Craft2.
+ * Don't put one in this list unless it should be commonly used across projects.
+ *
+ * pluginKey: {
+ *   name: 'Example Plugin', // Name to show in generator prompt
+ *   githubName: 'oneExample', // github zip files extract as <githubName>-<branch>/<pluginKey>
+ *   src: '', // Either the composer name or a github base URL
+ *   branch: 'master', // Which branch to download. Only used if `src` is a Github URL.
+ *   checked: true // Whether this should be checked as a prompt option by default
+ * }
+ *
+ * @type {Object}
+ */
 module.exports = {
   assetrev: {
     name: 'Asset Rev',
