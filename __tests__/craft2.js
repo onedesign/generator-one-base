@@ -2,6 +2,7 @@
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
+const plugins = require('../generators/craft2/modules/available-plugins');
 
 describe('generator-one-base:craft-2', () => {
   describe('default', () => {
@@ -10,6 +11,7 @@ describe('generator-one-base:craft-2', () => {
       projectName: 'craft2-project',
       projectDescription: 'Craft2 project description',
       craftPlugins: [
+        'assetrev',
         'minify', // composer plugin
         'imager' // Github downloaded plugin
       ]
@@ -28,17 +30,30 @@ describe('generator-one-base:craft-2', () => {
       ]);
     });
 
-    it('configures craft', () => {
+    it('configures Craft', () => {
       assert.fileContent('craft/config/general.php', "getenv('APP_SITE_URL')");
       assert.fileContent('craft/config/db.php', "getenv('APP_DB_SERVER')");
     });
 
     it('installs plugins with composer', () => {
-      assert.fileContent('composer.json', `"${promptAnswers.craftPlugins['minify'].src}":`);
+      assert.fileContent('composer.json', `"${plugins.minify.src}":`);
+    });
+
+    it('adds a sample .env file', () => {
+      assert.fileContent('env.sample', 'APP_SITE_URL=');
     });
 
     it('installs plugins by downloading from Github', () => {
-      assert.file('craft/plugins/imager/');
+      assert.file('craft/plugins/imager/ImagerPlugin.php');
+    });
+
+    it('adds imager config for imager plugin', () => {
+      assert.file('craft/config/imager.php');
+    });
+
+    it('adds asset rev config for assetrev plugin', () => {
+      assert.file('craft/config/assetrev.php');
+      assert.fileContent('env.sample', 'IMAGER_SYSTEM_PATH=');
     });
 
     it('adds .gitignore', () => {
@@ -56,6 +71,22 @@ describe('generator-one-base:craft-2', () => {
 
     it('does not leave the downloads directory around', () => {
       assert.noFile('craft/plugins/downloads/');
+    });
+
+    it('generates with scripts generator', () => {
+      assert.file('src/scripts/');
+    });
+
+    it('generates with styles generator', () => {
+      assert.file('src/styles/');
+    });
+
+    it('generates with gulp generator', () => {
+      assert.file(['gulpfile.js', 'gulp']);
+    });
+
+    it('generates with git generator', () => {
+      assert.file('.git');
     });
   });
 });
