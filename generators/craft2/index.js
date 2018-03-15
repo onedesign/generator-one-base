@@ -69,7 +69,8 @@ module.exports = class extends Generator {
       templateSrc: 'craft/templates/',
       templateDist: 'craft/templates/',
       useProxy: true,
-      serverBaseDir: './'
+      serverBaseDir: './',
+      useNunjucks: false
     });
   }
 

@@ -63,7 +63,8 @@ module.exports = class extends Generator {
       templateSrc: 'templates/',
       templateDist: 'templates/',
       useProxy: true,
-      serverBaseDir: './'
+      serverBaseDir: './',
+      useNunjucks: false
     });
   }
 
