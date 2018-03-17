@@ -75,7 +75,7 @@ module.exports = class extends Generator {
 
   install() {
     const devDependencies = [
-      'webpack',
+      'webpack@^3.11.0',
       'babel-core',
       'babel-loader',
       'babel-preset-env',
