@@ -5,6 +5,8 @@ const prompts = require('./modules/prompts');
 const fs = require('fs');
 const extend = require('lodash/extend');
 const yosay = require('yosay');
+const path = require('path');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
   initializing() {
@@ -26,6 +28,15 @@ module.exports = class extends Generator {
 
       // To access props use this.props.someAnswer;
     });
+  }
+
+  default() {
+    if (path.basename(this.destinationPath()) !== this.props.projectName) {
+      const text = `\nYour project should be inside a folder named ${chalk.red(this.props.projectName)}\nI'll automatically create this folder.\n\n(If you meant to run this generator inside of an existing project directory, make sure that the ${chalk.red('Project Name')} you enter at the prompt matches the name of your current directory.)\n`;
+      this.log(chalk.yellow(text));
+      mkdirp(this.props.projectName);
+      this.destinationRoot(this.destinationPath(this.props.projectName));
+    }
   }
 
   git() {
