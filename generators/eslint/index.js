@@ -21,9 +21,11 @@ module.exports = class extends Generator {
     ];
 
     // Display a message
-    this.log(chalk.green('\nInstalling dependencies via yarn: '));
+    this.log(chalk.green('\nInstalling ESLint-related dependencies…'));
 
     // Install dev dependencies
-    this.yarnInstall(devDependencies, { 'dev': true });
+    this.yarnInstall(devDependencies, { 'dev': true, silent: true }).then(() => {
+      this.log(chalk.green('Installed ESLint-related dependencies.'));
+    });
   }
 };
