@@ -14,7 +14,7 @@ describe('generator-one-base:eslint', () => {
 
     it('creates files', () => {
       assert.file([
-        '.eslintrc.json'
+        '.eslintrc'
       ]);
     });
 

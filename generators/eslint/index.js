@@ -7,8 +7,8 @@ module.exports = class extends Generator {
     this.log(chalk.green('Writing eslint files...'));
 
     this.fs.copy(
-      this.templatePath('.eslintrc.json'),
-      this.destinationPath('.eslintrc.json')
+      this.templatePath('.eslintrc'),
+      this.destinationPath('.eslintrc')
     );
   }
 
