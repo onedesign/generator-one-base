@@ -56,6 +56,14 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../scripts'));
   }
 
+  eslint() {
+    this.composeWith(require.resolve('../eslint'));
+  }
+
+  stylelint() {
+    this.composeWith(require.resolve('../stylelint'));
+  }
+
   build() {
     // Currently only supports gulp for building
     this.composeWith(require.resolve('../gulp'), {
