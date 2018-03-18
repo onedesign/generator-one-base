@@ -15,6 +15,10 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../eslint'));
   }
 
+  stylelint() {
+    this.composeWith(require.resolve('../stylelint'));
+  }
+
   writing() {
     this.log(chalk.green('Writing gulp files...'));
 
