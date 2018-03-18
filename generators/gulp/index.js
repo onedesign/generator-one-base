@@ -23,11 +23,6 @@ module.exports = class extends Generator {
       this.destinationPath('gulpfile.js')
     );
 
-    this.fs.copy(
-      this.templatePath('.stylelintrc'),
-      this.destinationPath('.stylelintrc')
-    );
-
     this.fs.copyTpl(
       this.templatePath('gulp/tasks'),
       this.destinationPath('gulp/tasks'), this.options, {}, {
@@ -96,8 +91,6 @@ module.exports = class extends Generator {
       'gulp-sass',
       'gulp-shell',
       'gulp-stylelint',
-      'stylelint',
-      'stylelint-scss',
       'gulp-util',
       'jsonfile',
       'node-libs-browser',
