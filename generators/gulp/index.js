@@ -15,17 +15,16 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../eslint'));
   }
 
+  stylelint() {
+    this.composeWith(require.resolve('../stylelint'));
+  }
+
   writing() {
     this.log(chalk.green('Writing gulp files...'));
 
     this.fs.copy(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js')
-    );
-
-    this.fs.copy(
-      this.templatePath('.stylelintrc'),
-      this.destinationPath('.stylelintrc')
     );
 
     this.fs.copyTpl(
@@ -96,8 +95,6 @@ module.exports = class extends Generator {
       'gulp-sass',
       'gulp-shell',
       'gulp-stylelint',
-      'stylelint',
-      'stylelint-scss',
       'gulp-util',
       'jsonfile',
       'node-libs-browser',

@@ -25,6 +25,7 @@ There are many types of generators which can reference other generators. For exa
 
 - `one-base:git` - initializes a git repo and installs hooks and Github templates
 - `one-base:eslint` - installs the ODC rules and rc files for linting javascript
+- `one-base:stylelint` - installs the ODC rules and rc files for linting stylesheets
 
 
 ## Installation
