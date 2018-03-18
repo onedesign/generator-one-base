@@ -32,10 +32,7 @@ module.exports = gulp.task('scripts:lint', function() {
     config.paths.scriptSrc + '**/*.js',
     '!' + config.paths.scriptSrc + 'vendor/**/*.js'
   ])
-    .pipe(eslint({
-      configFile: '.eslintrc.json',
-      useEslintrc: false
-    }))
+    .pipe(eslint())
     .pipe(eslint.result(_resultNotifications))
     .pipe(eslint.format());
 });
