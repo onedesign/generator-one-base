@@ -46,13 +46,15 @@
   "jest": {
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "<rootDir>/.jest-setup.js",
-    "verbose": true
+    "verbose": true,
+    "collectCoverage": true
   },
   "scripts": {
     "prepublish": "nsp check",
     "pretest": "eslint .",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "test:dev": "jest --watch --verbose -o"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"],
