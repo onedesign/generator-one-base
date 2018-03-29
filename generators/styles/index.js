@@ -82,9 +82,10 @@ module.exports = class extends Generator {
   }
 
   install() {
+    this.log(chalk.yellow('\nInstalling style-related dependencies…'));
     if (this.props.deps && this.props.deps.length) {
       this.yarnInstall(this.props.deps, { silent: true }).then(() => {
-        this.log(chalk.green('Installed style depenencies.'));
+        this.log(chalk.green('Installed style-related depenencies.'));
       });
     }
   }

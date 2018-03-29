@@ -206,7 +206,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.log(chalk.yellow('\nInstalling dependencies via composer: '));
+    this.log(chalk.yellow('\nInstalling dependencies via composer…'));
     const pluginList = this.props.craftPlugins.join(' ');
     childProcess.execSync(`composer require --no-progress ${pluginList}`);
     this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
