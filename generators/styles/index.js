@@ -52,9 +52,12 @@ module.exports = class extends Generator {
       }
     );
 
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('base/*'),
-      this.destinationPath('src/styles/base')
+      this.destinationPath('src/styles/base'),
+      {
+        deps: this.props.deps
+      }
     );
 
     this.fs.copy(
