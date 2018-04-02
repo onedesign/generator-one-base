@@ -44,9 +44,12 @@ module.exports = class extends Generator {
 
   writing() {
     this.log(chalk.green('Writing styles files...'));
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('main.scss'),
-      this.destinationPath('src/styles/main.scss')
+      this.destinationPath('src/styles/main.scss'),
+      {
+        deps: this.props.deps
+      }
     );
 
     this.fs.copy(

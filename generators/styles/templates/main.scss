@@ -1,6 +1,10 @@
-// Vendor<% if (deps.indexOf('susy') > -1) { %>
-@import 'susy/sass/susy';<% } %><% if (deps.indexOf('sass-mq') > -1) { %>
-@import 'sass-mq/mq';<% } %>
+// Vendor
+<%_ if (deps.indexOf('sass-mq') > -1) { _%>
+@import 'sass-mq/mq';
+<%_ } _%>
+<%_ if (deps.indexOf('susy') > -1) { _%>
+@import 'susy/sass/susy';
+<%_ } _%>
 
 // Resets
 @import 'vendor/normalize';
@@ -10,13 +14,15 @@
 @import 'util/*';
 
 // Variables
-@import 'base/variables';<% if (deps.indexOf('one-sass-toolkit') > -1) { %>
+@import 'base/variables';
 
+<%_ if (deps.indexOf('one-sass-toolkit') > -1) { _%>
 // Toolkit
 @import 'one-sass-toolkit/color';
 @import 'one-sass-toolkit/fluid-size';
-@import 'one-sass-toolkit/type-styles';<% } %>
+@import 'one-sass-toolkit/type-styles';
 
+<%_ } _%>
 // Helpers
 @import 'helpers/*';
 

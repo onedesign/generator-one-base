@@ -6,7 +6,10 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:styles', () => {
   describe('default', () => {
     beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/styles'));
+      return helpers.run(path.join(__dirname, '../generators/styles'))
+        .withPrompts({
+          deps: []
+        });
     });
 
     it('creates files', () => {
@@ -28,6 +31,7 @@ describe('generator-one-base:styles', () => {
     });
 
     it('adds Sass MQ', () => {
+      assert.fileContent('src/styles/main.scss', 'sass-mq/');
       assert.fileContent('src/styles/base/_variables.scss', '// Sass MQ');
     });
   });
@@ -41,6 +45,7 @@ describe('generator-one-base:styles', () => {
     });
 
     it('adds one-sass-toolkit', () => {
+      assert.fileContent('src/styles/main.scss', 'one-sass-toolkit/');
       assert.fileContent('src/styles/base/_variables.scss', '// One Sass Toolkit');
     });
   });
@@ -54,6 +59,7 @@ describe('generator-one-base:styles', () => {
     });
 
     it('adds susy', () => {
+      assert.fileContent('src/styles/main.scss', 'susy/');
       assert.fileContent('src/styles/base/_variables.scss', '// Susy Config');
     });
   });
