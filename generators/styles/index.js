@@ -2,8 +2,6 @@
 const Generator = require('yeoman-generator');
 const extend = require('deep-extend');
 const chalk = require('chalk');
-const config = require('./config');
-const os = require('os');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -27,11 +25,6 @@ module.exports = class extends Generator {
             name: 'One Sass Toolkit',
             value: 'one-sass-toolkit',
             checked: true
-          },
-          {
-            name: 'Susy',
-            value: 'susy',
-            checked: false
           }
         ]
       }
@@ -69,22 +62,6 @@ module.exports = class extends Generator {
       this.templatePath('vendor/*'),
       this.destinationPath('src/styles/vendor')
     );
-
-    // inject variables
-    if (this.props.deps && this.props.deps.length) {
-      const self = this;
-      this.props.deps.map(dep => {
-        if (config[dep]) {
-          self.fs.append(
-            self.destinationPath('src/styles/base/_variables.scss'),
-            config[dep],
-            {
-              separator: `${os.EOL}${os.EOL}`
-            }
-          );
-        }
-      });
-    }
   }
 
   install() {

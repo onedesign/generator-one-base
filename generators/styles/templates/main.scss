@@ -2,9 +2,6 @@
 <%_ if (deps.indexOf('sass-mq') > -1) { _%>
 @import 'sass-mq/mq';
 <%_ } _%>
-<%_ if (deps.indexOf('susy') > -1) { _%>
-@import 'susy/sass/susy';
-<%_ } _%>
 
 // Resets
 @import 'vendor/normalize';
