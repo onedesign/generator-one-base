@@ -29,7 +29,7 @@ describe('generator-one-base:gulp', () => {
     });
 
     it('doesn\'t create index.html', () => {
-      assert.noFile('index.html');
+      assert.noFile('src/templates/index.twig');
     });
 
     it('adds .gitgnore rules', () => {
@@ -77,8 +77,9 @@ describe('generator-one-base:gulp', () => {
       assert.fileContent('gulp/tasks/watch.js', "runSequence('nunjucks')");
     });
 
-    it('creates nunjucks index.html', () => {
-      assert.file('index.html');
+    it('creates nunjucks templates', () => {
+      assert.file('src/templates/index.twig');
+      assert.file('src/templates/_layout.twig');
     });
 
     it('adds nunjucks as a dep', () => {

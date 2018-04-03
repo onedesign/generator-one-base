@@ -41,7 +41,7 @@ module.exports = class extends Generator {
     }
 
     this.fs.copyTpl(
-      this.templatePath('main.ejs'),
+      this.templatePath('main.js'),
       this.destinationPath('src/scripts/main.js'),
       {
         deps
