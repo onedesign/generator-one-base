@@ -26,7 +26,8 @@ module.exports = class extends Generator {
             value: 'one-sass-toolkit',
             checked: true
           }
-        ]
+        ],
+        default: []
       }
     ];
 
@@ -37,6 +38,8 @@ module.exports = class extends Generator {
 
   writing() {
     this.log(chalk.green('Writing styles files...'));
+    // eslint-disable-next-line
+    console.log('this.props.deps', this.props.deps);
     this.fs.copyTpl(
       this.templatePath('main.scss'),
       this.destinationPath('src/styles/main.scss'),

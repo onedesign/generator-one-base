@@ -6,9 +6,7 @@ const dependencies = require('./prompts/dependencies');
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.props = {
-      deps: []
-    };
+    this.props = {};
   }
 
   prompting() {
@@ -16,7 +14,8 @@ module.exports = class extends Generator {
       type: 'checkbox',
       name: 'deps',
       message: 'Which script dependencies do you want installed?',
-      choices: dependencies
+      choices: dependencies,
+      default: []
     }];
 
     return this.prompt(prompts).then(props => {
