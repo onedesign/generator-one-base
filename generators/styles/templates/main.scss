@@ -1,11 +1,9 @@
 // Vendor
+@import 'normalize.css/normalize.css';
+@import 'reset.css/reset.css';
 <%_ if (deps.indexOf('sass-mq') > -1) { _%>
 @import 'sass-mq/mq';
 <%_ } _%>
-
-// Resets
-@import 'vendor/normalize';
-@import 'vendor/reset';
 
 // Utilities
 @import 'util/*';

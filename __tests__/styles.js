@@ -16,8 +16,7 @@ describe('generator-one-base:styles', () => {
       assert.file([
         'src/styles/main.scss',
         'src/styles/base',
-        'src/styles/util',
-        'src/styles/vendor'
+        'src/styles/util'
       ]);
     });
   });
