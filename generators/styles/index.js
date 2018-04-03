@@ -26,7 +26,8 @@ module.exports = class extends Generator {
             value: 'one-sass-toolkit',
             checked: true
           }
-        ]
+        ],
+        default: []
       }
     ];
 
