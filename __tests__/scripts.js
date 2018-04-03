@@ -31,7 +31,7 @@ describe('generator-one-base:scripts', () => {
     });
 
     it('adds one-router init code', () => {
-      assert.fileContent('src/scripts/main.js', "require('one-router')");
+      assert.fileContent('src/scripts/main.js', 'import OneRouter');
     });
   });
 });
