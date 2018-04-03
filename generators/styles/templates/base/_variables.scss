@@ -2,4 +2,110 @@
 // Site Wide Variables
 // ===============================================================
 
+/*
+  Colors are at the top so they're available to other variables
+  below. All other categories are listed in alphabetical order.
+*/
 
+
+// ---------------------------------------------------------------
+// Colors
+// ---------------------------------------------------------------
+$colors: (
+  black: #333,
+  white: #fff
+);
+<%_ if (deps.indexOf('sass-mq') > -1) { _%>
+
+
+// ---------------------------------------------------------------
+// Media Queries
+// ---------------------------------------------------------------
+$mq-responsive: true;
+$mq-static-breakpoint: large;
+$mq-breakpoints: (
+  small: 500px,
+  medium: 768px,
+  large: 1024px,
+  xlarge: 1280px
+);
+<%_ } _%>
+<%_ if (deps.indexOf('one-sass-toolkit') > -1) { _%>
+
+
+// ---------------------------------------------------------------
+// Spacing
+// ---------------------------------------------------------------
+$fluid-sizes: (
+  none: (
+    default: 0px,
+    max: 0px
+  ),
+  s: (
+    default: 20px,
+    max: 60px
+  )
+);
+<%_ } _%>
+
+
+// ---------------------------------------------------------------
+// Z-Index
+// ---------------------------------------------------------------
+$z-index-site-header: 100;
+<%_ if (deps.indexOf('one-sass-toolkit') > -1) { _%>
+
+
+// ---------------------------------------------------------------
+// Type – Font Stacks
+// ---------------------------------------------------------------
+$font-stacks: (
+  helvetica: (
+    font-family: ('Helvetica Neue', arial, sans-serif),
+    font-weight: normal,
+    font-style: normal
+  )
+);
+
+
+// ---------------------------------------------------------------
+// Type – Styles
+// ---------------------------------------------------------------
+/*
+  Map that contains all of the type styles used across the site,
+  intended to be used with the one-sass-tolkit type-related
+  utilities (https://github.com/onedesign/one-sass-toolkit)
+  such as `type-style()`. New styles should always be added
+  to this map and never as one off instances elsewhere
+  in the codebase.
+
+  The name for the top level keys can be anything, but should
+  generally help you identify the style as this will be the value
+  you refer to throughout your styles.
+
+  The 'stack' key correlates to the $font-stacks map above.
+
+  `sizes` map: The nested 'sizes' map corelates to the sizes across breakpoints.
+  The 'default' being the base size and others being defined across
+  breakpoints. The names (small, medium, large, etc.) correlate to
+  the $mq-breakpoints map defined in the _base/_variables.scss file.
+
+  The 'properties' map can contain any standard CSS properties
+*/
+
+$type-styles: (
+  a: (
+    stack: helvetica,
+    font-smoothing: false,
+    sizes: (
+      default: 13,
+      medium: 27
+    ),
+    properties: (
+      line-height: 1.8,
+      text-transform: normal,
+      letter-spacing: 0
+    )
+  )
+);
+<%_ } _%>

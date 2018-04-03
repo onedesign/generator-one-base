@@ -6,7 +6,10 @@ const helpers = require('yeoman-test');
 describe('generator-one-base:styles', () => {
   describe('default', () => {
     beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/styles'));
+      return helpers.run(path.join(__dirname, '../generators/styles'))
+        .withPrompts({
+          deps: []
+        });
     });
 
     it('creates files', () => {
@@ -28,7 +31,8 @@ describe('generator-one-base:styles', () => {
     });
 
     it('adds Sass MQ', () => {
-      assert.fileContent('src/styles/base/_variables.scss', '// Sass MQ');
+      assert.fileContent('src/styles/main.scss', 'sass-mq/');
+      assert.fileContent('src/styles/base/_variables.scss', '// Media Queries');
     });
   });
 
@@ -41,20 +45,11 @@ describe('generator-one-base:styles', () => {
     });
 
     it('adds one-sass-toolkit', () => {
-      assert.fileContent('src/styles/base/_variables.scss', '// One Sass Toolkit');
-    });
-  });
-
-  describe('Susy option', () => {
-    beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/styles'))
-        .withPrompts({
-          deps: ['susy']
-        });
-    });
-
-    it('adds susy', () => {
-      assert.fileContent('src/styles/base/_variables.scss', '// Susy Config');
+      assert.fileContent('src/styles/main.scss', 'one-sass-toolkit/');
+      assert.fileContent('src/styles/base/_variables.scss', '// Colors');
+      assert.fileContent('src/styles/base/_variables.scss', '// Spacing');
+      assert.fileContent('src/styles/base/_variables.scss', '// Type – Font Stacks');
+      assert.fileContent('src/styles/base/_variables.scss', '// Type – Styles');
     });
   });
 });
