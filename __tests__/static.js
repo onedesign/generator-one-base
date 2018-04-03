@@ -9,7 +9,7 @@ describe('generator-one-base:static', () => {
       projectTitle: 'Craft2 Project',
       projectName: 'craft2-project',
       projectDescription: 'Craft2 project description',
-      useNunjucks: true
+      useNunjucks: false
     };
 
     beforeAll(() => {
@@ -40,6 +40,10 @@ describe('generator-one-base:static', () => {
 
     it('generates with styles generator', () => {
       assert.file('src/styles/');
+    });
+
+    it('creates index.html', () => {
+      assert.file('index.html');
     });
 
     it('generates with gulp generator', () => {

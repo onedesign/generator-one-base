@@ -13,7 +13,7 @@ Compiles templates using nunjucks
 
 module.exports = gulp.task('nunjucks', function() {
   return gulp.src([
-    config.paths.templateSrc + '**/[^_]*.html'
+    config.paths.templateSrc + '**/[^_]*.twig'
   ])
     .pipe(nunjucks({
       path: [config.paths.templateSrc],

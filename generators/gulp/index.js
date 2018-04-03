@@ -60,15 +60,11 @@ module.exports = class extends Generator {
     );
 
     if (this.options.useNunjucks) {
-      if (this.fs.exists('index.html')) {
-        this.log(chalk.yellow('\nindex.html already exists. Not generating sample index.html.'));
-      } else {
-        this.fs.copyTpl(
-          this.templatePath('index.html'),
-          this.destinationPath('index.html'),
-          this.options
-        );
-      }
+      this.fs.copyTpl(
+        this.templatePath('templates'),
+        this.destinationPath('src/templates'),
+        this.options
+      );
     }
   }
 

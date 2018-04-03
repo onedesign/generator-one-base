@@ -94,6 +94,15 @@ module.exports = class extends Generator {
       );
     }
 
+    // HTML
+    if (!this.props.useNunjucks) {
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('index.html'),
+        extend(this.props, { rootDistPath: 'dist' })
+      );
+    }
+
     // Package
     this.fs.copyTpl(
       this.templatePath('package.json'),
