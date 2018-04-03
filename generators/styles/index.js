@@ -26,7 +26,8 @@ module.exports = class extends Generator {
             value: 'one-sass-toolkit',
             checked: true
           }
-        ]
+        ],
+        default: []
       }
     ];
 
@@ -57,19 +58,16 @@ module.exports = class extends Generator {
       this.templatePath('util/*'),
       this.destinationPath('src/styles/util')
     );
-
-    this.fs.copy(
-      this.templatePath('vendor/*'),
-      this.destinationPath('src/styles/vendor')
-    );
   }
 
   install() {
     this.log(chalk.yellow('\nInstalling style-related dependencies…'));
-    if (this.props.deps && this.props.deps.length) {
-      this.yarnInstall(this.props.deps, { silent: true }).then(() => {
-        this.log(chalk.green('Installed style-related depenencies.'));
-      });
-    }
+    const deps = this.props.deps.concat([
+      'reset.css',
+      'normalize.css'
+    ]);
+    this.yarnInstall(deps, { silent: true }).then(() => {
+      this.log(chalk.green('Installed style-related depenencies.'));
+    });
   }
 };
