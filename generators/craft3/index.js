@@ -83,7 +83,7 @@ module.exports = class extends Generator {
     this.log(chalk.yellow('Installing Craft...'));
 
     // download craft
-    childProcess.execSync(`composer create-project -s RC craftcms/craft ${this.props.projectName}-craft`);
+    childProcess.execSync(`composer create-project craftcms/craft ${this.props.projectName}-craft`);
 
     // move install to this dir since composer requires installing to a sub directory
     childProcess.execSync(`mv ${this.props.projectName}-craft/* ${this.destinationRoot()}`);
