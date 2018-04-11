@@ -2,7 +2,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const del = require('del');
-const childProcess = require('child_process');
 const yosay = require('yosay');
 const prompts = require('./modules/prompts');
 const fs = require('fs');
@@ -19,7 +18,7 @@ module.exports = class extends Generator {
     };
 
     try {
-      childProcess.execSync('composer --version');
+      this.spawnCommandSync('composer', ['--version']);
     } catch (e) {
       this.log(chalk.red('Composer is not installed. You must install it to use this generator. See https://getcomposer.org/download/.'));
       process.exit(1);
@@ -82,13 +81,22 @@ module.exports = class extends Generator {
   writing() {
     this.log(chalk.yellow('Installing Craft...'));
 
-    // download craft
-    childProcess.execSync(`composer create-project craftcms/craft ${this.props.projectName}-craft`);
+    const tempDir = `${this.props.projectName}-craft`;
 
-    // move install to this dir since composer requires installing to a sub directory
-    childProcess.execSync(`mv ${this.props.projectName}-craft/* ${this.destinationRoot()}`);
+    // download craft
+    this.spawnCommandSync('composer', [
+      'create-project',
+      'craftcms/craft',
+      `${tempDir}`
+    ]);
+
+    this.spawnCommandSync('mv', [
+      `${tempDir}`,
+      `${this.destinationRoot()}`
+    ]);
+
     del.sync([
-      this.destinationPath(`${this.props.projectName}-craft`)
+      this.destinationPath(`${tempDir}`)
     ]);
 
     // Clean the default Craft install
@@ -207,8 +215,12 @@ module.exports = class extends Generator {
 
   install() {
     this.log(chalk.yellow('\nInstalling dependencies via composer…'));
-    const pluginList = this.props.craftPlugins.join(' ');
-    childProcess.execSync(`composer require --no-progress ${pluginList}`);
+    this.spawnCommandSync('composer', [
+      'require',
+      '--no-progress',
+      ...this.props.craftPlugins
+    ]);
+
     this.closingStatements.push('Craft Plugins: ' + chalk.yellow('Your chosen plugins have been installed via Composer, but you’ll still need to install them in the Craft control panel at /admin/settings/plugins'));
   }
 
