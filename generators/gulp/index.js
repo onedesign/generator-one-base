@@ -70,7 +70,7 @@ module.exports = class extends Generator {
 
   install() {
     const devDependencies = [
-      'webpack@^3.11.0',
+      'autoprefixer',
       'babel-core',
       'babel-loader',
       'babel-preset-env',
@@ -78,27 +78,29 @@ module.exports = class extends Generator {
       'browser-sync',
       'del',
       'dotenv',
-      'gulp',
-      'autoprefixer',
+      'eslint-loader',
       'gulp-changed-in-place',
       'gulp-css-globbing',
       'gulp-eslint',
-      'gulp-postcss',
       'gulp-imagemin',
       'gulp-pixrem',
+      'gulp-postcss',
       'gulp-replace',
       'gulp-rev',
       'gulp-sass',
       'gulp-shell',
       'gulp-stylelint',
       'gulp-util',
+      'gulp',
       'jsonfile',
       'node-libs-browser',
       'postcss-import',
       'require-dir',
+      'react-dev-utils',
       'run-sequence',
       'script-loader',
-      'strip-ansi'
+      'strip-ansi',
+      'webpack'
     ];
 
     // Add nunjucks if desired

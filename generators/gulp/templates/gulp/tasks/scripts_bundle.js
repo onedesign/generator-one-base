@@ -4,6 +4,7 @@ const _ = require('lodash');
 const path = require('path');
 const stripAnsi = require('strip-ansi');
 const webpack = require('webpack');
+const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const util = require('util');
 
 //
@@ -16,45 +17,21 @@ Bundles javascript files.
 */
 
 gulp.task('scripts:bundle', function(callback) {
-  //---------------------------------------------------------------
-  // Plugins
-  //---------------------------------------------------------------
+// ---------------------------------------------------------------
+// Plugins
+// ---------------------------------------------------------------
   const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.bundle.js'
-    }),
-
     // Give all modules access to jQuery
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
     }),
-
-    // Get the current environment
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    })
   ];
 
-  // Add uglification in production
-  if (process.env.NODE_ENV === 'production') {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-        comparisons: false
-      }
-    }));
-  }
-
-
-  //---------------------------------------------------------------
+  // ---------------------------------------------------------------
   // Config
-  //---------------------------------------------------------------
+  // ---------------------------------------------------------------
 
   const webpackConfig = {
     entry: _.reduce(config.scripts.entryFiles, function(result, name) {
@@ -67,6 +44,8 @@ gulp.task('scripts:bundle', function(callback) {
       filename: '[name].bundle.js'
     },
 
+    mode: process.env.NODE_ENV || 'development',
+
     resolve: {
       modules: [
         path.resolve('./node_modules'),
@@ -78,17 +57,35 @@ gulp.task('scripts:bundle', function(callback) {
     module: {
       rules: [
         {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          options: { presets: [
-            ['env', {
-              'targets': {
-                'browsers': ['> 1%', 'last 2 versions']
+          test: /\.(js|jsx)$/,
+          include: path.resolve(`./${config.paths.scriptSrc}`),
+          enforce: 'pre',
+          use: [
+            {
+              loader: require.resolve('eslint-loader'),
+              options: {
+                formatter: eslintFormatter,
+                eslintPath: require.resolve('eslint')
               }
-            }],
-            'react'
-          ] },
-          exclude: [/node_modules/]
+            }
+          ]
+        },
+        {
+          oneOf: [
+            {
+              test: /\.js$/,
+              loader: 'babel-loader',
+              options: { presets: [
+                ['env', {
+                  'targets': {
+                    'browsers': ['> 1%', 'last 2 versions']
+                  }
+                }],
+                'react'
+              ] },
+              exclude: [/node_modules/]
+            }
+          ]
         }
       ]
     },

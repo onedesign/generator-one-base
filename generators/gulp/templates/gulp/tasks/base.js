@@ -18,7 +18,6 @@ module.exports = gulp.task('base', function(callback) {
       'templates',<% if (useNunjucks) { %>
       'nunjucks',<% } %>
       'scripts:bundle',
-      'scripts:lint',
       'styles',
       'styles:copy',
       'styles:lint',
