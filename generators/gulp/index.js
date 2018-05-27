@@ -91,7 +91,6 @@ module.exports = class extends Generator {
       'gulp-sass',
       'gulp-shell',
       'gulp-stylelint',
-      'gulp-util',
       'jsonfile',
       'node-libs-browser',
       'postcss-import',
