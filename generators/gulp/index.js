@@ -90,7 +90,6 @@ module.exports = class extends Generator {
       'gulp-sass',
       'gulp-shell',
       'gulp-stylelint',
-      'gulp-util',
       'gulp',
       'jsonfile',
       'node-libs-browser',
@@ -111,7 +110,7 @@ module.exports = class extends Generator {
     // Display a message
     this.log(chalk.yellow('\nInstalling gulp-related dependencies…'));
 
-    // Install dev dependencies
+    // Install dev k
     this.yarnInstall(devDependencies, { 'dev': true, silent: true }).then(() => {
       this.log(chalk.green('Installed gulp-related dependencies.'));
     });
