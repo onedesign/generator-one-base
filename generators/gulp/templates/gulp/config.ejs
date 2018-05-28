@@ -39,7 +39,23 @@ module.exports = {
   proxyUrl: process.env.APP_SITE_URL || undefined,
   serverBaseDir: '<%= serverBaseDir %>',
 
+  // @TODO: move this into package.json
+  // in here because babel won't support it in there until v7
+  browserlist: [
+    '> 1%',
+    'last 2 versions'
+  ],
+
   scripts: {
+    // Passed directly into webpack.ProvidePlugin
+    // @see https://webpack.js.org/plugins/provide-plugin/
+    provide: {
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    },
+
+
     // entry files:
     // each filename listed here (and found in scriptSrc)
     // will have a file generated for it in scriptDist
@@ -70,6 +86,12 @@ module.exports = {
 
     aliases: {
 
-    }
+    },
+
+    // Instantiate any additional webpack plugins here
+    additionalWebpackplugins: [],
+
+    // Set to false to disable hotModuleReplacement
+    hot: true
   }
 };

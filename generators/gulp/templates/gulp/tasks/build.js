@@ -1,5 +1,5 @@
-const gulp = require('gulp');
-const runSequence = require('run-sequence');
+const gulp = require("gulp");
+const runSequence = require("run-sequence");
 
 //
 //   Build
@@ -10,12 +10,6 @@ const runSequence = require('run-sequence');
 Base tasks + tasks that should be run on production
 */
 
-module.exports = gulp.task('build', function(callback) {
-  runSequence(
-    'base',
-    'images',
-    'rev:clear',
-    'rev',
-    callback
-  );
+module.exports = gulp.task("build", function(callback) {
+  runSequence("base", "scripts:bundle", "images", "rev", callback);
 });
