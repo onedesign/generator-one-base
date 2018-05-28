@@ -55,7 +55,7 @@
     "test:dev": "jest --watch --verbose -o"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
+    "*.js": ["eslint --fix", "prettier --write", "git add"],
     "*.json": ["prettier --write", "git add"]
   },
   "eslintConfig": {
