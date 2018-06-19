@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const pixrem = require('gulp-pixrem');
 const postcss = require('gulp-postcss');
 const importCss = require('postcss-import');
+const cssnano = require('cssnano');
 const Notifier = require('../utils/notifier')();
 
 //
@@ -26,7 +27,8 @@ autoprefixer: Automatically adds vendor prefixes to experimental properties
 module.exports = gulp.task('styles', function() {
   const postCssProcessors = [
     importCss(),
-    autoprefixer({ browsers: ['last 2 versions'] })
+    autoprefixer({ browsers: ['last 2 versions'] }),
+    cssnano()
   ];
 
   return gulp.src([
@@ -36,7 +38,7 @@ module.exports = gulp.task('styles', function() {
       extensions: ['.scss']
     }))
     .pipe(sass({
-      outputStyle: 'compressed',
+      outputStyle: 'nested',
       includePaths: ['./node_modules']
     }).on('error', function(error) {
       Notifier.queue('styles', error.message);
