@@ -91,7 +91,7 @@ module.exports = class extends Generator {
   downloadCraft() {
     this.log(chalk.green('Downloading Craft...'));
     const self = this;
-    const craftDownloadUrl = 'http://buildwithcraft.com/latest.zip?accept_license=yes';
+    const craftDownloadUrl = 'https://craftcms.com/latest-v2.zip';
     return download(craftDownloadUrl, this.destinationPath(), {
       extract: true
     })
