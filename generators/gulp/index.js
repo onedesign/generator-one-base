@@ -76,6 +76,7 @@ module.exports = class extends Generator {
       'babel-preset-env',
       'babel-preset-react',
       'browser-sync',
+      'cssnano',
       'del',
       'dotenv',
       'gulp',
