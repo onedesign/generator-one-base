@@ -111,7 +111,8 @@ module.exports = class extends Generator {
       this.destinationPath('config/db.php'),
       this.destinationPath('composer.json'),
       this.destinationPath('composer.lock'),
-      this.destinationPath('package.json')
+      this.destinationPath('package.json'),
+      this.destinationPath('templates')
     ]);
 
     // If using SEOmatic, remove default robots.txt
