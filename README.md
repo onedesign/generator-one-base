@@ -40,7 +40,7 @@ yo one-base
 
 ## Gulp Sub-Generator
 
-If you want to add or update the gulp setup for an an existing project (or a project previously created with `generator-one-base`) you can use the `gulp` sub-generator on its own:
+If you want to add or update the gulp setup for an existing project (or a project previously created with `generator-one-base`) you can use the `gulp` sub-generator on its own:
 
 ```bash
 cd project/to/run/generator
